@@ -1,0 +1,8 @@
+# Default config file: /etc/xdg/surfraw/conf
+SURFRAW_graphical=no
+#SURFRAW_text_browser=www-browser
+# Selects the correct terminal program to view the given URL.
+# From ~/.scripts
+SURFRAW_text_browser=url-program
+SURFRAW_graphical_browser=x-www-browser
+
