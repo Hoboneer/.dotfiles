@@ -2,7 +2,7 @@
 
 (This is to remind myself mostly)
 
-## Prequisites
+## Prerequisites
 
 - GNU stow
 
