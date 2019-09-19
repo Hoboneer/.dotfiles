@@ -29,3 +29,11 @@ stow -D <package>  # --delete
 where package is a top-level directory.
 
 `stow` will then remove the installed symlinks.
+
+## Reinstall (after making changes)
+
+From the root directory of this repo do:
+
+```sh
+stow -R <package>  # --restow
+```
