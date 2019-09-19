@@ -11,7 +11,7 @@
 From the root directory of this repo do:
 
 ```sh
-stow <package>
+stow <package>  # -S, --stow (default)
 ```
 
 where package is a top-level directory.
