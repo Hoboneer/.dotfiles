@@ -10,3 +10,12 @@ set input-meta on
 set output-meta on
 
 # END: global inputrc
+
+$if profanity
+	"\C-p": prof_win_prev
+	"\C-n": prof_win_next
+	"\C-k": prof_win_pageup
+	"\C-j": prof_win_pagedown
+	"\C-h": prof_subwin_pageup
+	"\C-l": prof_subwin_pagedown
+$endif
