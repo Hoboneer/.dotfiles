@@ -8,8 +8,8 @@ keymap	C-f	NEXT_PAGE
 keymap	C-b	PREV_PAGE
 keymap	C-d	NEXT_HALF_PAGE
 keymap	C-u	PREV_HALF_PAGE
-keymap	C-e	DOWN
-keymap	C-y	UP
+keymap	C-y	DOWN
+keymap	C-e	UP
 keymap	gg	BEGIN
 # C-i is TAB ...
 keymap	C-n	NEXT_LINK
