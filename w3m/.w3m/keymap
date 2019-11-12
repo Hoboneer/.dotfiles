@@ -1,0 +1,39 @@
+# Tab management:
+keymap	J	NEXT_TAB
+keymap	K	PREV_TAB
+keymap	d	CLOSE_TAB
+
+# Movement:
+keymap	C-f	NEXT_PAGE
+keymap	C-b	PREV_PAGE
+keymap	C-d	NEXT_HALF_PAGE
+keymap	C-u	PREV_HALF_PAGE
+keymap	C-e	DOWN
+keymap	C-y	UP
+keymap	gg	BEGIN
+# C-i is TAB ...
+keymap	C-n	NEXT_LINK
+keymap	C-p	PREV_LINK
+# Undo/redo cursor movements
+keymap	C-o	UNDO
+keymap	C-i	REDO
+
+# Marks	| prefix=m;
+keymap	mw	MARK_WORD
+keymap	mu	MARK_URL
+
+# Link menus:
+# Move to selected link
+keymap	gf	MOVE_LIST_MENU
+# Follow selected link
+keymap	f	LIST_MENU
+
+# History
+keymap	H BACK
+
+# Misc.
+keymap	gh	HELP
+keymap	C-V	VERSION
+keymap	r	RELOAD
+keymap	R	REINIT
+keymap	C-m	MSGS
