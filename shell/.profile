@@ -35,6 +35,6 @@ export PATH="/home/gabber/.scripts:$PATH"
 export EDITOR='vim'
 export VISUAL=$EDITOR
 
-# the one true browser (?)
-export BROWSER='lynx'
-
+# Synchronise BROWSER with debian's alternatives system.
+# This should be w3m.
+export BROWSER='www-browser'
