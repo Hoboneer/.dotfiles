@@ -37,3 +37,12 @@ keymap	C-V	VERSION
 keymap	r	RELOAD
 keymap	R	REINIT
 keymap	C-m	MSGS
+
+# External commands:
+
+# Queue youtube downloads
+keymap	xy	EXTERN_LINK	'TS_SOCKET=/tmp/w3m tsp youtube-dl -o "~/Videos/%(title)s-%(id)s" %s'
+# W3m doesn't seem to be able to handle 3+ letter keymaps...
+keymap	xs	SHELL	'watch TS_SOCKET=/tmp/w3m tsp'
+# Clear task spooler list
+keymap	xc	SHELL	'clear && TS_SOCKET=/tmp/w3m tsp -C'
