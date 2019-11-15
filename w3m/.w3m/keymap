@@ -46,3 +46,8 @@ keymap	xy	EXTERN_LINK	'TS_SOCKET=/tmp/w3m tsp youtube-dl -o "~/Videos/%(title)s-
 keymap	xs	SHELL	'watch TS_SOCKET=/tmp/w3m tsp'
 # Clear task spooler list
 keymap	xc	SHELL	'clear && TS_SOCKET=/tmp/w3m tsp -C'
+
+# Images in specific X terminals and linux framebuffer
+keymap	X	DISPLAY_IMAGE
+keymap	C-c	STOP_IMAGE
+keymap	t	SET_OPTION  display_image=toggle
