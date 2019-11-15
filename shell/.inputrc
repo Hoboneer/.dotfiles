@@ -1,5 +1,6 @@
 set keymap vi
 set editing-mode vi
+set show-mode-in-prompt on
 
 # /etc/inputrc - global inputrc for libreadline
 # See readline(3readline) and `info rluserman' for more information.
