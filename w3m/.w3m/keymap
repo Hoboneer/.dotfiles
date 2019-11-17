@@ -10,6 +10,11 @@ keymap	C-d	NEXT_HALF_PAGE
 keymap	C-u	PREV_HALF_PAGE
 keymap	C-y	DOWN
 keymap	C-e	UP
+keymap	w	NEXT_WORD
+keymap	b	PREV_WORD
+# Remove the weird defaults
+keymap	W	NEXT_WORD
+keymap	B	PREV_WORD
 keymap	gg	BEGIN
 # C-i is TAB ...
 keymap	C-n	NEXT_LINK
