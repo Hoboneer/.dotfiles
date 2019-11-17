@@ -51,6 +51,10 @@ keymap	xS	SHELL	'clear && TS_SOCKET=/tmp/w3m tsp -c'
 # Clear task spooler list
 keymap	xc	SHELL	'clear && TS_SOCKET=/tmp/w3m tsp -C'
 
+# Clipboard
+keymap	yy	EXTERN	'echo %s | xclip -selection clipboard -i'
+keymap	yu	EXTERN_LINK	'echo %s | xclip -selection clipboard -i'
+
 # Images in specific X terminals and linux framebuffer
 keymap	X	DISPLAY_IMAGE
 keymap	C-c	STOP_IMAGE
