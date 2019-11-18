@@ -7,6 +7,7 @@ set show-mode-in-prompt on
 $include /etc/inputrc
 
 
+# TODO: Rebind these keys to not clobber C-{n,p,k,h} which are vi-like commands.
 $if profanity
 	"\C-p": prof_win_prev
 	"\C-n": prof_win_next
