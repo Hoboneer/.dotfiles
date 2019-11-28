@@ -6,13 +6,14 @@ set show-mode-in-prompt on
 # See readline(3readline) and `info rluserman' for more information.
 $include /etc/inputrc
 
-
-# TODO: Rebind these keys to not clobber C-{n,p,k,h} which are vi-like commands.
+# Profanity should be able show the mode in prompt... it gets confusing sometimes.
+# Completions with C-{n,p} would be nice too.
+set keymap vi-command
 $if profanity
-	"\C-p": prof_win_prev
-	"\C-n": prof_win_next
-	"\C-k": prof_win_pageup
-	"\C-j": prof_win_pagedown
-	"\C-h": prof_subwin_pageup
-	"\C-l": prof_subwin_pagedown
+	"gp": prof_win_prev
+	"gn": prof_win_next
+	"gb": prof_win_pageup
+	"gf": prof_win_pagedown
+	"gu": prof_subwin_pageup
+	"gd": prof_subwin_pagedown
 $endif
