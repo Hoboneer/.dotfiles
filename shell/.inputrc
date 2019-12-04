@@ -10,10 +10,10 @@ $include /etc/inputrc
 # Completions with C-{n,p} would be nice too.
 set keymap vi-command
 $if profanity
-	"gp": prof_win_prev
-	"gn": prof_win_next
-	"gb": prof_win_pageup
-	"gf": prof_win_pagedown
-	"gu": prof_subwin_pageup
-	"gd": prof_subwin_pagedown
+	"K": prof_win_prev
+	"J": prof_win_next
+	"\C-b": prof_win_pageup
+	"\C-f": prof_win_pagedown
+	"gb": prof_subwin_pageup
+	"gf": prof_subwin_pagedown
 $endif
