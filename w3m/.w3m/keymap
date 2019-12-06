@@ -2,6 +2,8 @@
 keymap	J	NEXT_TAB
 keymap	K	PREV_TAB
 keymap	d	CLOSE_TAB
+keymap	gr	TAB_RIGHT
+keymap	gl	TAB_LEFT
 
 # Movement:
 keymap	C-f	NEXT_PAGE
