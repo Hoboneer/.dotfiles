@@ -43,7 +43,7 @@ keymap	gh	HELP
 keymap	C-V	VERSION
 keymap	r	RELOAD
 keymap	R	REINIT
-keymap	C-m	MSGS
+keymap	M	MSGS
 
 # External commands:
 
