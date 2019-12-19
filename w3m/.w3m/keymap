@@ -51,7 +51,7 @@ keymap	M	MSGS
 keymap	xd	EXTERN_LINK	'TS_SOCKET=/tmp/w3m tsp wget -c -P ~/Downloads %s'
 # Queue youtube downloads
 ## Get the 'best' single-file video
-keymap	xy	EXTERN_LINK	'TS_SOCKET=/tmp/w3m tsp youtube-dl -f best -o "~/Videos/%(title)s-%(id)s" %s'
+keymap	xy	EXTERN_LINK	'TS_SOCKET=/tmp/w3m tsp youtube-dl -f best -o "~/Videos/%(title)s-%(id)s.%(ext)s" %s'
 # W3m doesn't seem to be able to handle 3+ letter keymaps...
 keymap	xs	SHELL	'watch TS_SOCKET=/tmp/w3m tsp'
 # Show output of download command
