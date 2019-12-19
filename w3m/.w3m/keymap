@@ -62,8 +62,8 @@ keymap	xc	SHELL	'clear && TS_SOCKET=/tmp/w3m tsp -C'
 keymap	xi	EXTERN_LINK	'curl %s | feh -'
 
 # Clipboard
-keymap	yy	EXTERN	'echo %s | xclip -selection clipboard -i'
-keymap	yu	EXTERN_LINK	'echo %s | xclip -selection clipboard -i'
+keymap	yy	EXTERN	'echo -n %s | xclip -selection clipboard -i'
+keymap	yu	EXTERN_LINK	'echo -n %s | xclip -selection clipboard -i'
 
 # "Session" management
 keymap	ss	EXTERN	'echo %s >>w3m_session'
