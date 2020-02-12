@@ -120,8 +120,10 @@ fi
 
 # pyenv
 export PATH="$HOME/.pyenv/bin:$PATH"
-eval "$(pyenv init -)"
-eval "$(pyenv virtualenv-init -)"
+if type pyenv &>/dev/null; then
+	eval "$(pyenv init -)"
+	eval "$(pyenv virtualenv-init -)"
+fi
 
 # vi-like keybindings are so nice :)
 set -o vi
