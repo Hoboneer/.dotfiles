@@ -119,7 +119,7 @@ fi
 # My own stuff.
 
 # pyenv
-export PATH="/home/gabber/.pyenv/bin:$PATH"
+export PATH="$HOME/.pyenv/bin:$PATH"
 eval "$(pyenv init -)"
 eval "$(pyenv virtualenv-init -)"
 

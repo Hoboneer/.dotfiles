@@ -29,7 +29,7 @@ fi
 # Non-shell specific environment variables.
 
 # Add scripts directory to path so that I don't have to install them into `usr/bin` (spooky!).
-export PATH="/home/gabber/.scripts:$PATH"
+export PATH="$HOME/.scripts:$PATH"
 
 # The one true editor
 export EDITOR='vim'
