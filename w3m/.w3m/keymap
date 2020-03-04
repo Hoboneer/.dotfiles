@@ -58,8 +58,8 @@ keymap	xs	SHELL	'watch TS_SOCKET=/tmp/w3m tsp'
 keymap	xS	SHELL	'clear && TS_SOCKET=/tmp/w3m tsp -c'
 # Clear task spooler list
 keymap	xc	SHELL	'clear && TS_SOCKET=/tmp/w3m tsp -C'
-# View image in feh
-keymap	xi	EXTERN_LINK	'wget -qO - %s | feh -'
+## View image in feh
+#keymap	xi	EXTERN_LINK	'wget -qO - %s | feh -'
 
 # Clipboard
 keymap	yy	EXTERN	'echo -n %s | xclip -selection clipboard -i'
