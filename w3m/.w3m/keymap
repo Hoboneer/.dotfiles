@@ -59,7 +59,7 @@ keymap	xS	SHELL	'clear && TS_SOCKET=/tmp/w3m tsp -c'
 # Clear task spooler list
 keymap	xc	SHELL	'clear && TS_SOCKET=/tmp/w3m tsp -C'
 # View image in feh
-keymap	xi	EXTERN_LINK	'curl %s | feh -'
+keymap	xi	EXTERN_LINK	'wget -qO - %s | feh -'
 
 # Clipboard
 keymap	yy	EXTERN	'echo -n %s | xclip -selection clipboard -i'
