@@ -132,3 +132,5 @@ alias lynx='lynx -vikeys'
 
 # Sane default for `xclip`.
 alias xclip='xclip -selection clipboard'
+
+alias zathura='zathura --fork'
