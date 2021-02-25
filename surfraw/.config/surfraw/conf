@@ -6,4 +6,4 @@ SURFRAW_graphical=no
 # From ~/.scripts
 SURFRAW_text_browser=url-program
 SURFRAW_graphical_browser=x-www-browser
-
+[ "${IN_DMENU_SURFRAW:=no}" = yes ] && SURFRAW_ddg_site=normal
