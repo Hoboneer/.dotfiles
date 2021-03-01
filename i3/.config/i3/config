@@ -55,6 +55,18 @@ bindsym $mod+Shift+d exec env DO_COMPLETE=yes dmenu_surfraw
 # installed.
 # bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
 
+# input methods (jap, eng)
+# TODO
+# toggle (mapped with mozc OR script): $mod+i
+bindsym $mod+i exec imswitch.sh
+# TODO: bind $mod+Shift+i to switch to specific engine (which would use dmenu)
+# english (direct input mode)
+#bindsym $mod+Shift+i
+# jap(hiragana)
+#bindsym $mod+i
+# jap(katakana)
+#bindsym $mod+i
+
 # change focus
 bindsym $mod+$left focus left
 bindsym $mod+$down focus down
