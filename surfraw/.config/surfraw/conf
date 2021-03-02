@@ -7,3 +7,8 @@ SURFRAW_graphical=no
 SURFRAW_text_browser=url-program
 SURFRAW_graphical_browser=x-www-browser
 [ "${IN_DMENU_SURFRAW:=no}" = yes ] && SURFRAW_ddg_site=normal
+
+SURFRAW_nyaa_search=anime-english
+SURFRAW_nyaa_sort=date
+SURFRAW_nyaa_sortorder=descending
+# filter should be decided on call.
