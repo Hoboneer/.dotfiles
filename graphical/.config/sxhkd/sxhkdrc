@@ -33,24 +33,12 @@ mod4+bracketleft
 #bindsym mod4+i
 
 # change focus
-mod4+h
-	i3-msg focus left
-mod4+j
-	i3-msg focus down
-mod4+k
-	i3-msg focus up
-mod4+l
-	i3-msg focus right
+mod4+{h,j,k,l}
+	i3-msg focus {left,down,up,right}
 
 # move focused window
-mod4+shift+h
-	i3-msg move left
-mod4+shift+j
-	i3-msg move down
-mod4+shift+k
-	i3-msg move up
-mod4+shift+l
-	i3-msg move right
+mod4+shift+{h,j,k,l}
+	i3-msg move {left,down,up,right}
 
 # split horizontally (following screen)
 mod4+shift+s
@@ -65,12 +53,8 @@ mod4+f
 	i3-msg fullscreen toggle
 
 # change container layout (stacked, tabbed, toggle split)
-mod4+s
-	i3-msg layout stacking
-mod4+w
-	i3-msg layout tabbed
-mod4+e
-	i3-msg layout toggle split
+mod4+{s,w,e}
+	i3-msg layout {stacking,tabbed,toggle split}
 
 # toggle tiling / floating
 mod4+shift+space
@@ -96,48 +80,12 @@ mod4+minus
 	i3-msg scratchpad show
 
 # switch to workspace
-mod4+1
-	i3-msg workspace 1
-mod4+2
-	i3-msg workspace 2
-mod4+3
-	i3-msg workspace 3
-mod4+4
-	i3-msg workspace 4
-mod4+5
-	i3-msg workspace 5
-mod4+6
-	i3-msg workspace 6
-mod4+7
-	i3-msg workspace 7
-mod4+8
-	i3-msg workspace 8
-mod4+9
-	i3-msg workspace 9
-mod4+0
-	i3-msg workspace 10
+mod4+{1-9,0}
+	i3-msg workspace {1-9,10}
 
 # move focused container to workspace
-mod4+shift+1
-	i3-msg move container to workspace 1
-mod4+shift+2
-	i3-msg move container to workspace 2
-mod4+shift+3
-	i3-msg move container to workspace 3
-mod4+shift+4
-	i3-msg move container to workspace 4
-mod4+shift+5
-	i3-msg move container to workspace 5
-mod4+shift+6
-	i3-msg move container to workspace 6
-mod4+shift+7
-	i3-msg move container to workspace 7
-mod4+shift+8
-	i3-msg move container to workspace 8
-mod4+shift+9
-	i3-msg move container to workspace 9
-mod4+shift+0
-	i3-msg move container to workspace 10
+mod4+shift+{1-9,0}
+	i3-msg move container to workspace {1-9,10}
 
 # reload the configuration file
 mod4+shift+c
