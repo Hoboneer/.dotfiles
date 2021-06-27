@@ -89,7 +89,7 @@ mod4+shift+{1-9,0}
 
 # reload the configuration file
 mod4+shift+c
-	i3-msg reload
+	i3-msg reload; pkill -SIGUSR1 '^sxhkd$'
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 mod4+shift+r
 	i3-msg restart
