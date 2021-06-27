@@ -8,6 +8,9 @@
 # for ssh logins, install and configure the libpam-umask package.
 #umask 022
 
+if [ "$HAVE_PROFILE" != 1 ]
+then export HAVE_PROFILE=1
+
 # if running bash
 if [ -n "$BASH_VERSION" ]; then
     # include .bashrc if it exists
@@ -38,3 +41,5 @@ export VISUAL=$EDITOR
 # Synchronise BROWSER with debian's alternatives system.
 # This should be w3m.
 export BROWSER='www-browser'
+
+fi

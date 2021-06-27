@@ -1,0 +1,6 @@
+if [ "$HAVE_XSESSIONRC" != 1 ]
+then export HAVE_XSESSIONRC=1
+
+[ -r "$HOME/.profile" ] && . "$HOME/.profile"
+
+fi
