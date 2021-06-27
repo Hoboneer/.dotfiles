@@ -1,0 +1,150 @@
+# start a terminal
+# apparently "Return" must be capitalised
+mod4+Return
+	i3-msg exec i3-sensible-terminal
+
+# kill focused window
+mod4+shift+q
+	i3-msg kill
+
+# start dmenu (a program launcher)
+mod4+a
+	i3-msg exec dmenu_run
+mod4+d
+	i3-msg exec env DO_FIELD_SPLIT=yes dmenu_surfraw
+mod4+shift+d
+	i3-msg exec env SURFRAW_browser=firefox DO_FIELD_SPLIT=yes dmenu_surfraw
+mod4+semicolon
+	i3-msg exec dmenu_screenshot
+mod4+bracketleft
+	i3-msg exec dmenu_series
+
+# input methods (jap, eng)
+# toggle (mapped with mozc OR script): mod4+i
+# NOTE: set in ibus itself as mod4 too
+#mod4+i
+	#i3-msg exec imswitch.sh
+# todo: bind mod4+shift+i to switch to specific engine (which would use dmenu)
+# english (direct input mode)
+#bindsym mod4+shift+i
+# jap(hiragana)
+#bindsym mod4+i
+# jap(katakana)
+#bindsym mod4+i
+
+# change focus
+mod4+h
+	i3-msg focus left
+mod4+j
+	i3-msg focus down
+mod4+k
+	i3-msg focus up
+mod4+l
+	i3-msg focus right
+
+# move focused window
+mod4+shift+h
+	i3-msg move left
+mod4+shift+j
+	i3-msg move down
+mod4+shift+k
+	i3-msg move up
+mod4+shift+l
+	i3-msg move right
+
+# split horizontally (following screen)
+mod4+shift+s
+	i3-msg split v
+
+# split vertically (following screen)
+mod4+shift+backslash
+	i3-msg split h
+
+# enter fullscreen mode for the focused container
+mod4+f
+	i3-msg fullscreen toggle
+
+# change container layout (stacked, tabbed, toggle split)
+mod4+s
+	i3-msg layout stacking
+mod4+w
+	i3-msg layout tabbed
+mod4+e
+	i3-msg layout toggle split
+
+# toggle tiling / floating
+mod4+shift+space
+	i3-msg floating toggle
+
+# change focus between tiling / floating windows
+mod4+space
+	i3-msg focus mode_toggle
+
+# focus the parent container
+#bindsym mod4+a focus parent
+
+# focus the child container
+#bindsym mod4+d focus child
+
+# move the currently focused window to the scratchpad
+mod4+shift+minus
+	i3-msg move scratchpad
+
+# Show the next scratchpad window or hide the focused scratchpad window.
+# If there are multiple scratchpad windows, this command cycles through them.
+mod4+minus
+	i3-msg scratchpad show
+
+# switch to workspace
+mod4+1
+	i3-msg workspace 1
+mod4+2
+	i3-msg workspace 2
+mod4+3
+	i3-msg workspace 3
+mod4+4
+	i3-msg workspace 4
+mod4+5
+	i3-msg workspace 5
+mod4+6
+	i3-msg workspace 6
+mod4+7
+	i3-msg workspace 7
+mod4+8
+	i3-msg workspace 8
+mod4+9
+	i3-msg workspace 9
+mod4+0
+	i3-msg workspace 10
+
+# move focused container to workspace
+mod4+shift+1
+	i3-msg move container to workspace 1
+mod4+shift+2
+	i3-msg move container to workspace 2
+mod4+shift+3
+	i3-msg move container to workspace 3
+mod4+shift+4
+	i3-msg move container to workspace 4
+mod4+shift+5
+	i3-msg move container to workspace 5
+mod4+shift+6
+	i3-msg move container to workspace 6
+mod4+shift+7
+	i3-msg move container to workspace 7
+mod4+shift+8
+	i3-msg move container to workspace 8
+mod4+shift+9
+	i3-msg move container to workspace 9
+mod4+shift+0
+	i3-msg move container to workspace 10
+
+# reload the configuration file
+mod4+shift+c
+	i3-msg reload
+# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+mod4+shift+r
+	i3-msg restart
+# exit i3 (logs you out of your X session)
+mod4+shift+e
+	i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'
