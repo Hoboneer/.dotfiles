@@ -3,4 +3,14 @@ then export HAVE_XSESSIONRC=1
 
 [ -r "$HOME/.profile" ] && . "$HOME/.profile"
 
+dunst &
+f="$XDG_RUNTIME_DIR/sxhkd/status-fifo"
+rm -f "$f"  # we should start fresh
+mkdir -p "$(dirname "$f")"
+mkfifo "$f"
+# Make sxhkd_watch run as a true daemon: https://stackoverflow.com/a/19235243
+setsid sxhkd_watch "$f" >/dev/null 2>&1 < /dev/null &
+sxhkd -s "$f" &
+unset f
+
 fi
