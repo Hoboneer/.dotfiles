@@ -87,6 +87,10 @@ mod4+{1-9,0}
 mod4+shift+{1-9,0}
 	i3-msg move container to workspace {1-9,10}
 
+# resize
+mod4+r: {h,j,k,l}
+	i3-msg resize {shrink width,grow height,shrink height,grow width} 10 px or 10 ppt
+
 # reload the configuration file
 mod4+shift+c
 	i3-msg reload; pkill -SIGUSR1 '^sxhkd$'
