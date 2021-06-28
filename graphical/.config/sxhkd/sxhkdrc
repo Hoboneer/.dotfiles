@@ -75,6 +75,26 @@ mod4+shift+{1-9,0}
 mod4+r: {h,j,k,l}
 	i3-msg resize {shrink width,grow height,shrink height,grow width} 10 px or 10 ppt
 
+# AUX:
+# increase volume
+XF86AudioRaiseVolume
+	pactl set-sink-volume @DEFAULT_SINK@ +10%
+# decrease volume
+XF86AudioLowerVolume
+	pactl set-sink-volume @DEFAULT_SINK@ -10%
+# increase volume (more granular)
+mod4+XF86AudioRaiseVolume
+	pactl set-sink-volume @DEFAULT_SINK@ +5%
+# decrease volume (more granular)
+mod4+XF86AudioLowerVolume
+	pactl set-sink-volume @DEFAULT_SINK@ -5%
+# mute volume
+XF86AudioMute
+	pactl set-sink-mute @DEFAULT_SINK@ toggle
+# mute mic
+XF86AudioMicMute
+	pactl set-source-mute @DEFAULT_SOURCE@ toggle
+
 # META:
 # reload the configuration file
 mod4+shift+c
