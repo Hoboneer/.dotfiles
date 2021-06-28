@@ -1,23 +1,23 @@
 # PROGRAMS:
 # apparently "Return" must be capitalised
 mod4+Return
-	i3-msg exec i3-sensible-terminal
+	i3-sensible-terminal
 mod4+a
-	i3-msg exec dmenu_run
+	dmenu_run
 mod4+d
-	i3-msg exec env DO_FIELD_SPLIT=yes dmenu_surfraw
+	env DO_FIELD_SPLIT=yes dmenu_surfraw
 mod4+shift+d
-	i3-msg exec env SURFRAW_browser=firefox DO_FIELD_SPLIT=yes dmenu_surfraw
+	env SURFRAW_browser=firefox DO_FIELD_SPLIT=yes dmenu_surfraw
 mod4+semicolon
-	i3-msg exec dmenu_screenshot
+	dmenu_screenshot
 mod4+bracketleft
-	i3-msg exec dmenu_series
+	dmenu_series
 
 # INPUT METHODS (JAP, ENG):
 # toggle (mapped with mozc OR script): mod4+i
 # NOTE: set in ibus itself as mod4 too
-#mod4+i
-	#i3-msg exec imswitch.sh
+mod4+i
+	imswitch.sh
 # todo: bind mod4+shift+i to switch to specific engine (which would use dmenu)
 # english (direct input mode)
 #bindsym mod4+shift+i
