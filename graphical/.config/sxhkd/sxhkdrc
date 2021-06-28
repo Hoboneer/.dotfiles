@@ -104,6 +104,6 @@ mod4+shift+p
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 mod4+shift+r
 	i3-msg restart
-# exit i3 (logs you out of your X session)
-mod4+shift+e
-	i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'
+# decide whether to log out, shut down, or restart computer
+mod4+shift+x
+	dmenu_powermenu
