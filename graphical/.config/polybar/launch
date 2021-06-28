@@ -1,0 +1,7 @@
+#!/bin/sh
+# Terminate already running bar instances
+polybar-msg cmd quit
+
+# Launch bars
+echo "---" | tee -a /tmp/polybar-main.log
+polybar main 2>&1 | tee -a /tmp/polybar-main.log &
