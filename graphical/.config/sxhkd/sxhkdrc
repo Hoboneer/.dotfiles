@@ -1,13 +1,7 @@
-# start a terminal
+# PROGRAMS:
 # apparently "Return" must be capitalised
 mod4+Return
 	i3-msg exec i3-sensible-terminal
-
-# kill focused window
-mod4+shift+q
-	i3-msg kill
-
-# start dmenu (a program launcher)
 mod4+a
 	i3-msg exec dmenu_run
 mod4+d
@@ -19,7 +13,7 @@ mod4+semicolon
 mod4+bracketleft
 	i3-msg exec dmenu_series
 
-# input methods (jap, eng)
+# INPUT METHODS (JAP, ENG):
 # toggle (mapped with mozc OR script): mod4+i
 # NOTE: set in ibus itself as mod4 too
 #mod4+i
@@ -32,65 +26,56 @@ mod4+bracketleft
 # jap(katakana)
 #bindsym mod4+i
 
+# WM WINDOW MANAGEMENT:
+# kill focused window
+mod4+shift+q
+	i3-msg kill
 # change focus
 mod4+{h,j,k,l}
 	i3-msg focus {left,down,up,right}
-
 # move focused window
 mod4+shift+{h,j,k,l}
 	i3-msg move {left,down,up,right}
-
 # split horizontally (following screen)
 mod4+shift+s
 	i3-msg split v
-
 # split vertically (following screen)
 mod4+shift+backslash
 	i3-msg split h
-
 # enter fullscreen mode for the focused container
 mod4+f
 	i3-msg fullscreen toggle
-
 # change container layout (stacked, tabbed, toggle split)
 mod4+{s,w,e}
 	i3-msg layout {stacking,tabbed,toggle split}
-
 # toggle tiling / floating
 mod4+shift+space
 	i3-msg floating toggle
-
 # change focus between tiling / floating windows
 mod4+space
 	i3-msg focus mode_toggle
-
 # focus the parent container
 #bindsym mod4+a focus parent
-
 # focus the child container
 #bindsym mod4+d focus child
-
 # move the currently focused window to the scratchpad
 mod4+shift+minus
 	i3-msg move scratchpad
-
 # Show the next scratchpad window or hide the focused scratchpad window.
 # If there are multiple scratchpad windows, this command cycles through them.
 mod4+minus
 	i3-msg scratchpad show
-
 # switch to workspace
 mod4+{1-9,0}
 	i3-msg workspace {1-9,10}
-
 # move focused container to workspace
 mod4+shift+{1-9,0}
 	i3-msg move container to workspace {1-9,10}
-
 # resize
 mod4+r: {h,j,k,l}
 	i3-msg resize {shrink width,grow height,shrink height,grow width} 10 px or 10 ppt
 
+# META:
 # reload the configuration file
 mod4+shift+c
 	i3-msg reload; pkill -SIGUSR1 '^sxhkd$'
