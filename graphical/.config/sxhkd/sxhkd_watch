@@ -31,7 +31,9 @@ while read line; do
 					?"$MODE_RESIZE"*) mode=resize ;;
 					?"$MODE_MOVE_FLOATING"*) mode=move_floating ;;
 				esac
-				echo "$mode" > "$2"
+				# Alert colour from polybar.
+				# TODO: sync them
+				echo "%{F#bd2c40}$mode%{F-}" > "$2"
 			fi
 			;;
 		# TODO: do something with commands (C*).
