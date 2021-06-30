@@ -58,6 +58,8 @@ keymap	xs	SHELL	'watch TS_SOCKET=/tmp/w3m tsp'
 keymap	xS	SHELL	'clear && TS_SOCKET=/tmp/w3m tsp -c'
 # Clear task spooler list
 keymap	xc	SHELL	'clear && TS_SOCKET=/tmp/w3m tsp -C'
+# (V)iew in (r)tv
+keymap	vr	EXTERN_LINK	'rtv "%s"'
 ## View image in feh
 #keymap	xi	EXTERN_LINK	'wget -qO - %s | feh -'
 
