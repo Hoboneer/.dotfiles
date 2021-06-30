@@ -2,7 +2,7 @@
 # (apparently "Return" must be capitalised):
 # Open terminal.
 mod4 + Return
-	i3-sensible-terminal
+	x-terminal-emulator
 # Program launcher.
 mod4 + space
 	dmenu_run
