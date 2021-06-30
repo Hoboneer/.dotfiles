@@ -39,7 +39,7 @@ XF86AudioMicMute
 # META:
 # Reload config for bspwm, sxhkd, or polybar.
 mod4 + shift + r; {b,s,p}
-	{"${XDG_CONFIG_HOME:-$HOME/.config}/bspwm/bspwmrc",pkill -SIGUSR1 -x sxhkd,polybar-msg cmd restart}
+	{"$\{XDG_CONFIG_HOME:-$HOME/.config\}/bspwm/bspwmrc",pkill -SIGUSR1 -x sxhkd,polybar-msg cmd restart}
 # Decide whether to log out, shut down, or restart computer.
 mod4 + shift + x
 	dmenu_powermenu
