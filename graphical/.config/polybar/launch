@@ -3,5 +3,7 @@
 polybar-msg cmd quit
 
 # Launch bars
-echo "---" | tee -a /tmp/polybar-main.log
-polybar main 2>&1 | tee -a /tmp/polybar-main.log &
+for bar in main bspwm; do
+	echo "---" | tee -a /tmp/polybar-$bar.log
+	polybar $bar 2>&1 | tee -a /tmp/polybar-$bar.log &
+done
