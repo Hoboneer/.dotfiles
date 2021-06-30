@@ -4,13 +4,13 @@ then export HAVE_XSESSIONRC=1
 [ -r "$HOME/.profile" ] && . "$HOME/.profile"
 
 dunst &
-dir="${XDG_RUNTIME_DIR:-${TMPDIR:-/tmp}}"
+dir="$XDG_RUNTIME_DIR"
 f="$dir/sxhkd/status.fifo" MODE_FILE="$dir/bspwm/mode"
 rm -f "$f" "$MODE_FIFO"  # we should start fresh
 mkdir -p "$(dirname "$f")" "$(dirname "$MODE_FILE")"
 mkfifo "$f"
 # Make sxhkd_watch run as a true daemon: https://stackoverflow.com/a/19235243
-setsid sxhkd_watch "$f" "$MODE_FILE" >/dev/null 2>&1 < /dev/null &
+setsid "${XDG_CONFIG_HOME:-$HOME/.config}/sxhkd/sxhkd_watch" "$f" "$MODE_FILE" >/dev/null 2>&1 < /dev/null &
 sxhkd -s "$f" &
 unset dir f MODE_FILE
 
