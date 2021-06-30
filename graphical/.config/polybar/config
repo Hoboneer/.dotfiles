@@ -39,18 +39,23 @@ font-0 = fixed:pixelsize=10;1
 font-1 = Unifont Upper:style=Medium:fontformat=truetype:size=8:antialias=false;0
 font-2 = Noto Color Emoji:style=Regular:scale=14
 
-modules-left = i3
-modules-right = filesystem ime xkeyboard wlan eth backlight-acpi pulseaudio battery temperature date
+modules-left = bspwm bspwm-mode
+modules-right = filesystem xkeyboard wlan eth backlight-acpi pulseaudio battery temperature date
 
 tray-position = right
 tray-padding = 2
 ;tray-background = #0063ff
 
-;wm-restack = bspwm
-wm-restack = i3
+wm-restack = bspwm
 
 cursor-click = pointer
 cursor-scroll = ns-resize
+
+[module/bspwm-mode]
+type = custom/script
+interval = 1
+exec = cat ${XDG_RUNTIME_DIR}/bspwm/mode
+label = mode: %output%
 
 [module/xkeyboard]
 type = internal/xkeyboard
@@ -76,61 +81,24 @@ label-mounted = %{F#0a81f5}%mountpoint%%{F-}: %percentage_used%% | %used% / %tot
 label-unmounted = %mountpoint% not mounted
 label-unmounted-foreground = ${colors.foreground-alt}
 
-;[module/bspwm]
-;type = internal/bspwm
-;
-;label-focused = %index%
-;label-focused-background = ${colors.background-alt}
-;label-focused-underline= ${colors.primary}
-;label-focused-padding = 2
-;
-;label-occupied = %index%
-;label-occupied-padding = 2
-;
-;label-urgent = %index%!
-;label-urgent-background = ${colors.alert}
-;label-urgent-padding = 2
-;
-;label-empty = %index%
-;label-empty-foreground = ${colors.foreground-alt}
-;label-empty-padding = 2
-;
-;; Separator in between workspaces
-;; label-separator = |
+[module/bspwm]
+type = internal/bspwm
 
-[module/i3]
-type = internal/i3
-format = <label-state> <label-mode>
-index-sort = true
-wrapping-scroll = false
-
-; Only show workspaces on the same output as the bar
-;pin-workspaces = true
-
-label-mode-padding = 2
-label-mode-foreground = #000
-label-mode-background = ${colors.primary}
-
-; focused = Active workspace on focused monitor
 label-focused = %index%
 label-focused-background = ${colors.background-alt}
 label-focused-underline= ${colors.primary}
 label-focused-padding = 2
 
-; unfocused = Inactive workspace on any monitor
-label-unfocused = %index%
-label-unfocused-padding = 2
+label-occupied = %index%
+label-occupied-padding = 2
 
-; visible = Active workspace on unfocused monitor
-label-visible = %index%
-label-visible-background = ${self.label-focused-background}
-label-visible-underline = ${self.label-focused-underline}
-label-visible-padding = ${self.label-focused-padding}
-
-; urgent = Workspace with urgency hint set
-label-urgent = %index%
+label-urgent = %index%!
 label-urgent-background = ${colors.alert}
 label-urgent-padding = 2
+
+label-empty = %index%
+label-empty-foreground = ${colors.foreground-alt}
+label-empty-padding = 2
 
 [module/xbacklight]
 type = internal/xbacklight
