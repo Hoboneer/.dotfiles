@@ -1,0 +1,6 @@
+# Tempfiles and private info.
+w3m/.w3m/w3m*
+w3m/.w3m/history
+surfraw/.config/surfraw/bookmarks
+surfraw/.config/surfraw/elvi/*
+*.swp
