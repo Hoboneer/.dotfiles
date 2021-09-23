@@ -14,3 +14,4 @@ bspc config gapless_monocle      true
 bspc rule -r '*'
 bspc rule -a qutebrowser desktop='^2' follow=on
 bspc rule -a Firefox-esr desktop='^2' follow=on
+bspc config external_rules_command "$(dirname "$(readlink -f "$0")")/external_rules"

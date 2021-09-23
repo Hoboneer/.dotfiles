@@ -1,0 +1,39 @@
+#!/bin/sh
+# DEPENDS: xprop(x11-utils) wmctrl
+
+wid="$1"
+class="$2"
+instance="$3"
+consequences="$4"
+
+get_xprop ()
+{
+	local __get_xprop_tmp
+	__get_xprop_tmp="$(xprop -id "$wid" "$1")" || return 1
+	echo "$__get_xprop_tmp" | sed "s/^${1}.*= //"
+	return 0
+}
+strip_quotes ()
+{
+	sed -e 's/^"//' -e 's/"$//'
+}
+
+if [ "$class" = zoom ]; then
+	ZOOM_START_WINDOW='Zoom Cloud Meetings'
+	case "$(get_xprop WM_NAME | strip_quotes)" in
+		# Remove annoying start window upon joining a meeting.
+		'Zoom Meeting')
+			wmctrl -F -c "$ZOOM_START_WINDOW"
+			;;
+		# Popups for sharing screens etc shouldn't clog up the screen.
+		'')
+			echo state=floating
+			;;
+	esac
+	exit
+fi
+case "$(get_xprop WM_ICON_NAME | strip_quotes)" in
+	xzoom)
+		echo state=floating
+		;;
+esac
