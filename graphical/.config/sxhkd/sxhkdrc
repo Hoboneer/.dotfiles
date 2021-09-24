@@ -12,9 +12,9 @@ mod4 + d
 # Dmenu surfraw (firefox).
 mod4 + shift + d
 	env SURFRAW_browser=firefox DO_FIELD_SPLIT=yes dmenu_surfraw
-# Execute dmenu scripts for media: screenshot, series.
-mod4 + semicolon; {s,w}
-	dmenu_{screenshot,series}
+# Execute dmenu scripts for convenience utilities: screenshot, series, flatpak runner.
+mod4 + semicolon; {s,w,f}
+	dmenu_{screenshot,series,flatpak_run}
 # Execute non-dmenu scripts for convenience utilities: current month calendar.
 mod4 + apostrophe; d
 	zenity --calendar --text='Current Month'
