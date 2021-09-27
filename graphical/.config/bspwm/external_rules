@@ -22,8 +22,10 @@ if [ "$class" = zoom ]; then
 	ZOOM_START_WINDOW='Zoom Cloud Meetings'
 	case "$(get_xprop WM_NAME | strip_quotes)" in
 		# Remove annoying start window upon joining a meeting.
-		'Zoom Meeting')
+		# Three cases, opening: breakout rooms, returning to main room, joining meeting for first time.
+		Room*'Zoom Meeting'|'Zoom Meeting'|Zoom)
 			wmctrl -F -c "$ZOOM_START_WINDOW"
+			echo state=tiled
 			;;
 		# Popups for sharing screens etc shouldn't clog up the screen.
 		'')
