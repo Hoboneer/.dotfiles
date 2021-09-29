@@ -27,9 +27,9 @@ if [ "$class" = zoom ]; then
 			wmctrl -F -c "$ZOOM_START_WINDOW"
 			echo state=tiled
 			;;
-		# Popups for sharing screens etc shouldn't clog up the screen.
+		# Popups for sharing screens etc shouldn't clog up the screen or grab focus.
 		'')
-			echo state=floating
+			echo 'state=floating focus=off'
 			;;
 	esac
 	exit
