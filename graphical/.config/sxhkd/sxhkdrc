@@ -15,9 +15,9 @@ mod4 + shift + d
 # Execute dmenu scripts for convenience utilities: screenshot, series, flatpak runner.
 mod4 + semicolon; {s,w,f}
 	dmenu_{screenshot,series,flatpak_run}
-# Execute non-dmenu scripts for convenience utilities: current month calendar, pictures, magnifier.
-mod4 + apostrophe; {d,p,z}
-	{zenity --calendar --text='Current Month',sxiv -t ~/Pictures/,wmzoom}
+# Execute non-dmenu scripts for convenience utilities: calendar, pictures, magnifier, keybinds.
+mod4 + apostrophe; {d,p,z,k}
+	{zenity --calendar --text='Current Month',sxiv -t ~/Pictures/,wmzoom,dmenu_sxhkd_binds}
 
 # AUX:
 # Increase volume.
@@ -96,7 +96,7 @@ mod4 + {o,i}
 mod4 + {_,shift + }{1-9,0}
 	bspc {desktop -f,node -d} '^{1-9,10}'
 
-# I'm not going to use this any time soon.
+## I'm not going to use this any time soon.
 ##
 ## preselect
 ##
