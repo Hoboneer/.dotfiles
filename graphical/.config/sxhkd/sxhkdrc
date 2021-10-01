@@ -8,10 +8,10 @@ mod4 + space
 	dmenu_run
 # Dmenu surfraw (qutebrowser).
 mod4 + d
-	env DO_FIELD_SPLIT=yes dmenu_surfraw
+	env DO_FIELD_SPLIT=yes dmenu_surfraw 2>&1 | xargs -n1 -d'\n' notify-send -u critical -t 5000
 # Dmenu surfraw (firefox).
 mod4 + shift + d
-	env SURFRAW_browser=firefox DO_FIELD_SPLIT=yes dmenu_surfraw
+	env SURFRAW_browser=firefox DO_FIELD_SPLIT=yes dmenu_surfraw 2>&1 | xargs -n1 -d'\n' notify-send -u critical -t 5000
 # Execute dmenu scripts for convenience utilities: screenshot, series, flatpak runner.
 mod4 + semicolon; {s,w,f}
 	dmenu_{screenshot,series,flatpak_run}
