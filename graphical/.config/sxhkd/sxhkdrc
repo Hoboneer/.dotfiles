@@ -64,9 +64,9 @@ mod4 + m
 #	bspc node -s biggest
 
 # BSPWM STATE/FLAGS:
-# Set the window state: tiled, pseudo_tiled, floating, fullscreen.
+# Set the window state: tiled, pseudo_tiled, floating, toggle fullscreen.
 mod4 + {t,shift + t,s,f}
-	bspc node -t {tiled,pseudo_tiled,floating,fullscreen}
+	bspc node -t {tiled,pseudo_tiled,floating,~fullscreen}
 # Toggle the node flags: marked, locked, sticky, private.
 mod4 + ctrl + {m,x,y,z}
 	bspc node -g {marked,locked,sticky,private}
