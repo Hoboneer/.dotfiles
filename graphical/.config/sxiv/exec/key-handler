@@ -1,0 +1,67 @@
+#!/bin/sh
+# DEPENDENCIES: dmenu file(GNU) notify-send xclip
+
+case "$1" in
+	# Get paths of all marked images.
+	C-p)
+		xclip -in -selection clipboard && notify-send -t 1000 'sxiv' "Copied paths of marked images to clipboard"
+		;;
+	# Copy image to clipboard.
+	C-c)
+		# Use the $@ array for the input files.
+		set --
+		while IFS= read -r file; do
+			set -- "$@" "$file"
+		done
+		case "$#" in
+			0)
+				notify-send -t 10000 -u critical 'sxiv: copy' "Got 0 marked images.  This shouldn't happen with sxiv!"
+				;;
+			1)
+				xclip -selection clipboard -target "$(file -bi "$1" | sed -n 's,\(image/[^;]\+\).*,\1,p')" "$1" &&
+					notify-send -t 1000 'sxiv: copy' "Copied '$1' to clipboard."
+				;;
+			# Multiple images marked, so force a choice of only one.
+			*)
+				file="$(for file in "$@"; do printf '%s\n' "$file"; done | dmenu -l 20 -i -p 'sxiv: Copy to clipboard')"
+				if [ -z "$file" ]; then
+					exit
+				elif [ ! -r "$file" ]; then
+					notify-send -t 5000 -u critical 'sxiv: copy' "File '$file' doesn't exist"
+					exit
+				fi
+				xclip -selection clipboard -target "$(file -bi "$file" | sed -n 's,\(image/[^;]\+\).*,\1,p')" "$file" &&
+					notify-send -t 1000 'sxiv: copy' "Copied '$file' to clipboard"
+				;;
+		esac
+		;;
+	# Delete marked images.
+	D)
+		# Use the $@ array for the input files.
+		set --
+		while IFS= read -r file; do
+			set -- "$@" "$file"
+		done
+		case "$#" in
+			0)	exit ;;
+			1)
+				del="$(printf 'no\nyes\n' | dmenu -i -p "sxiv: Delete '$1'?")"
+				if [ "$del" != yes ]; then
+					exit
+				fi
+				rm -- "$1" && notify-send -t 2500 'sxiv: delete' "Deleted $1"
+				;;
+			*)
+				SENTINEL='--sxiv-keyhandler-YES--'
+				NO='--NO--'
+				del="$({ printf -- '%s\n%s\n' "$NO" "$SENTINEL"; for file in "$@"; do printf '%s\n' "$file"; done; } |
+					dmenu -l 20 -i -p "sxiv: Delete these $# images? ($SENTINEL to confirm)")"
+				if [ "$del" != "$SENTINEL" ]; then
+					exit
+				fi
+				rm -- "$@" && notify-send -t 5000 'sxiv: delete' "Deleted $# images"
+				;;
+		esac
+		;;
+esac
+
