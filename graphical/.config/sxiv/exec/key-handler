@@ -2,11 +2,24 @@
 # DEPENDENCIES: dmenu file(GNU) notify-send xclip
 
 case "$1" in
-	# Get paths of all marked images.
+	# @Get keybinds.
+	question)
+		keybind="$(awk -v OFS='\t' '
+			/^[[:space:]]*#[[:space:]]*@.*\.$/ {
+				sub("^[[:space:]]*#[[:space:]]*@", "");
+				desc=$0;
+				# A keybind is on the line right after its description.
+				getline;
+				sub("^[[:space:]]*",""); sub(")$","");
+				bind=$0;
+				print desc, bind
+			}' "$0" | dmenu -l 20 -p 'sxiv: View keybinds')"
+		;;
+	# @Get paths of all marked images.
 	C-p)
 		xclip -in -selection clipboard && notify-send -t 1000 'sxiv' "Copied paths of marked images to clipboard"
 		;;
-	# Copy image to clipboard.
+	# @Copy image to clipboard.
 	C-c)
 		# Use the $@ array for the input files.
 		set --
@@ -35,7 +48,7 @@ case "$1" in
 				;;
 		esac
 		;;
-	# Delete marked images.
+	# @Delete marked images.
 	D)
 		# Use the $@ array for the input files.
 		set --
