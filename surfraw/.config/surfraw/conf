@@ -12,3 +12,6 @@ SURFRAW_nyaa_search=anime-english
 SURFRAW_nyaa_sort=date
 SURFRAW_nyaa_sortorder=descending
 # filter should be decided on call.
+
+SURFRAW_wordtranslate_direction=to-english
+SURFRAW_wordtranslate_language=japanese
