@@ -3,9 +3,12 @@
 # Open terminal.
 mod4 + Return
 	x-terminal-emulator
-# Program launcher.
+# Program launcher (direct to programs).
 mod4 + space
-	dmenu_run
+	cmd="$(dmenu_path | dmenu)"; $cmd &
+# Program launcher (output run through $SHELL).
+mod4 + shift + space
+	dmenu_path | dmenu | $\{SHELL:-"/bin/sh"\} &
 # Browser.
 mod4 + shift + b
 	x-www-browser
