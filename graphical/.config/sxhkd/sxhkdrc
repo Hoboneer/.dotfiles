@@ -52,9 +52,10 @@ XF86AudioMicMute
 	pactl set-source-mute @DEFAULT_SOURCE@ toggle
 
 # META:
-# Reload config for bspwm, sxhkd, or polybar.
-mod4 + shift + r; {b,s,p}
-	{"$\{XDG_CONFIG_HOME:-$HOME/.config\}/bspwm/bspwmrc",pkill -SIGUSR1 -x sxhkd,polybar-msg cmd restart}
+# Reload config for bspwm, sxhkd, polybar, or watchers.
+mod4 + shift + r; {b,s,p,w}
+	cfg_dir="$\{XDG_CONFIG_HOME:-$HOME/.config\}"; \
+	{"$cfg_dir/bspwm/bspwmrc",pkill -SIGUSR1 -x sxhkd,polybar-msg cmd restart,"$cfg_dir/bspwm/launch_watchers"}
 # Decide whether to log out, shut down, or restart computer.
 mod4 + shift + x
 	dmenu_powermenu

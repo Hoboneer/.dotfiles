@@ -1,0 +1,53 @@
+#!/bin/sh
+# DESCRIPTION: Watch for changes to audio volume, outputting to `xob`
+# DEPENDENCIES: pactl(pulseaudio-utils) xob
+echo "$$" > "$XDG_RUNTIME_DIR/bspwm/watch_pulseaudio.pid"
+
+
+default_sink_name="$(LC_ALL=C pactl info | awk '/^Default Sink:/{print $3; exit}')"
+default_sink_id="$(LC_ALL=C pactl list short sinks | awk -v sink="$default_sink_name" '$2 == sink {print $1; exit}')"
+
+get_avg_vol ()
+{
+	LC_ALL=C pactl list sinks |
+		# Take average of the two sides
+		awk -v sink_id="$default_sink_id" '
+			/^Sink #[0-9]+$/ {right_sink = ($2 == ("#" sink_id)); next}
+
+			/Mute: yes/ && right_sink {mute=1; next}
+			/Mute: no/ && right_sink {mute=0; next}
+
+			/Volume:/ && right_sink {
+				split($0,vols,",");
+				split(vols[1],left_vols," / "); split(vols[2],right_vols," / ");
+				left_vol=left_vols[2]; right_vol=right_vols[2];
+				# remove trailing "%" char
+				clean_left=substr(left_vol,1,length(left_vol)-1); clean_right=substr(right_vol,1,length(right_vol)-1);
+				average_vol = (clean_left + clean_right) / 2;
+				exit;
+			}
+
+			END {
+				if (mute)
+					print average_vol "!";
+				else
+					print average_vol;
+			}'
+}
+
+LC_ALL=C pactl subscribe | {
+	prev_vol="$(get_avg_vol)"
+	while IFS= read -r line; do
+		case "$line" in
+			"Event 'change' on sink #$default_sink_id")
+				avg_vol="$(get_avg_vol)"
+				# Volume percentages should allow floating point numbers so -eq,-neq wouldn't work
+				# Also, the input to `xob` allows a "!" suffix
+				if [ "$avg_vol" != "$prev_vol" ]; then
+					echo "$avg_vol"
+					prev_vol="$avg_vol"
+				fi
+				;;
+		esac
+	done
+} | xob

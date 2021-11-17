@@ -1,0 +1,24 @@
+#!/bin/sh
+# DESCRIPTION: Warn on low battery
+# DEPENDENCIES: notify-send upower
+echo "$$" > "$XDG_RUNTIME_DIR/bspwm/watch_battery.pid"
+
+# from upower --enumerate
+BATTERY=/org/freedesktop/UPower/devices/battery_BAT0
+# in percentage points
+WARN_LEVEL=15
+
+upower --monitor-detail |
+	awk -v battery="$BATTERY" -v threshold="$WARN_LEVEL" '
+		/device changed:/ && $NF == battery {in_section=1; next}
+		/state:/ && in_section {discharging = $NF == "discharging"}
+		/percentage:/ && in_section {
+			# strip off final "%" char
+			perc = substr($NF,1,length($NF)-1);
+			if (perc <= threshold && perc != old_perc && discharging) {
+				system(sprintf("notify-send -u critical -t 10000 \"LOW BATTERY\" \"battery at %d%%\"", perc));
+				old_perc = perc;
+			}
+			next;
+		}
+		/^[[:space:]]*$/{in_section=0; next}'

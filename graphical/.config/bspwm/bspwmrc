@@ -1,6 +1,8 @@
 #!/bin/sh
+bspwm_dir="$(dirname -- "$(readlink -f -- "$0")")"
 
-"${XDG_CONFIG_HOME:-$HOME/.config}/polybar/launch"
+"${XDG_CONFIG_HOME:-$HOME/.config}/polybar/launch" &
+"$bspwm_dir/launch_watchers" &
 
 bspc monitor -d I II III IV V VI VII VIII IX X
 
@@ -14,4 +16,4 @@ bspc config gapless_monocle      true
 bspc rule -r '*'
 bspc rule -a qutebrowser desktop='^2' follow=on
 bspc rule -a Firefox-esr desktop='^2' follow=on
-bspc config external_rules_command "$(dirname "$(readlink -f "$0")")/external_rules"
+bspc config external_rules_command "$bspwm_dir/external_rules"
