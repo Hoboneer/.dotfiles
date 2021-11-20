@@ -21,9 +21,9 @@ mod4 + d
 # Dmenu surfraw (skip options).
 mod4 + shift + d
 	env DO_FIELD_SPLIT=yes DO_SKIP_OPTIONS=yes dmenu_surfraw 2>&1 | xargs -n1 -d'\n' notify-send -u critical -t 5000
-# Execute dmenu scripts for convenience utilities: screenshot, series, flatpak runner.
-mod4 + semicolon; {s,w,f}
-	dmenu_{screenshot,series,flatpak_run}
+# Execute dmenu scripts for convenience utilities: screenshot, series, flatpak runner, emojis.
+mod4 + semicolon; {s,w,f,e}
+	dmenu_{screenshot,series,flatpak_run,emoji}
 # Execute non-dmenu scripts for convenience utilities: calendar, pictures, magnifier, keybinds.
 mod4 + apostrophe; {d,p,z,k}
 	{zenity --calendar --text='Current Month',sxiv -t ~/Pictures/,wmzoom,dmenu_sxhkd_binds}
