@@ -15,12 +15,30 @@ mod4 + shift + b
 # Mail.
 mod4 + shift + m
 	thunderbird
-# Dmenu surfraw.
+# Dmenu surfraw (qutebrowser).
 mod4 + d
-	env DO_FIELD_SPLIT=yes dmenu_surfraw 2>&1 | xargs -n1 -d'\n' notify-send -u critical -t 5000
-# Dmenu surfraw (skip options).
+	if wmctrl -lx | awk -v found=0 '$3 ~ /qutebrowser/ \{found=1; exit\} END \{exit found\}'; then \
+		setsid qutebrowser & \
+	fi; \
+	env DO_FIELD_SPLIT=yes SURFRAW_browser=qutebrowser dmenu_surfraw 2>&1 | xargs -n1 -d'\n' notify-send -u critical -t 5000
+# Dmenu surfraw (qutebrowser; skip options).
 mod4 + shift + d
-	env DO_FIELD_SPLIT=yes DO_SKIP_OPTIONS=yes dmenu_surfraw 2>&1 | xargs -n1 -d'\n' notify-send -u critical -t 5000
+	if wmctrl -lx | awk -v found=0 '$3 ~ /qutebrowser/ \{found=1; exit\} END \{exit found\}'; then \
+		setsid qutebrowser & \
+	fi; \
+	env DO_FIELD_SPLIT=yes DO_SKIP_OPTIONS=yes SURFRAW_browser=qutebrowser dmenu_surfraw 2>&1 | xargs -n1 -d'\n' notify-send -u critical -t 5000
+# Dmenu surfraw (firefox).
+mod4 + e
+	if wmctrl -lx | awk -v found=0 '$3 ~ /Firefox/ \{found=1; exit\} END \{exit found\}'; then \
+		setsid firefox & \
+	fi; \
+	env DO_FIELD_SPLIT=yes SURFRAW_browser=firefox dmenu_surfraw 2>&1 | xargs -n1 -d'\n' notify-send -u critical -t 5000
+# Dmenu surfraw (firefox; skip options).
+mod4 + shift + e
+	if wmctrl -lx | awk -v found=0 '$3 ~ /Firefox/ \{found=1; exit\} END \{exit found\}'; then \
+		setsid firefox & \
+	fi; \
+	env DO_FIELD_SPLIT=yes DO_SKIP_OPTIONS=yes SURFRAW_browser=firefox dmenu_surfraw 2>&1 | xargs -n1 -d'\n' notify-send -u critical -t 5000
 # Execute dmenu scripts for convenience utilities: screenshot, series, flatpak runner, emojis.
 mod4 + semicolon; {s,w,f,e}
 	dmenu_{screenshot,series,flatpak_run,emoji}
