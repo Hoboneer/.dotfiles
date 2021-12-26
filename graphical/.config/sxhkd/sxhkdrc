@@ -115,6 +115,9 @@ mod4 + {_,shift + }c
 # Focus the next/previous desktop in the current monitor.
 mod4 + bracket{left,right}
 	bspc desktop -f {prev,next}.local
+# Focus the next/previous monitor.
+mod4 + shift + bracket{left,right}
+	bspc monitor -f {prev,next}; bspc node -f local
 # Focus the last node/desktop.
 mod4 + {grave,Tab}
 	bspc {node,desktop} -f last
