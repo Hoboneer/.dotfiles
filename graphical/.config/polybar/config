@@ -109,6 +109,24 @@ label-unmounted-foreground = ${colors.foreground-alt}
 [module/bspwm]
 type = internal/bspwm
 
+format = <label-state> <label-mode> <label-monitor>
+
+label-monitor = %{F#0a81f5}%name%%{F-}
+
+label-monocle = MONO
+label-tiled = TILED
+label-fullscreen = FULLSCREEN
+label-floating = FLOAT
+label-pseudotiled = PSEUDOTILED
+label-locked = LOCK
+label-locked-foreground = ${colors.alert}
+label-sticky = STICKY
+label-sticky-foreground = ${colors.alert}
+label-private = PRIV
+label-private-foreground = ${colors.alert}
+label-marked = MARK
+label-marked-foreground = ${colors.alert}
+
 label-focused = %index%
 label-focused-background = ${colors.background-alt}
 label-focused-underline= ${colors.primary}
