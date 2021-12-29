@@ -31,6 +31,7 @@ padding-right = 2
 modules-left = title
 modules-center = bspwm
 modules-right = xkeyboard bspwm-mode
+modules-right = bspwm-state xkeyboard
 
 wm-restack = bspwm
 
@@ -109,9 +110,7 @@ label-unmounted-foreground = ${colors.foreground-alt}
 [module/bspwm]
 type = internal/bspwm
 
-format = <label-state> <label-mode> <label-monitor>
-
-label-monitor = %{F#0a81f5}%name%%{F-}
+format = <label-state>
 
 label-monocle = MONO
 label-tiled = TILED
@@ -252,6 +251,12 @@ label-warn-foreground = ${colors.secondary}
 type = custom/script
 exec = ibus engine
 interval = 2
+
+[module/bspwm-state]
+type = custom/script
+exec = exec watch_bspwm
+tail = true
+format-padding = 2
 
 [settings]
 screenchange-reload = true
