@@ -9,14 +9,11 @@ export XMODIFIERS=@im=ibus
 ibus-daemon --xim -d &
 
 dunst &
-dir="$XDG_RUNTIME_DIR"
-f="$dir/sxhkd/status.fifo" MODE_FILE="$dir/bspwm/mode"
-rm -f "$f" "$MODE_FIFO"  # we should start fresh
-mkdir -p "$(dirname "$f")" "$(dirname "$MODE_FILE")"
-mkfifo "$f"
-# Make sxhkd_watch run as a true daemon: https://stackoverflow.com/a/19235243
-setsid "${XDG_CONFIG_HOME:-$HOME/.config}/sxhkd/sxhkd_watch" "$f" "$MODE_FILE" >/dev/null 2>&1 < /dev/null &
-sxhkd -s "$f" &
-unset dir f MODE_FILE
+SXHKD_FIFO="$XDG_RUNTIME_DIR/sxhkd/status.fifo"
+export SXHKD_FIFO
+rm -f "$SXHKD_FIFO" # we should start fresh
+mkdir -p "$(dirname "$SXHKD_FIFO")"
+mkfifo "$SXHKD_FIFO"
+sxhkd -s "$SXHKD_FIFO" &
 
 fi

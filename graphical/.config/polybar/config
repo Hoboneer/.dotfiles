@@ -30,8 +30,7 @@ padding-right = 2
 
 modules-left = title
 modules-center = bspwm
-modules-right = xkeyboard bspwm-mode
-modules-right = bspwm-state xkeyboard
+modules-right = bspwm-state xkeyboard sxhkd-mode
 
 wm-restack = bspwm
 
@@ -76,12 +75,12 @@ cursor-scroll = ns-resize
 type = internal/xwindow
 format-padding = 4
 
-[module/bspwm-mode]
+[module/sxhkd-mode]
 type = custom/script
-interval = 1
-exec = cat ${XDG_RUNTIME_DIR}/bspwm/mode
-label = mode: %output%
-format-padding = 4
+exec = exec watch_sxhkd
+label = kbmode: %output%
+tail = true
+format-padding = 2
 
 [module/xkeyboard]
 type = internal/xkeyboard
