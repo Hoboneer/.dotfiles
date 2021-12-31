@@ -149,3 +149,7 @@ pushdf ()
 	[ -z "$dir" ] && return 1
 	pushd "$dir"
 }
+
+alias d='cd ~/.dotfiles/'
+alias s='cd ~/.scripts/'
+alias dl='cd ~/Downloads/'
