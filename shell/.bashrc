@@ -134,3 +134,18 @@ alias lynx='lynx -vikeys'
 alias xclip='xclip -selection clipboard'
 
 alias zathura='zathura --fork'
+
+cdf ()
+{
+	local dir
+	dir="$(find . \( \( -name '.git' \) -prune \) -o \( -type d \! \( -name '.' \) -print0 \) | fzf --read0)" || return 1
+	[ -z "$dir" ] && return 1
+	cd "$dir"
+}
+pushdf ()
+{
+	local dir
+	dir="$(find . \( \( -name '.git' \) -prune \) -o \( -type d \! \( -name '.' \) -print0 \) | fzf --read0)" || return 1
+	[ -z "$dir" ] && return 1
+	pushd "$dir"
+}
