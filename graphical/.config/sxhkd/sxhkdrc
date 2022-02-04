@@ -73,6 +73,9 @@ XF86AudioMute
 # Mute mic.
 XF86AudioMicMute
 	pactl set-source-mute @DEFAULT_SOURCE@ toggle
+# Move mouse to centre of focussed window or screen (if no window is there).
+mod4 + equal
+	centre_mouse
 
 # META:
 # Reload config for bspwm, sxhkd, polybar, or watchers.
