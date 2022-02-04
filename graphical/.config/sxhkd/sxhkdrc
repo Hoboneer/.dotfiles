@@ -44,7 +44,11 @@ mod4 + semicolon; {s,w,f,e}
 	dmenu_{screenshot,series,flatpak_run,emoji}
 # Execute non-dmenu scripts for convenience utilities: calendar, pictures, magnifier, keybinds.
 mod4 + apostrophe; {d,p,z,k}
-	{zenity --calendar --text='Current Month',sxiv -t ~/Pictures/,wmzoom,dmenu_sxhkd_binds}
+	{zenity --calendar --text='Current Month' \
+	,sxiv -t ~/Pictures/ \
+	,wmzoom \
+	,dmenu_sxhkd_binds \
+	}
 # Switch to some open graphical program.
 mod4 + slash
 	dmenu_switch_xprog
