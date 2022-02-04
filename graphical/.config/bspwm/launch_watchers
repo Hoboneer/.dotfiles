@@ -11,5 +11,6 @@ for script in "$bspwm_dir"/watch/*; do
 		pid="$(cat "$pidfile")"
 		pkill --parent "$pid"
 	fi
+	mkdir -p "$(dirname -- "$pidfile")"
 	"$script" &
 done
