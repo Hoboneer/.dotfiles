@@ -18,22 +18,39 @@ strip_quotes ()
 	sed -e 's/^"//' -e 's/"$//'
 }
 
-if [ "$class" = zoom ]; then
-	ZOOM_START_WINDOW='Zoom Cloud Meetings'
-	case "$(get_xprop WM_NAME | strip_quotes)" in
-		# Remove annoying start window upon joining a meeting.
-		# Three cases, opening: breakout rooms, returning to main room, joining meeting for first time.
-		Room*'Zoom Meeting'|'Zoom Meeting'|Zoom)
-			wmctrl -F -c "$ZOOM_START_WINDOW"
-			echo state=tiled
-			;;
-		# Popups for sharing screens etc shouldn't clog up the screen or grab focus.
-		'')
-			echo 'state=floating focus=off'
-			;;
-	esac
-	exit
-fi
+case "$class" in
+	zoom)
+		ZOOM_START_WINDOW='Zoom Cloud Meetings'
+		case "$(get_xprop WM_NAME | strip_quotes)" in
+			# Remove annoying start window upon joining a meeting.
+			# Three cases, opening: breakout rooms, returning to main room, joining meeting for first time.
+			Room*'Zoom Meeting'|'Zoom Meeting'|Zoom)
+				wmctrl -F -c "$ZOOM_START_WINDOW"
+				echo state=tiled
+				;;
+			# Popups for sharing screens etc shouldn't clog up the screen or grab focus.
+			'')
+				echo 'state=floating focus=off'
+				;;
+		esac
+		exit
+		;;
+	discord)
+		DISCORD_DESKTOP="$XDG_RUNTIME_DIR/bspwm/discord-updater-desktop"
+		case "$(get_xprop WM_NAME | strip_quotes)" in
+			# Save desktop ID that this updater window is in
+			'Discord Updater')
+				bspc query -D -d focused > "$DISCORD_DESKTOP"
+				;;
+			*)
+				echo desktop="$(cat "$DISCORD_DESKTOP")"
+				rm "$DISCORD_DESKTOP"
+				;;
+
+		esac
+		exit
+		;;
+esac
 case "$(get_xprop WM_ICON_NAME | strip_quotes)" in
 	xzoom)
 		echo state=floating
