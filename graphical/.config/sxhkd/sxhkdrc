@@ -42,12 +42,13 @@ mod4 + shift + e
 # Execute dmenu scripts for convenience utilities: screenshot, series, flatpak runner, emojis.
 mod4 + semicolon; {s,w,f,e}
 	dmenu_{screenshot,series,flatpak_run,emoji}
-# Execute non-dmenu scripts for convenience utilities: calendar, pictures, magnifier, keybinds.
-mod4 + apostrophe; {d,p,z,k}
+# Execute non-dmenu scripts for convenience utilities: calendar, pictures, magnifier, keybinds, watch video url in clipboard.
+mod4 + apostrophe; {d,p,z,k,v}
 	{zenity --calendar --text='Current Month' \
 	,sxiv -t ~/Pictures/ \
 	,wmzoom \
 	,dmenu_sxhkd_binds \
+	,clip="$(xclip -selection clipboard -o)"; case $clip in (http?://*) notify-send -t 1000 "Opening $clip"; mpv --profile=1080p "$clip" ;; (*) notify-send -t 5000 -u critical "'$clip' doesn't look like a URL" ;; esac \
 	}
 # Switch to some open graphical program.
 mod4 + slash
