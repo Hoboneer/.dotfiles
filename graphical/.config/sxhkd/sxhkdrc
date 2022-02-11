@@ -3,6 +3,9 @@
 # Open terminal.
 mod4 + Return
 	x-terminal-emulator
+# Open terminal and attach to screen session.
+mod4 + shift + Return
+	x-terminal-emulator screen -x
 # Program launcher (direct to programs).
 mod4 + space
 	cmd="$(dmenu_path | dmenu)"; $cmd &
