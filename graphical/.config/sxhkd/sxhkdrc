@@ -18,6 +18,9 @@ mod4 + shift + b
 # Mail.
 mod4 + shift + m
 	thunderbird
+# Paint on screen.
+mod4 + shift + p
+	gromit-mpx
 # Dmenu surfraw (qutebrowser).
 mod4 + d
 	if wmctrl -lx | awk -v found=0 '$3 ~ /qutebrowser/ \{found=1; exit\} END \{exit found\}'; then \
