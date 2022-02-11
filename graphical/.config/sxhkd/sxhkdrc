@@ -100,12 +100,21 @@ mod4 + {_,shift + }w
 # Alternate between the tiled and monocle layout.
 mod4 + m
 	bspc desktop -l next
-## swap the current node and the biggest node
-#mod4 + g
-#	bspc node -s biggest
 # Send the newest marked node to the newest preselected node in the *current* desktop or in *any* desktop.
 mod4 + {_,shift + }y
 	bspc node newest.marked.local -n newest.!automatic{.local,_}
+# Swap the current node and the biggest node locally and globally, *following* the original node.
+mod4 + {_,shift + }g
+	bspc node -s biggest{.local,_} --follow
+# Swap the current node and the biggest node locally and globally, *without* following the original node.
+mod4 + {_,shift + }v
+	: need to do this trickery because swapping nodes within desktops seems to follow the focussed node; \
+	: TODO: review this when bspwm updated; \
+	swapnodeid="$(bspc query -N -n biggest{.local,_})"; \
+	bspc wm -h off; \
+	bspc node -s "$swapnodeid"; \
+	bspc node -f "$swapnodeid"; \
+	bspc wm -h on
 
 # BSPWM STATE/FLAGS:
 # Set the window state: tiled, pseudo_tiled, floating, toggle fullscreen.
