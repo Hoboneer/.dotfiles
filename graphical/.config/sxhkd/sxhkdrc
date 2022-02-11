@@ -115,6 +115,12 @@ mod4 + {_,shift + }v
 	bspc node -s "$swapnodeid"; \
 	bspc node -f "$swapnodeid"; \
 	bspc wm -h on
+# Increase/decrease the window gap (Prior=PageUp, Next=PageDown) by a higher/lower amount.
+mod4 + {_,shift +}{Prior,Next}
+	old="$(bspc config window_gap)"; \
+	delta={4,2}; \
+	new="$(( old {+,-} delta ))"; \
+	[ "$new" -ge 0 ] && bspc config window_gap "$new"
 
 # BSPWM STATE/FLAGS:
 # Set the window state: tiled, pseudo_tiled, floating, toggle fullscreen.
