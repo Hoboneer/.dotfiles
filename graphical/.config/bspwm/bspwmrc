@@ -4,7 +4,8 @@ bspwm_dir="$(dirname -- "$(readlink -f -- "$0")")"
 "${XDG_CONFIG_HOME:-$HOME/.config}/polybar/launch" &
 "$bspwm_dir/launch_watchers" &
 
-bspc monitor -d I II III IV V VI VII VIII IX X
+# From scripts repo
+distribute_monitors
 
 bspc config border_width         2
 bspc config window_gap          12
