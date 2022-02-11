@@ -3,6 +3,8 @@ then export HAVE_XSESSIONRC=1
 
 [ -r "$HOME/.profile" ] && . "$HOME/.profile"
 
+setxkbmap -option caps:swapescape
+
 export GTK_IM_MODULE=ibus
 export QT_IM_MODULE=ibus
 export XMODIFIERS=@im=ibus
