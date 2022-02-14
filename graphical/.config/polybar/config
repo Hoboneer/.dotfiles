@@ -28,9 +28,9 @@ line-color = #f00
 padding-left = 2
 padding-right = 2
 
-modules-left = title
-modules-center = bspwm
-modules-right = bspwm-state xkeyboard sxhkd-mode
+modules-left = bspwm-state
+modules-center = title
+modules-right = xkeyboard sxhkd-mode
 
 wm-restack = bspwm
 
@@ -105,41 +105,6 @@ mount-0 = /
 label-mounted = %{F#0a81f5}%mountpoint%%{F-}: %percentage_used%% | %used% / %total%
 label-unmounted = %mountpoint% not mounted
 label-unmounted-foreground = ${colors.foreground-alt}
-
-[module/bspwm]
-type = internal/bspwm
-
-format = <label-state>
-
-label-monocle = MONO
-label-tiled = TILED
-label-fullscreen = FULLSCREEN
-label-floating = FLOAT
-label-pseudotiled = PSEUDOTILED
-label-locked = LOCK
-label-locked-foreground = ${colors.alert}
-label-sticky = STICKY
-label-sticky-foreground = ${colors.alert}
-label-private = PRIV
-label-private-foreground = ${colors.alert}
-label-marked = MARK
-label-marked-foreground = ${colors.alert}
-
-label-focused = %index%
-label-focused-background = ${colors.background-alt}
-label-focused-underline= ${colors.primary}
-label-focused-padding = 2
-
-label-occupied = %index%
-label-occupied-padding = 2
-
-label-urgent = %index%!
-label-urgent-background = ${colors.alert}
-label-urgent-padding = 2
-
-label-empty = %index%
-label-empty-foreground = ${colors.foreground-alt}
-label-empty-padding = 2
 
 [module/xbacklight]
 type = internal/xbacklight
