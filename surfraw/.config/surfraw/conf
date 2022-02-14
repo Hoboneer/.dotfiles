@@ -15,3 +15,5 @@ SURFRAW_nyaa_sortorder=descending
 
 SURFRAW_wordtranslate_direction=to-english
 SURFRAW_wordtranslate_language=japanese
+
+SURFRAW_reddit_site=oldreddit
