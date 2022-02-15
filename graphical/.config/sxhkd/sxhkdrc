@@ -100,21 +100,6 @@ mod4 + {_,shift + }w
 # Alternate between the tiled and monocle layout.
 mod4 + m
 	bspc desktop -l next
-# Send the newest marked node to the newest preselected node in the *current* desktop or in *any* desktop.
-mod4 + {_,shift + }y
-	bspc node newest.marked.local -n newest.!automatic{.local,_}
-# Swap the current node and the biggest node locally and globally, *following* the original node.
-mod4 + {_,shift + }g
-	bspc node -s biggest{.local,_} --follow
-# Swap the current node and the biggest node locally and globally, *without* following the original node.
-mod4 + {_,shift + }v
-	: need to do this trickery because swapping nodes within desktops seems to follow the focussed node; \
-	: TODO: review this when bspwm updated; \
-	swapnodeid="$(bspc query -N -n biggest{.local,_})"; \
-	bspc wm -h off; \
-	bspc node -s "$swapnodeid"; \
-	bspc node -f "$swapnodeid"; \
-	bspc wm -h on
 # Increase/decrease the window gap (Prior=PageUp, Next=PageDown) by a higher/lower amount.
 mod4 + {_,shift +}{Prior,Next}
 	old="$(bspc config window_gap)"; \
@@ -157,6 +142,18 @@ mod4 + {o,i}
 # Focus or send to the given desktop.
 mod4 + {_,shift + }{1-9,0}
 	bspc {desktop -f,node -d} '^{1-9,10}'
+# Swap the current node and the biggest node locally and globally, *following* the original node.
+mod4 + {_,shift + }g
+	bspc node -s biggest{.local,_} --follow
+# Swap the current node and the biggest node locally and globally, *without* following the original node.
+mod4 + {_,shift + }v
+	: need to do this trickery because swapping nodes within desktops seems to follow the focussed node; \
+	: still seems to be broken in version 0.9.10 of bspwm on Debian Bullseye; \
+	swapnodeid="$(bspc query -N -n biggest{.local,_})"; \
+	bspc wm -h off; \
+	bspc node -s "$swapnodeid"; \
+	bspc node -f "$swapnodeid"; \
+	bspc wm -h on
 
 # BSPWM PRESELECT:
 # Preselect the direction.
@@ -166,14 +163,15 @@ mod4 + ctrl + {h,j,k,l}
 # Preselect the ratio.
 mod4 + ctrl + {1-9}
 	bspc node -o 0.{1-9}
-
 # Cancel the preselection for the focused node.
 mod4 + ctrl + space
 	bspc node -p cancel
-
 # Cancel the preselection for the focused desktop.
 mod4 + ctrl + shift + space
 	bspc query -N -d | xargs -I id -n 1 bspc node id -p cancel
+# Send the newest marked node to the newest preselected node in the *current* desktop or in *any* desktop.
+mod4 + {_,shift + }y
+	bspc node newest.marked.local -n newest.!automatic{.local,_}
 
 # BSPWM MOVE/RESIZE:
 # Expand/contract window by a side or corner (nethack, vi-keys 'yuhjklbn'): lowercase: expand; uppercase: contract.
