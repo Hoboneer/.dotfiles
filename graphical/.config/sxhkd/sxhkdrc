@@ -114,11 +114,21 @@ mod4 + shift + {period,comma}
 	bspc node -R {90,-90}
 
 # BSPWM STATE/FLAGS:
-# Set the window state: tiled, pseudo_tiled, floating, toggle fullscreen.
-mod4 + {t,shift + t,s,f}
-	bspc node -t {tiled,pseudo_tiled,floating,~fullscreen}
-# Toggle the node flags: marked, locked, sticky, private.
+# Toggle fullscreen for the node.
+mod4 + f
+	bspc node -t ~fullscreen
+# Uniformly set Set the window state for the focused node and its descendants: tiled, pseudo_tiled, floating.
+mod4 + {t,shift + t,s}
+	: jq-1.6 docs for Debian Bullseye lied: recurse default is wrong.; \
+	bspc query -T -n | jq -r 'recurse(.firstChild, .secondChild; . != null) | .id' | xargs -I id -n 1 bspc node id -t {tiled,pseudo_tiled,floating}
+# Uniformly toggle the node flags for the focused node and its descendants: marked, locked, sticky, private.
 mod4 + ctrl + {m,x,y,z}
+	flag={marked,locked,sticky,private}; \
+	newvalue="$(bspc query -T -n | jq -r "if .$flag then \"off\" else \"on\" end")"; \
+	: jq-1.6 docs for Debian Bullseye lied: recurse default is wrong.; \
+	bspc query -T -n | jq -r 'recurse(.firstChild, .secondChild; . != null) | .id' | xargs -I id -n 1 bspc node id -g $flag=$newvalue
+# Toggle the node flags for the single node: marked, locked, sticky, private.
+mod4 + alt + {m,x,y,z}
 	bspc node -g {marked,locked,sticky,private}
 
 # BSPWM FOCUS/SWAP:
@@ -174,7 +184,6 @@ mod4 + {_,shift + }v
 # Preselect the direction.
 mod4 + ctrl + {h,j,k,l}
 	bspc node -p {west,south,north,east}
-
 # Preselect the ratio.
 mod4 + ctrl + {1-9}
 	bspc node -o 0.{1-9}
