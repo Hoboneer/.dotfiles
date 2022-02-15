@@ -137,9 +137,9 @@ mod4 + {_,shift + }{h,j,k,l}
 # Focus the node for the given path jump.
 mod4 + {p,b,comma,period}
 	bspc node -f @{parent,brother,first,second}
-# Focus the next/previous node in the current desktop.
+# Focus the next/previous leaf node in the current desktop.
 mod4 + {_,shift + }c
-	bspc node -f {next,prev}.local
+	bspc node -f {next,prev}.local.leaf
 # Focus the next/previous desktop in the current monitor.
 mod4 + bracket{left,right}
 	bspc desktop -f {prev,next}.local
