@@ -119,6 +119,9 @@ mod4 + ctrl + {m,x,y,z}
 # Focus/swap the node in the given direction.
 mod4 + {_,shift + }{h,j,k,l}
 	bspc node -{f,s} {west,south,north,east}
+# Focus the root node of the current desktop.
+mod4 + u
+	bspc node -f @/
 # Focus the node for the given path jump.
 mod4 + {p,b,comma,period}
 	bspc node -f @{parent,brother,first,second}
@@ -137,6 +140,9 @@ mod4 + shift + bracket{left,right}
 # Focus the last node/desktop.
 mod4 + {grave,Tab}
 	bspc {node,desktop} -f last
+# Focus last non-leaf node.
+mod4 + Escape
+	bspc node -f last.leaf
 # Focus the older or newer node in the focus history.
 mod4 + {o,i}
 	bspc wm -h off; \
