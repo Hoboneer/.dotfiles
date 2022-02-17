@@ -15,30 +15,18 @@ mod4 + shift + space
 # Open programs: browser, mail, screen painter, telegram.
 mod4 + a; {b,m,p,t}
 	{x-www-browser,thunderbird,gromit-mpx,telegram-desktop}
-# Dmenu surfraw (qutebrowser).
-mod4 + d
+# Dmenu surfraw (qutebrowser), skipping or not skipping options.
+mod4 + {_,shift + }d
 	if wmctrl -lx | awk -v found=0 '$3 ~ /qutebrowser/ \{found=1; exit\} END \{exit found\}'; then \
 		setsid qutebrowser & \
 	fi; \
-	env DO_FIELD_SPLIT=yes SURFRAW_browser=qutebrowser dmenu_surfraw 2>&1 | xargs -n1 -d'\n' notify-send -u critical -t 5000
-# Dmenu surfraw (qutebrowser; skip options).
-mod4 + shift + d
-	if wmctrl -lx | awk -v found=0 '$3 ~ /qutebrowser/ \{found=1; exit\} END \{exit found\}'; then \
-		setsid qutebrowser & \
-	fi; \
-	env DO_FIELD_SPLIT=yes DO_SKIP_OPTIONS=yes SURFRAW_browser=qutebrowser dmenu_surfraw 2>&1 | xargs -n1 -d'\n' notify-send -u critical -t 5000
-# Dmenu surfraw (firefox).
-mod4 + e
+	env DO_FIELD_SPLIT=yes DO_SKIP_OPTIONS={yes,no} SURFRAW_browser=qutebrowser dmenu_surfraw 2>&1 | xargs -n1 -d'\n' notify-send -u critical -t 5000
+# Dmenu surfraw (firefox), skipping or not skipping options.
+mod4 + {_,shift + }e
 	if wmctrl -lx | awk -v found=0 '$3 ~ /Firefox/ \{found=1; exit\} END \{exit found\}'; then \
 		setsid firefox & \
 	fi; \
-	env DO_FIELD_SPLIT=yes SURFRAW_browser=firefox dmenu_surfraw 2>&1 | xargs -n1 -d'\n' notify-send -u critical -t 5000
-# Dmenu surfraw (firefox; skip options).
-mod4 + shift + e
-	if wmctrl -lx | awk -v found=0 '$3 ~ /Firefox/ \{found=1; exit\} END \{exit found\}'; then \
-		setsid firefox & \
-	fi; \
-	env DO_FIELD_SPLIT=yes DO_SKIP_OPTIONS=yes SURFRAW_browser=firefox dmenu_surfraw 2>&1 | xargs -n1 -d'\n' notify-send -u critical -t 5000
+	env DO_FIELD_SPLIT=yes DO_SKIP_OPTIONS={yes,no} SURFRAW_browser=firefox dmenu_surfraw 2>&1 | xargs -n1 -d'\n' notify-send -u critical -t 5000
 # Execute dmenu scripts for convenience utilities: screenshot, series, flatpak runner, emojis.
 mod4 + semicolon; {s,w,f,e}
 	dmenu_{screenshot,series,flatpak_run,emoji}
