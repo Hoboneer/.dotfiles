@@ -12,9 +12,9 @@ mod4 + space
 # Program launcher (output run through $SHELL).
 mod4 + shift + space
 	dmenu_path | dmenu | $\{SHELL:-"/bin/sh"\} &
-# Open programs: browser, mail, screen painter.
-mod4 + a; {b,m,p}
-	{x-www-browser,thunderbird,gromit-mpx}
+# Open programs: browser, mail, screen painter, telegram.
+mod4 + a; {b,m,p,t}
+	{x-www-browser,thunderbird,gromit-mpx,telegram-desktop}
 # Dmenu surfraw (qutebrowser).
 mod4 + d
 	if wmctrl -lx | awk -v found=0 '$3 ~ /qutebrowser/ \{found=1; exit\} END \{exit found\}'; then \
