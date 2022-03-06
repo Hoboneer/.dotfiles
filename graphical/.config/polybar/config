@@ -77,7 +77,7 @@ format-padding = 4
 
 [module/sxhkd-mode]
 type = custom/script
-exec = exec watch_sxhkd
+exec = exec tail -f $XDG_RUNTIME_DIR/sxhkd/mode.fifo
 label = kbmode: %output%
 tail = true
 format-padding = 2
@@ -223,7 +223,7 @@ tail = true
 format-padding = 2
 
 [settings]
-screenchange-reload = true
+screenchange-reload = false
 
 [global/wm]
 margin-top = 5

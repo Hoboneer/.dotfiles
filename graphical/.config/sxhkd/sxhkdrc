@@ -83,7 +83,7 @@ mod4 + shift + slash; k; k
 ## @description		Reload config for {bspwm,sxhkd,polybar,watchers}.
 mod4 + shift + r; {b,s,p,w}
 	cfg_dir="$\{XDG_CONFIG_HOME:-$HOME/.config\}"; \
-	{"$cfg_dir/bspwm/bspwmrc",pkill -SIGUSR1 -x sxhkd,polybar-msg cmd restart,"$cfg_dir/bspwm/launch_watchers"}
+	{"$cfg_dir/bspwm/bspwmrc",pkill -SIGUSR1 -x sxhkd; pkill -SIGUSR1 -x hkwatch,polybar-msg cmd restart; sleep 2; pkill -SIGUSR2 -x hkwatch,"$cfg_dir/bspwm/launch_watchers"}
 ## @description		Decide whether to log out, shut down, or restart computer.
 mod4 + shift + x
 	dmenu_powermenu

@@ -1,0 +1,6 @@
+--section-type stack
+--header ^#+\s*(?P<name>[A-Z./-]+)\s*{{{$
+--footer ^#+\s*}}}$
+--metadata-type key-value
+--pair ^#+\s*@(?P<key>[a-z0-9_]+)\s+(?P<value>.*)$
+--empty ^#+\s*$
