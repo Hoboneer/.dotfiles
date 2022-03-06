@@ -69,6 +69,17 @@ mod4 + equal
 # }}}
 
 # META {{{
+## @description		View keybinds in browser.
+mod4 + shift + slash; k; w
+	cfg_dir="$\{XDG_CONFIG_HOME:-$HOME/.config\}"; \
+	outfile="$XDG_RUNTIME_DIR/sxhkd/keybinds.html"; \
+	hkexport $(cat "$cfg_dir/sxhkd/PARSER-ARGS") --format html --expand >"$outfile"; \
+	x-www-browser "$outfile"
+## @description		View all keybinds.
+mod4 + shift + slash; k; k
+	cfg_dir="$\{XDG_CONFIG_HOME:-$HOME/.config\}"; \
+	hkexport $(cat "$cfg_dir/sxhkd/PARSER-ARGS") --format txt --keybinds-only --expand | \
+		dmenu -l 20 -i
 ## @description		Reload config for {bspwm,sxhkd,polybar,watchers}.
 mod4 + shift + r; {b,s,p,w}
 	cfg_dir="$\{XDG_CONFIG_HOME:-$HOME/.config\}"; \
