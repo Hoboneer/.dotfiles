@@ -1,36 +1,36 @@
-# PROGRAMS:
+# PROGRAMS {{{
 # (apparently "Return" must be capitalised):
-# Open terminal.
+## @description		Open terminal.
 mod4 + Return
 	x-terminal-emulator
-# Open terminal and attach to screen session.
+## @description		Open terminal and attach to screen session.
 mod4 + shift + Return
 	x-terminal-emulator screen -x
-# Program launcher (direct to programs).
+## @description		Program launcher (direct to programs).
 mod4 + space
 	cmd="$(dmenu_path | dmenu)"; $cmd &
-# Program launcher (output run through $SHELL).
+## @description		Program launcher (output run through $SHELL).
 mod4 + shift + space
 	dmenu_path | dmenu | $\{SHELL:-"/bin/sh"\} &
-# Open programs: browser, mail, screen painter, telegram.
+## @description		Open {browser,mail,screen painter,telegram}.
 mod4 + a; {b,m,p,t}
 	{x-www-browser,thunderbird,gromit-mpx,telegram-desktop}
-# Dmenu surfraw (qutebrowser), skipping or not skipping options.
+## @description		Dmenu surfraw (qutebrowser), {skipping,not skipping} options.
 mod4 + {_,shift + }d
 	if wmctrl -lx | awk -v found=0 '$3 ~ /qutebrowser/ \{found=1; exit\} END \{exit found\}'; then \
 		setsid qutebrowser & \
 	fi; \
 	env DO_FIELD_SPLIT=yes DO_SKIP_OPTIONS={yes,no} SURFRAW_browser=qutebrowser dmenu_surfraw 2>&1 | xargs -n1 -d'\n' notify-send -u critical -t 5000
-# Dmenu surfraw (firefox), skipping or not skipping options.
+## @description		Dmenu surfraw (firefox), {skipping,not skipping} options.
 mod4 + {_,shift + }e
 	if wmctrl -lx | awk -v found=0 '$3 ~ /Firefox/ \{found=1; exit\} END \{exit found\}'; then \
 		setsid firefox & \
 	fi; \
 	env DO_FIELD_SPLIT=yes DO_SKIP_OPTIONS={yes,no} SURFRAW_browser=firefox dmenu_surfraw 2>&1 | xargs -n1 -d'\n' notify-send -u critical -t 5000
-# Execute dmenu scripts for convenience utilities: screenshot, series, flatpak runner, emojis.
+## @description		Execute dmenu scripts for convenience utilities: screenshot, series, flatpak runner, emojis.
 mod4 + semicolon; {s,w,f,e}
 	dmenu_{screenshot,series,flatpak_run,emoji}
-# Execute non-dmenu scripts for convenience utilities: calendar, pictures, magnifier, keybinds, latex scratchpad, watch video url in clipboard.
+## @description		Execute non-dmenu scripts for convenience utilities: calendar, pictures, magnifier, keybinds, latex scratchpad, watch video url in clipboard.
 mod4 + apostrophe; {d,p,z,k,l,v}
 	{zenity --calendar --text='Current Month' \
 	,sxiv -t ~/Pictures/ \
@@ -39,120 +39,126 @@ mod4 + apostrophe; {d,p,z,k,l,v}
 	,latex_scratch \
 	,clip="$(xclip -selection clipboard -o)"; case $clip in (http?://*) notify-send -t 1000 "Opening $clip"; mpv --profile=1080p "$clip" ;; (*) notify-send -t 5000 -u critical "'$clip' doesn't look like a URL" ;; esac \
 	}
-# Switch to some open graphical program.
+## @description		Switch to some open graphical program.
 mod4 + slash
 	dmenu_switch_xprog
+# }}}
 
-# AUX:
-# Increase volume.
+# AUX {{{
+## @description		Increase volume.
 XF86AudioRaiseVolume
 	pactl set-sink-volume @DEFAULT_SINK@ +10%
-# Decrease volume.
+## @description		Decrease volume.
 XF86AudioLowerVolume
 	pactl set-sink-volume @DEFAULT_SINK@ -10%
-# Increase volume (more granular).
+## @description		Increase volume (more granular).
 mod4 + XF86AudioRaiseVolume
 	pactl set-sink-volume @DEFAULT_SINK@ +5%
-# Decrease volume (more granular).
+## @description		Decrease volume (more granular).
 mod4 + XF86AudioLowerVolume
 	pactl set-sink-volume @DEFAULT_SINK@ -5%
-# Mute volume.
+## @description		Mute volume.
 XF86AudioMute
 	pactl set-sink-mute @DEFAULT_SINK@ toggle
-# Mute mic.
+## @description		Mute mic.
 XF86AudioMicMute
 	pactl set-source-mute @DEFAULT_SOURCE@ toggle
-# Move mouse to centre of focussed window or screen (if no window is there).
+## @description		Move mouse to centre of focussed window or screen (if no window is there).
 mod4 + equal
 	centre_mouse
+# }}}
 
-# META:
-# Reload config for bspwm, sxhkd, polybar, or watchers.
+# META {{{
+## @description		Reload config for {bspwm,sxhkd,polybar,watchers}.
 mod4 + shift + r; {b,s,p,w}
 	cfg_dir="$\{XDG_CONFIG_HOME:-$HOME/.config\}"; \
 	{"$cfg_dir/bspwm/bspwmrc",pkill -SIGUSR1 -x sxhkd,polybar-msg cmd restart,"$cfg_dir/bspwm/launch_watchers"}
-# Decide whether to log out, shut down, or restart computer.
+## @description		Decide whether to log out, shut down, or restart computer.
 mod4 + shift + x
 	dmenu_powermenu
+# }}}
 
-# BSPWM MISC.:
-# Close (via X) or kill (via `kill`, probably) the focused window.
+# BSPWM {{{
+## MISC. {{{
+### @description		{Close (via X),Kill (via `kill` probably)} the focused window.
 mod4 + {_,shift + }w
 	bspc node -{c,k}
-# Alternate between the tiled and monocle layout.
+### @description		Alternate between the tiled and monocle layout.
 mod4 + m
 	bspc desktop -l next
-# Increase/decrease the window gap (Prior=PageUp, Next=PageDown) by a higher/lower amount.
+### @description		By a {higher,lower} amount, {increase,decrease} the window gap (Prior=PageUp, Next=PageDown).
 mod4 + {_,shift +}{Prior,Next}
 	old="$(bspc config window_gap)"; \
 	delta={4,2}; \
 	new="$(( old {+,-} delta ))"; \
 	[ "$new" -ge 0 ] && bspc config window_gap "$new"
-# Circulate nodes around current node (which must be internal) forward and backward.
+### @description		Circulate nodes around current node (which must be internal) {forward,backward}.
 mod4 + {x,z}
 	bspc node -C {forward,backward}
-# Rotate tree around current node (which must be internal) clockwise and counter-clockwise.
+### @description		Rotate tree around current node (which must be internal) {clockwise,counter-clockwise}.
 mod4 + shift + {period,comma}
 	bspc node -R {90,-90}
+## }}}
 
-# BSPWM STATE/FLAGS:
-# Toggle fullscreen for the node.
+## STATE/FLAGS {{{
+### @description		Toggle fullscreen for the node.
 mod4 + f
 	bspc node -t ~fullscreen
-# Uniformly set Set the window state for the focused node and its descendants: tiled, pseudo_tiled, floating.
+### @description		Uniformly set the window state for the focused node and its descendants to '{tiled,pseudo_tiled,floating}'.
 mod4 + {t,shift + t,s}
 	: jq-1.6 docs for Debian Bullseye lied: recurse default is wrong.; \
 	bspc query -T -n | jq -r 'recurse(.firstChild, .secondChild; . != null) | .id' | xargs -I id -n 1 bspc node id -t {tiled,pseudo_tiled,floating}
-# Uniformly toggle the node flags for the focused node and its descendants: marked, locked, sticky, private.
+### @description		Uniformly toggle the '{marked,locked,sticky,private}' node flag for the focused node and its descendants.
 mod4 + ctrl + {m,x,y,z}
 	flag={marked,locked,sticky,private}; \
 	newvalue="$(bspc query -T -n | jq -r "if .$flag then \"off\" else \"on\" end")"; \
 	: jq-1.6 docs for Debian Bullseye lied: recurse default is wrong.; \
 	bspc query -T -n | jq -r 'recurse(.firstChild, .secondChild; . != null) | .id' | xargs -I id -n 1 bspc node id -g $flag=$newvalue
-# Toggle the node flags for the single node: marked, locked, sticky, private.
+### @description		Toggle the '{marked,locked,sticky,private}' node flag for the single node.
 mod4 + alt + {m,x,y,z}
 	bspc node -g {marked,locked,sticky,private}
+## }}}
 
-# BSPWM FOCUS/SWAP:
-# Focus/swap the node in the given direction.
+## FOCUS/SWAP {{{
+### @description		{Focus,Swap} the node {to the left,down,up,to the right}.
 mod4 + {_,shift + }{h,j,k,l}
 	bspc node -{f,s} {west,south,north,east}
-# Focus the root node of the current desktop.
+### @description		Focus the root node of the current desktop.
 mod4 + u
 	bspc node -f @/
-# Focus the node for the given path jump.
+### @description		Focus the node's {parent,sibling,first child,second child}.
 mod4 + {p,b,comma,period}
 	bspc node -f @{parent,brother,first,second}
-# Focus the next/previous leaf node in the current desktop.
+### @description		Focus the {next,previous} leaf node in the current desktop.
 mod4 + {_,shift + }c
 	bspc node -f {next,prev}.local.leaf
-# Focus the next/previous desktop in the current monitor.
+### @description		Focus the {previous,next} desktop in the current monitor.
 mod4 + bracket{left,right}
 	bspc desktop -f {prev,next}.local
-# Focus the next/previous occupied desktop in the current monitor.
+### @description		Focus the {previous,next} occupied desktop in the current monitor.
 mod4 + ctrl + bracket{left,right}
 	bspc desktop -f {prev,next}.occupied.local
-# Focus the next/previous monitor.
+### @description		Focus the {previous,next} monitor.
 mod4 + shift + bracket{left,right}
 	bspc monitor -f {prev,next}; bspc node -f local
-# Focus the last node/desktop.
+### @description		Focus the last {node,desktop}.
 mod4 + {grave,Tab}
 	bspc {node,desktop} -f last
-# Focus last non-leaf node.
+### @description		Focus the last non-leaf node.
 mod4 + Escape
 	bspc node -f last.leaf
-# Focus the older or newer node in the focus history.
+### @description		Focus the {older,newer} node in the focus history.
 mod4 + {o,i}
 	bspc wm -h off; \
 	bspc node {older,newer} -f; \
 	bspc wm -h on
-# Focus or send to the given desktop.
+### @description		{Focus,Send the node to} desktop {1-9,10}.
 mod4 + {_,shift + }{1-9,0}
 	bspc {desktop -f,node -d} '^{1-9,10}'
-# Swap the current node and the biggest node locally and globally, *following* the original node.
+### @description		Swap the current node and the biggest node {locally,globally}, *following* the original node.
 mod4 + {_,shift + }g
 	bspc node -s biggest{.local,_} --follow
-# Swap the current node and the biggest node locally and globally, *without* following the original node.
+### @description		Swap the current node and the biggest node {locally,globally}, *without* following the original node.
 mod4 + {_,shift + }v
 	: need to do this trickery because swapping nodes within desktops seems to follow the focussed node; \
 	: still seems to be broken in version 0.9.10 of bspwm on Debian Bullseye; \
@@ -161,32 +167,38 @@ mod4 + {_,shift + }v
 	bspc node -s "$swapnodeid"; \
 	bspc node -f "$swapnodeid"; \
 	bspc wm -h on
+## }}}
 
-# BSPWM PRESELECT:
-# Preselect the direction.
+## PRESELECT {{{
+### @description		Preselect {to the left,down,up,to the right}.
 mod4 + ctrl + {h,j,k,l}
 	bspc node -p {west,south,north,east}
-# Preselect the ratio.
+### @description		Set a 0.{1-9} splitting ratio for the preselection area.
 mod4 + ctrl + {1-9}
 	bspc node -o 0.{1-9}
-# Cancel the preselection for the focused node.
+### @description		Cancel the preselection for the focused node.
 mod4 + ctrl + space
 	bspc node -p cancel
-# Cancel the preselection for the focused desktop.
+### @description		Cancel the preselection for the focused desktop.
 mod4 + ctrl + shift + space
 	bspc query -N -d | xargs -I id -n 1 bspc node id -p cancel
-# Send the newest marked node to the newest preselected node in the *current* desktop or in *any* desktop.
+### @description		Send the newest marked node to the newest preselected node in {the current,any} desktop.
 mod4 + {_,shift + }y
 	bspc node newest.marked.local -n newest.!automatic{.local,_}
+## }}}
 
-# BSPWM MOVE/RESIZE:
-# Expand/contract window by a side or corner (nethack, vi-keys 'yuhjklbn'): lowercase: expand; uppercase: contract.
+## MOVE/RESIZE {{{
+### @description		Expand/contract window by a side or corner (nethack, vi-keys 'yuhjklbn'): lowercase: expand; uppercase: contract.
+### @mode			resize
 mod4 + r: {h,j,k,l,y,u,b,n,H,J,K,L,Y,U,B,N}
 	bspc node -z {left -20 0,bottom 0 20,top 0 -20,right 20 0,\
 	              top_left -20 -20,top_right 20 -20,bottom_left -20 20,bottom_right 20 20,\
 	              right -20 0,top 0 20,bottom 0 -20,left 20 0,\
 	              top_left 20 20,top_right -20 20,bottom_left 20 -20,bottom_right -20 -20}
-# Move floating window (nethack, vi-keys 'yuhjklbn').
+### @description		Move floating window {left,down,up,right,up and left,up and right,down and left,down and right} (nethack, vi-keys 'yuhjklbn').
+### @mode			move_floating
 mod4 + shift + f: {h,j,k,l,y,u,b,n}
 	bspc node -v {-20 0,0 20,0 -20,20 0,\
 	              -20 -20,20 -20,-20 20,20 20}
+## }}}
+# }}}
