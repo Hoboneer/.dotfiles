@@ -135,7 +135,7 @@ mod4 + alt + {m,x,y,z}
 mod4 + {_,shift + }{h,j,k,l}
 	bspc node -{f,s} {west,south,north,east}
 ### @description		Focus the root node of the current desktop.
-mod4 + u
+mod4 + shift + p
 	bspc node -f @/
 ### @description		Focus the node's {parent,sibling,first child,second child}.
 mod4 + {p,b,comma,period}
