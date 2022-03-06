@@ -218,4 +218,16 @@ mod4 + shift + f: {h,j,k,l,y,u,b,n}
 	bspc node -v {-20 0,0 20,0 -20,20 0,\
 	              -20 -20,20 -20,-20 20,20 20}
 ## }}}
+
+## MONITOR {{{
+## @description			Set orientation of current monitor to {normal,inverted,left,right}.
+## @mode			monitor
+mod4 + shift + m: shift + {minus,backslash,comma,period}
+	mon="$(bspc query -M -m --names)"; \
+	xrandr --output "$mon" --rotate {normal,inverted,left,right}
+## @description			Bubble the monitor to the {left,right}.
+## @mode			monitor
+mod4 + shift + m: bracket{left,right}
+	bubblemonitor {left,right}
+## }}}
 # }}}
