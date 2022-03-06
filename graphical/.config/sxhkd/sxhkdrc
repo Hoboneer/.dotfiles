@@ -152,6 +152,9 @@ mod4 + bracket{left,right}
 ### @description		Focus the {previous,next} occupied desktop in the current monitor.
 mod4 + ctrl + bracket{left,right}
 	bspc desktop -f {prev,next}.occupied.local
+### @description		Focus the {previous,next} unoccupied desktop in the current monitor.
+mod4 + alt + bracket{left,right}
+	bspc desktop -f {prev,next}.!occupied.local
 ### @description		Focus the {previous,next} monitor.
 mod4 + shift + bracket{left,right}
 	bspc monitor -f {prev,next}; bspc node -f local
