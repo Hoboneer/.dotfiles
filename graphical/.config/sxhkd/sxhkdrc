@@ -36,7 +36,7 @@ mod4 + apostrophe; {d,p,z,l,v}
 	,sxiv -t ~/Pictures/ \
 	,wmzoom \
 	,latex_scratch \
-	,clip="$(xclip -selection clipboard -o)"; case $clip in (http?://*) notify-send -t 1000 "Opening $clip"; mpv --profile=1080p "$clip" ;; (*) notify-send -t 5000 -u critical "'$clip' doesn't look like a URL" ;; esac \
+	,clip="$(xclip -selection clipboard -o)"; case $clip in (http?://*) notify-send -t 1000 "Opening $clip"; exec mpv --profile=1080p "$clip" ;; (*) notify-send -t 5000 -u critical "'$clip' doesn't look like a URL" ;; esac \
 	}
 ## @description		Switch to some open graphical program.
 mod4 + slash
