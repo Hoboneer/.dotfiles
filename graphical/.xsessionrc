@@ -22,4 +22,8 @@ mkdir -p "$(dirname "$SXHKD_FIFO")"
 mkfifo "$SXHKD_FIFO"
 sxhkd -s "$SXHKD_FIFO" &
 
+XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-$HOME/.config}"
+"$XDG_CONFIG_HOME/polybar/launch" &
+"$XDG_CONFIG_HOME/bspwm/launch_watchers" &
+
 fi
