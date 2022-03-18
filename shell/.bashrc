@@ -153,3 +153,4 @@ pushdf ()
 alias d='cd ~/.dotfiles/'
 alias s='cd ~/.scripts/'
 alias dl='cd ~/Downloads/'
+alias linthk='hkcheck $(cat ~/.config/sxhkd/PARSER-ARGS)'
