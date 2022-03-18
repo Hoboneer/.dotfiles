@@ -63,7 +63,7 @@ XF86AudioMute
 XF86AudioMicMute
 	pactl set-source-mute @DEFAULT_SOURCE@ toggle
 ## @description		Move mouse to centre of focussed window or screen (if no window is there).
-mod4 + equal
+mod4 + Escape
 	centre_mouse
 # }}}
 
@@ -160,9 +160,6 @@ mod4 + shift + bracket{left,right}
 ### @description		Focus the last {node,desktop}.
 mod4 + {grave,Tab}
 	bspc {node,desktop} -f last
-### @description		Focus the last non-leaf node.
-mod4 + Escape
-	bspc node -f last.leaf
 ### @description		Focus the {older,newer} node in the focus history.
 mod4 + {o,i}
 	bspc wm -h off; \
