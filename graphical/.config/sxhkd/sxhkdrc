@@ -142,9 +142,9 @@ mod4 + alt + {m,x,y,z}
 ### @description		{Focus,Swap} the node {to the left,down,up,to the right}.
 mod4 + {_,shift + }{h,j,k,l}
 	bspc node -{f,s} {west,south,north,east}
-### @description		Focus the next urgent node across all monitors.
-mod4 + u
-	bspc node -f next.urgent
+### @description		Focus the next {urgent,marked} node across all monitors.
+mod4 + {_,shift +}u
+	bspc node -f next.{urgent,marked}
 ### @description		Focus the root node of the current desktop.
 mod4 + shift + p
 	bspc node -f @/
