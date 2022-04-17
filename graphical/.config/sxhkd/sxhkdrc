@@ -30,14 +30,23 @@ mod4 + {_,shift + }e
 ## @description		Execute dmenu scripts for convenience utilities: screenshot, series, flatpak runner, emojis.
 mod4 + semicolon; {s,w,f,e}
 	dmenu_{screenshot,series,flatpak_run,emoji}
-## @description		Execute non-dmenu scripts for convenience utilities: calendar, pictures, magnifier, latex scratchpad, watch video url in clipboard.
-mod4 + apostrophe; {d,p,z,l,v}
+## @description		Execute non-dmenu scripts for convenience utilities: calendar, pictures, magnifier, latex scratchpad.
+mod4 + apostrophe; {d,p,z,l}
 	{zenity --calendar --text='Current Month' \
 	,sxiv -t ~/Pictures/ \
 	,wmzoom \
 	,latex_scratch \
-	,clip="$(xclip -selection clipboard -o)"; case $clip in (http?://*) notify-send -t 1000 "Opening $clip"; exec mpv --profile=1080p "$clip" ;; (*) notify-send -t 5000 -u critical "'$clip' doesn't look like a URL" ;; esac \
 	}
+## @description		Watch video url in clipboard ({720p,1080p}).
+mod4 + apostrophe; v; {1,2}
+	clip="$(xclip -selection clipboard -o)"; \
+	case $clip in \
+		http?://*) \
+			notify-send -t 1000 "Opening $clip"; \
+			exec mpv --profile={720p,1080p} "$clip";; \
+		*) \
+			notify-send -t 5000 -u critical "'$clip' doesn't look like a URL";; \
+	esac
 ## @description		Switch to some open graphical program.
 mod4 + slash
 	dmenu_switch_xprog
