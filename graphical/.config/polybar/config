@@ -30,7 +30,7 @@ padding-right = 2
 
 modules-left = bspwm-state
 modules-center = title
-modules-right = xkeyboard sxhkd-mode
+modules-right = xkeyboard dunst-pause sxhkd-mode
 
 wm-restack = bspwm
 
@@ -74,6 +74,13 @@ cursor-scroll = ns-resize
 [module/title]
 type = internal/xwindow
 format-padding = 4
+
+[module/dunst-pause]
+type = custom/script
+exec = dunstctl is-paused; tail -f "$DUNST_FIFO"
+label = dunst-pause: %output%
+tail = true
+format-padding = 2
 
 [module/sxhkd-mode]
 type = custom/script

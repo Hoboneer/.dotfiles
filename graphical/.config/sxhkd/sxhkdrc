@@ -76,6 +76,22 @@ mod4 + Escape
 	centre_mouse
 # }}}
 
+# NOTIFICATION {{{
+## @description		Close {topmost notification,all notifications}.
+mod4 + n; {_,shift +}w
+	dunstctl close{_,-all}
+## @description		Open context menu.
+mod4 + n; c
+	dunstctl context
+## @description		Toggle notification daemon pause.
+mod4 + n; p
+	;dunstctl set-paused toggle; \
+	dunstctl is-paused >"$DUNST_FIFO"
+## @description		Display most recently closed notification.
+mod4 + n; h
+	dunstctl history-pop
+# }}}
+
 # META {{{
 ## @description		View keybinds in browser.
 mod4 + shift + slash; k; w
