@@ -3,4 +3,5 @@ w3m/.w3m/w3m*
 w3m/.w3m/history
 surfraw/.config/surfraw/bookmarks
 surfraw/.config/surfraw/elvi/*
+graphical/.config/sxhkd/sxhkdrc.exec
 *.swp

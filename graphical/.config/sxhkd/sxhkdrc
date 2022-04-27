@@ -106,13 +106,50 @@ mod4 + shift + slash; k; k
 		dmenu -l 20 -i | \
 		awk -F'\t' '{print $1}' | \
 		hkxargs --exec
-## @description		Reload config for {bspwm,sxhkd,polybar,watchers}.
-mod4 + shift + r; {b,s,p,w}
+## @description		Reload config for {bspwm,polybar,watchers}.
+mod4 + shift + r; {b,p,w}
 	cfg_dir="$\{XDG_CONFIG_HOME:-$HOME/.config\}"; \
-	{"$cfg_dir/bspwm/bspwmrc",pkill -SIGUSR1 -x sxhkd; pkill -SIGUSR1 -x hkwatch,polybar-msg cmd restart; sleep 2; pkill -SIGUSR2 -x hkwatch,"$cfg_dir/bspwm/launch_watchers"}
+	{"$cfg_dir/bspwm/bspwmrc",polybar-msg cmd restart; sleep 2; pkill -SIGUSR2 -x hkwatch,"$cfg_dir/bspwm/launch_watchers"}
+## @description		Reload config for sxhkd.
+mod4 + shift + r; s
+	cfg_dir="$\{XDG_CONFIG_HOME:-$HOME/.config\}"; \
+	notify-send -t 5000 'config reload' "Rebuilding exec sxhkd config"; \
+	(cd "$cfg_dir/sxhkd"; make); \
+	pkill -SIGUSR1 -x sxhkd; \
+	pkill -SIGUSR1 -x hkwatch
 ## @description		Decide whether to log out, shut down, or restart computer.
 mod4 + shift + x
 	dmenu_powermenu
+# }}}
+
+# MACROS {{{
+## @description		Record macro into register '{a-z}'.
+mod4 + q; {a-z}
+	register={a-z}; \
+	notify-send -t 5000 'sxhkdmacro' "Recording macro register '$register'"; \
+	sxhkdmacro record "$register"; \
+	case $? in \
+		123) \
+			notify-send -t 10000 -u critical 'sxhkdmacro' 'Already recording a macro!' \
+			;; \
+	esac
+## @description		Stop recording macro.
+mod4 + q; space
+	notify-send -t 5000 'sxhkdmacro' "Stopping current macro recording"; \
+	sxhkdmacro stop
+## @description		Play macro in register '{a-z}'.
+mod4 + shift + q; {a-z}
+	register={a-z}; \
+	sxhkdmacro exec "$register"; \
+	case $? in \
+		124) \
+			notify-send -t 10000 -u critical 'sxhkdmacro' "File for macro register '$register' doesn't exist" \
+			;; \
+	esac
+## @description		View and edit macros.
+mod4 + q; shift + slash
+	macrofile="$(find "$XDG_RUNTIME_DIR/sxhkd/macros/" -type f -name '*.macro' | dmenu -p 'View macro:' -l 20)"; \
+	[ -r "$macrofile" ] && gvim "$macrofile"
 # }}}
 
 # BSPWM {{{
