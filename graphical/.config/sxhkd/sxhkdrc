@@ -249,5 +249,15 @@ mod4 + shift + m: shift + {minus,backslash,comma,period}
 ## @mode			monitor
 mod4 + shift + m: bracket{left,right}
 	bubblemonitor {left,right}
+## @description			Reflect current monitor along the {x axis,y axis,x and y axis}.
+## @mode			monitor
+mod4 + shift + m: {x,y,shift + r}
+	mon="$(bspc query -M -m --names)"; \
+	xrandr --output "$mon" --reflect {x,y,xy}
+## @description			Reset reflection of current monitor.
+## @mode			monitor
+mod4 + shift + m: r
+	mon="$(bspc query -M -m --names)"; \
+	xrandr --output "$mon" --reflect normal
 ## }}}
 # }}}
