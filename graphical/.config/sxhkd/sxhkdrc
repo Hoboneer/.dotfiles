@@ -103,7 +103,9 @@ mod4 + shift + slash; k; w
 mod4 + shift + slash; k; k
 	cfg_dir="$\{XDG_CONFIG_HOME:-$HOME/.config\}"; \
 	hkexport $(cat "$cfg_dir/sxhkd/PARSER-ARGS") --format txt --keybinds-only --expand | \
-		dmenu -l 20 -i
+		dmenu -l 20 -i | \
+		awk -F'\t' '{print $1}' | \
+		hkxargs --exec
 ## @description		Reload config for {bspwm,sxhkd,polybar,watchers}.
 mod4 + shift + r; {b,s,p,w}
 	cfg_dir="$\{XDG_CONFIG_HOME:-$HOME/.config\}"; \
