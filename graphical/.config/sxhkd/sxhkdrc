@@ -123,11 +123,12 @@ mod4 + shift + x
 # }}}
 
 # MACROS {{{
-## @description		Record macro into register '{a-z}'.
-mod4 + q; {a-z}
+## @description		Record{_, (append)} macro into register '{a-z}'.
+mod4 + q; {_,shift +}{a-z}
+	{flags=''; action='Recording',flags='-a'; action='Appending'}; \
 	register={a-z}; \
-	notify-send -t 5000 'sxhkdmacro' "Recording macro register '$register'"; \
-	sxhkdmacro record "$register"; \
+	notify-send -t 5000 'sxhkdmacro' "$action into macro register '$register'"; \
+	sxhkdmacro $flags record "$register"; \
 	case $? in \
 		123) \
 			notify-send -t 10000 -u critical 'sxhkdmacro' 'Already recording a macro!' \
