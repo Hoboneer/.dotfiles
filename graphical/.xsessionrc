@@ -23,7 +23,11 @@ dunstctl is-paused >"$DUNST_FIFO" &
 
 # Only used when executing.
 SXHKD_CONFIG_DIR="${XDG_CONFIG_HOME:-$HOME/.config}/sxhkd"
+# Rebuild exec sxhkd kebinds.
 (cd "$SXHKD_CONFIG_DIR"; make)
+# Copy saved macros over to macro dir.
+export SXHKD_MACRO_DIR="$XDG_RUNTIME_DIR/sxhkd/macros"
+find "$SXHKD_CONFIG_DIR/macros" -type f -name '*.macro' -exec sh -c 'grep -v "^[[:space:]]*#" "$1" >"$2/$(basename "$1")"' sh '{}' "$SXHKD_MACRO_DIR" \;
 export SXHKD_FIFO="$XDG_RUNTIME_DIR/sxhkd/status.fifo"
 rm -f "$SXHKD_FIFO" # we should start fresh
 mkdir -p "$(dirname "$SXHKD_FIFO")"

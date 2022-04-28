@@ -1,0 +1,4 @@
+# View video in url on 10th desktop (second monitor, if connected).
+mod4+0
+mod4+Escape
+mod4+apostrophe; v; 1
