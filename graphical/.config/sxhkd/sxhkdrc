@@ -12,9 +12,9 @@ mod4 + space
 ## @description		Program launcher (output run through $SHELL).
 mod4 + shift + space
 	dmenu_path | dmenu | $\{SHELL:-"/bin/sh"\} &
-## @description		Open {browser,mail,screen painter,telegram,discord}.
-mod4 + a; {b,m,p,t,d}
-	{x-www-browser,thunderbird,gromit-mpx,telegram-desktop,flatpak run com.discordapp.Discord}
+## @description		Open {browser,mail,file manager,screen painter,telegram,discord}.
+mod4 + a; {b,m,f,p,t,d}
+	{x-www-browser,thunderbird,pcmanfm,gromit-mpx,telegram-desktop,flatpak run com.discordapp.Discord}
 ## @description		Dmenu surfraw (qutebrowser), {skipping,not skipping} options.
 mod4 + {_,shift + }d
 	if wmctrl -lx | awk -v found=0 '$3 ~ /qutebrowser/ \{found=1; exit\} END \{exit found\}'; then \
