@@ -17,14 +17,21 @@ trap '' USR2
 
 hkwatch -s "$fifo" --notify-send-on-config-read --notify-send-on-config-read-error $(cat "${XDG_CONFIG_HOME:-$HOME/.config}/sxhkd/PARSER-ARGS") 2>/tmp/hkwatch.log |
 	while IFS= read -r line; do
-		case "$line" in
-			normal|in-chain)
-				echo "$line" >"$outfifo"
+		message="${line#?}"
+		typ="${line%$message}"
+		case $typ in
+			[NC])
+				echo "$message" >"$outfifo"
 				;;
-			*)	# Mode!
+			M)	# Mode!
 				# Alert colour from polybar.
 				# TODO: sync them
-				echo "%{F#bd2c40}$line%{F-}" >"$outfifo"
+				echo "%{F#bd2c40}$message%{F-}" >"$outfifo"
+				;;
+			U)	# Unknown mode!
+				# Alert colour from polybar.
+				# TODO: sync them
+				echo "$typ%{F#bd2c40}$message%{F-}" >"$outfifo"
 				;;
 		esac
 	done
