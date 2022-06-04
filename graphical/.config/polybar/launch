@@ -3,7 +3,12 @@
 polybar-msg cmd quit
 
 # Launch bars
+monitor="$1"
 for bar in main bspwm; do
 	echo "---" | tee -a /tmp/polybar-$bar.log
-	polybar $bar 2>&1 | tee -a /tmp/polybar-$bar.log &
+	if [ -n "$monitor" ]; then
+		MONITOR="$monitor" polybar $bar 2>&1 | tee -a /tmp/polybar-$bar.log &
+	else
+		polybar $bar 2>&1 | tee -a /tmp/polybar-$bar.log &
+	fi
 done

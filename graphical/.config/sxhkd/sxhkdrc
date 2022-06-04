@@ -299,5 +299,16 @@ mod4 + shift + m: {x,y,shift + r}
 mod4 + shift + m: r
 	mon="$(bspc query -M -m --names)"; \
 	xrandr --output "$mon" --reflect normal
+## @description			Move status bars to current monitor.
+## @mode			monitor
+mod4 + shift + m: p
+	mon="$(bspc query -M -m --names)"; \
+	"$\{XDG_CONFIG_HOME:-$HOME/.config\}/polybar/launch" "$mon"; \
+	for othermon in $(polybar --list-monitors | cut -d: -f1 | grep -vxF "$mon"); do \
+		bspc config -m "$othermon" top_padding 0; \
+		bspc config -m "$othermon" bottom_padding 0; \
+		bspc config -m "$othermon" left_padding 0; \
+		bspc config -m "$othermon" right_padding 0; \
+	done;
 ## }}}
 # }}}
