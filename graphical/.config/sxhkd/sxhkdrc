@@ -74,6 +74,9 @@ XF86AudioMicMute
 ## @description		Move mouse to centre of focussed window or screen (if no window is there).
 mod4 + Escape
 	centre_mouse
+## @description		Ping current mouse location.
+mod4 + button2
+	find-cursor --color orange
 # }}}
 
 # NOTIFICATION {{{
