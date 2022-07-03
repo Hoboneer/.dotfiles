@@ -232,7 +232,7 @@ mod4 + {o,i}
 	bspc wm -h on
 ### @description		{Focus,Send the node to} desktop {1-9,10}.
 mod4 + {_,shift + }{1-9,0}
-	bspc {desktop -f,node -d} '^{1-9,10}'
+	bspc {desktop -f,node -d} '{I,II,III,IV,V,VI,VII,VIII,IX,X}'
 ### @description		Swap the current node and the biggest node {locally,globally}, *following* the original node.
 mod4 + {_,shift + }g
 	bspc node -s biggest{.local,_} --follow
