@@ -263,9 +263,9 @@ mod4 + ctrl + space
 ### @description		Cancel the preselection for the focused desktop.
 mod4 + ctrl + shift + space
 	bspc query -N -d | xargs -I id -n 1 bspc node id -p cancel
-### @description		Send the newest marked node to the newest preselected node in {the current,any} desktop.
+### @description		Send the focused node to the newest preselected node in {the current,any} desktop.
 mod4 + {_,shift + }y
-	bspc node newest.marked.local -n newest.!automatic{.local,_}
+	bspc node -n newest.!automatic{.local,_}
 ## }}}
 
 ## MOVE/RESIZE {{{
