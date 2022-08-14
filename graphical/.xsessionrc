@@ -33,7 +33,7 @@ export SXHKD_FIFO="$XDG_RUNTIME_DIR/sxhkd/status.fifo"
 rm -f "$SXHKD_FIFO" # we should start fresh
 mkdir -p "$(dirname "$SXHKD_FIFO")"
 mkfifo "$SXHKD_FIFO"
-sxhkd -c "$SXHKD_CONFIG_DIR/sxhkdrc.exec" -s "$SXHKD_FIFO" >"${TMPDIR:-/tmp}/sxhkd.log" 2>&1 &
+sxhkd -c "$SXHKD_CONFIG_DIR/sxhkdrc.exec" -s "$SXHKD_FIFO" 2>"${TMPDIR:-/tmp}/sxhkd.log" >&2 &
 
 XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-$HOME/.config}"
 "$XDG_CONFIG_HOME/polybar/launch" &
