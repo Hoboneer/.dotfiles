@@ -263,9 +263,16 @@ mod4 + ctrl + space
 ### @description		Cancel the preselection for the focused desktop.
 mod4 + ctrl + shift + space
 	bspc query -N -d | xargs -I id -n 1 bspc node id -p cancel
-### @description		Send the focused node to the newest preselected node in {the current,any} desktop.
+### @description		In {the current,any} desktop, send the focused node to the newest preselected node OR (if the focused node is preselected) send the newest marked node to the focused node.
 mod4 + {_,shift + }y
-	bspc node -n newest.!automatic{.local,_}
+	currnodeid="$(bspc query -N -n)"; \
+	ispreselnode="$(bspc query -T -n "$currnodeid" | jq -r 'if .presel then 1 else 0 end')"; \
+	suffix='{.local,_}'; \
+	if [ "$ispreselnode" = 1 ]; then \
+		bspc node newest.marked$suffix -n "$currnodeid"; \
+	else \
+		bspc node "$currnodeid" -n newest.!automatic$suffix; \
+	fi
 ## }}}
 
 ## MOVE/RESIZE {{{
