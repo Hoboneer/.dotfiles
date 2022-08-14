@@ -41,7 +41,7 @@ mod4 + apostrophe; {d,p,z,l}
 mod4 + apostrophe; v; {1,2}
 	clip="$(xclip -selection clipboard -o)"; \
 	case $clip in \
-		http?://*) \
+		http://* | https://*) \
 			notify-send -t 1000 "Opening $clip"; \
 			exec mpv --profile={720p,1080p} "$clip";; \
 		*) \
