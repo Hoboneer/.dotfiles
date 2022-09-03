@@ -50,6 +50,14 @@ case "$class" in
 		esac
 		exit
 		;;
+	Zathura)
+		case "$(get_xprop WM_NAME | strip_quotes)" in
+			Print)
+				echo state=floating ;;
+			*)
+				echo state=tiled ;;
+		esac
+		;;
 esac
 case "$(get_xprop WM_ICON_NAME | strip_quotes)" in
 	xzoom)

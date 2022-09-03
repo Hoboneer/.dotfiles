@@ -17,5 +17,4 @@ bspc config remove_unplugged_monitors	true
 bspc rule -r '*'
 bspc rule -a qutebrowser desktop='^2' follow=on
 bspc rule -a Firefox-esr desktop='^2' follow=on
-bspc rule -a Zathura state=tiled
 bspc config external_rules_command "$bspwm_dir/external_rules"
