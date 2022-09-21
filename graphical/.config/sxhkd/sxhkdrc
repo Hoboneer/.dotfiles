@@ -242,6 +242,9 @@ mod4 + {_,shift + }v
 	bspc node -s "$swapnodeid"; \
 	bspc node -f "$swapnodeid"; \
 	bspc wm -h on
+### @description		Swap the current node and the newest marked node, without following the original node or unmarking the marked node.
+mod4 + shift + s
+	bspc node -s newest.marked
 ## }}}
 
 ## PRESELECT {{{
