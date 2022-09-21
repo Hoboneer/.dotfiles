@@ -15,14 +15,8 @@ mod4 + shift + space
 ## @description		Open {audio control,browser,mail,file manager,network services (avahi-discover),screen painter,telegram,discord}.
 mod4 + a; {a,b,m,f,n,p,t,d}
 	{pavucontrol,x-www-browser,thunderbird,pcmanfm,avahi-discover,gromit-mpx,telegram-desktop,flatpak run com.discordapp.Discord}
-## @description		Dmenu surfraw (qutebrowser), {skipping,not skipping} options.
-mod4 + {_,shift + }d
-	if wmctrl -lx | awk -v found=0 '$3 ~ /qutebrowser/ \{found=1; exit\} END \{exit found\}'; then \
-		setsid qutebrowser & \
-	fi; \
-	env DO_FIELD_SPLIT=yes DO_SKIP_OPTIONS={yes,no} SURFRAW_browser=qutebrowser dmenu_surfraw 2>&1 | xargs -n1 -d'\n' notify-send -u critical -t 5000
 ## @description		Dmenu surfraw (firefox), {skipping,not skipping} options.
-mod4 + {_,shift + }e
+mod4 + {_,shift + }d
 	if wmctrl -lx | awk -v found=0 '$3 ~ /Firefox/ \{found=1; exit\} END \{exit found\}'; then \
 		setsid firefox & \
 	fi; \
