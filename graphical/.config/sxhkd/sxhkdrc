@@ -270,6 +270,12 @@ mod4 + {_,shift + }y
 ## }}}
 
 ## MOVE/RESIZE {{{
+### @description		Reset split ratios of tree at focused node to default values.
+mod4 + e
+	bspc node --equalize
+### @description		Balance split ratios of the tree rooted at the focused node.
+mod4 + shift + e
+	bspc node --balance
 ### @description		{Expand,Contract} the window in the {left,bottom,top,right,top-left,top-right,bottom-left,bottom-right} direction.
 ### @mode			resize
 mod4 + r: {_,shift +}{h,j,k,l,y,u,b,n}
