@@ -3,7 +3,7 @@ then export HAVE_XSESSIONRC=1
 
 [ -r "$HOME/.profile" ] && . "$HOME/.profile"
 
-setxkbmap -option caps:swapescape
+setxkbmap -option ctrl:swapcaps_hyper
 
 # Fix graphical Java programs starting with a blank screen.
 # See https://bugs.openjdk.java.net/browse/JDK-8058197
