@@ -125,11 +125,6 @@ if type pyenv &>/dev/null; then
 	eval "$(pyenv virtualenv-init -)"
 fi
 
-# vi-like keybindings are so nice :)
-set -o vi
-alias info='info --vi-keys'
-alias lynx='lynx -vikeys'
-
 # Sane default for `xclip`.
 alias xclip='xclip -selection clipboard'
 
