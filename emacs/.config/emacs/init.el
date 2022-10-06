@@ -117,6 +117,6 @@
 ;; Just show me what I can do with a prefix key!
 (use-package which-key
   :ensure t
-  :custom
-  (setq which-key-popup-type 'minibuffer)
+  :init
+  (which-key-setup-side-window-right)
   (which-key-mode 1))
