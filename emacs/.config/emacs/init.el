@@ -70,7 +70,20 @@
   :bind ("<f5>" . modus-themes-toggle))
 
 (use-package ibuffer
-  :bind ("C-x C-b" . ibuffer))
+  :bind (("C-x C-b" . ibuffer)
+	 :map ibuffer-mode-map
+	 ;; I've accidentally printed before!
+	 ("P" . (lambda ()
+		  "Print marked buffers as with `print-buffer', with confirmation."
+		  (interactive)
+		  (if (yes-or-no-p "Print? ") (ibuffer-do-print))))))
+(use-package dired
+  :bind (:map dired-mode-map
+	      ;; I've accidentally printed before!
+	      ("P" . (lambda (&optional arg)
+		       "Print the marked (or next ARG) files, with confirmation."
+		       (interactive)
+		       (if (yes-or-no-p "Print? ") (dired-do-print arg))))))
 
 (use-package imenu
   :config
