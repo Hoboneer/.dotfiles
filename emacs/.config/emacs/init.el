@@ -144,3 +144,18 @@
   ;; Uncomment if I start using \include or \input a lot.  From Info manual.
   ;(setq-default TeX-master nil)
   )
+
+;; Version Control stuff
+(use-package diff-hl
+  :ensure t
+  :init
+  (diff-hl-dired-mode)
+  (diff-hl-flydiff-mode)
+  (setq diff-hl-show-staged-changes nil)
+  (global-diff-hl-mode))
+(use-package magit
+  :ensure t
+  :after diff-hl
+  :config
+  (add-hook 'magit-pre-refresh-hook 'diff-hl-magit-pre-refresh)
+  (add-hook 'magit-post-refresh-hook 'diff-hl-magit-post-refresh))
