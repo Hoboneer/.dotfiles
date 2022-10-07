@@ -169,7 +169,7 @@
   :bind ("C-=" . er/expand-region))
 (use-package ace-window
   :ensure t
-  :custom
+  :init
   (setq aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l))
   ;; The default command bound to M-SPC (just-one-space) is pretty useless.
   :bind ("M-SPC" . ace-window))
