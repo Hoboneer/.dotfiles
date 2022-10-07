@@ -32,6 +32,8 @@
 ;(scroll-bar-mode -1)
 ;; Display line numbers in every buffer
 (global-display-line-numbers-mode 1)
+;; Display column in modeline.
+(column-number-mode)
 
 ;; Maybe use this: https://ianyepan.github.io/posts/setting-up-use-package/
 ;; https://menno.io/posts/use-package/
