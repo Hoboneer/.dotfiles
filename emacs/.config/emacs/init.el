@@ -32,6 +32,9 @@
 ;(scroll-bar-mode -1)
 ;; Display line numbers in every buffer
 (global-display-line-numbers-mode 1)
+(dolist (mode '(;; pdf-tools doesn't work well with line numbers.  See https://pdftools.wiki/f178ba41
+		pdf-view-mode-hook))
+  (add-hook mode (lambda () (display-line-numbers-mode -1))))
 ;; Display column in modeline.
 (column-number-mode)
 
@@ -124,3 +127,20 @@
   :init
   (which-key-setup-side-window-right)
   (which-key-mode 1))
+
+(use-package pdf-tools
+  :ensure t
+  :config
+  (pdf-tools-install)
+  ;; Autorevert might not work reliably with (La)TeX.  See https://pdftools.wiki/24b671c6
+  (add-hook 'TeX-after-compilation-finished-functions #'TeX-revert-document-buffer)
+  (setq TeX-view-program-selection '((output-pdf "PDF Tools"))))
+;; Straight from AUCTeX Info manual.
+(use-package tex
+  :ensure auctex
+  :config
+  (setq TeX-auto-save t)
+  (setq TeX-parse-self t)
+  ;; Uncomment if I start using \include or \input a lot.  From Info manual.
+  ;(setq-default TeX-master nil)
+  )
