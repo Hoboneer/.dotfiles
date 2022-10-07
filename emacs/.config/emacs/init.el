@@ -20,6 +20,8 @@
 (global-auto-revert-mode 1)
 ;; Also revert Dired and other buffers
 (setq global-auto-revert-non-file-buffers t)
+;; Remember and restore the last cursor location of opened files
+(save-place-mode 1)
 
 ;;; From https://systemcrafters.net/emacs-from-scratch/basics-of-emacs-configuration/
 ;; Don't show the splash screen
