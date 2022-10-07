@@ -121,6 +121,9 @@
   (completion-styles '(orderless basic))
   (completion-category-overrides '((file (styles basic partial-completion)))))
 
+(setq read-file-name-completion-ignore-case t
+      read-buffer-completion-ignore-case t)
+
 ;; Just show me what I can do with a prefix key!
 (use-package which-key
   :ensure t
