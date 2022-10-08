@@ -4,6 +4,10 @@
 (add-to-list 'package-archives '("org" . "https://orgmode.org/elpa/"))
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
 (add-to-list 'package-archives '("melpa-stable" . "https://stable.melpa.org/packages/"))
+(setq package-archive-priorities '(("org" . 100)
+				   ("gnu" . 50)
+				   ("melpa-stable" . 25)
+				   ("melpa" . 10)))
 
 (unless (package-installed-p 'use-package)
   (package-refresh-contents)
