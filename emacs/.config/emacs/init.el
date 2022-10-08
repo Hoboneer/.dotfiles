@@ -41,6 +41,9 @@
   (add-hook mode (lambda () (display-line-numbers-mode -1))))
 ;; Display column in modeline.
 (column-number-mode)
+;; Much more focussed than Vim's `listchars' variable.  I often only
+;; want to see trailing whitespace anyway.
+(setq show-trailing-whitespace t)
 
 ;; Maybe use this: https://ianyepan.github.io/posts/setting-up-use-package/
 ;; https://menno.io/posts/use-package/
