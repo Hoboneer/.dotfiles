@@ -99,6 +99,9 @@
   :custom
   (imenu-auto-rescan t)
   :bind ("H-i" . imenu))
+(use-package imenu-anywhere
+  :ensure t
+  :bind ("H-M-i" . imenu-anywhere))
 
 (use-package simple
   :bind (("H-n H-n" . clone-buffer)
