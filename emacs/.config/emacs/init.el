@@ -215,3 +215,7 @@
 (use-package tab-bar
   ;; Analogy with Isearch.
   :bind ("C-x t C-s" . tab-bar-select-tab-by-name))
+(use-package emacs
+  ;; Switch the current buffer to the next/previous one *based on the current window's history*.
+  :bind (("H-l" . previous-buffer)
+	 ("H-r" . next-buffer)))
