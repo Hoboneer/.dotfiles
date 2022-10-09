@@ -210,20 +210,46 @@
 (use-package pdf-tools
   :ensure t
   :custom
-  (TeX-view-program-selection '((output-pdf "PDF Tools"))))
+  (TeX-view-program-selection '((output-pdf "PDF Tools")))
+  (TeX-view-program-list '(("PDF Tools" TeX-pdf-tools-sync-view)))
+  (TeX-source-correlate-start-server t)
   :config
   (pdf-tools-install)
   ;; Autorevert might not work reliably with (La)TeX.  See https://pdftools.wiki/24b671c6
-  (add-hook 'TeX-after-compilation-finished-functions #'TeX-revert-document-buffer)
-;; Straight from AUCTeX Info manual.
+  (add-hook 'TeX-after-compilation-finished-functions #'TeX-revert-document-buffer))
 (use-package tex
   :ensure auctex
   :custom
   (TeX-auto-save t)
   (TeX-parse-self t)
   ;; Uncomment if I start using \include or \input a lot.  From Info manual.
-  ;(TeX-master nil)
-  )
+  ;;(TeX-master nil)
+  :config
+  ;; From crafted-emacs.
+  ;; set a correct indentation in a few additional environments
+  (add-to-list 'LaTeX-indent-environment-list '("lstlisting" current-indentation))
+  (add-to-list 'LaTeX-indent-environment-list '("tikzcd" LaTeX-indent-tabular))
+  (add-to-list 'LaTeX-indent-environment-list '("tikzpicture" current-indentation))
+
+  ;; add a few macros and environment as verbatim
+  (add-to-list 'LaTeX-verbatim-environments "lstlisting")
+  (add-to-list 'LaTeX-verbatim-environments "Verbatim")
+  (add-to-list 'LaTeX-verbatim-macros-with-braces "lstinline")
+  (add-to-list 'LaTeX-verbatim-macros-with-delims "lstinline")
+
+  ;; electric pairs in auctex
+  (customize-set-variable 'TeX-electric-sub-and-superscript t)
+  ;; Electric-pair-mode already does this though?
+  ;; (customize-set-variable 'LaTeX-electric-left-right-brace t)
+  (customize-set-variable 'TeX-electric-math (cons "$" "$"))
+
+  ;; open all buffers with the math mode and auto-fill mode
+  (add-hook 'LaTeX-mode-hook #'auto-fill-mode)
+  (add-hook 'LaTeX-mode-hook #'LaTeX-math-mode)
+
+  ;; add support for references
+  (add-hook 'LaTeX-mode-hook 'turn-on-reftex)
+  (customize-set-variable 'reftex-plug-into-AUCTeX t))
 
 ;; Version Control stuff
 (use-package diff-hl
