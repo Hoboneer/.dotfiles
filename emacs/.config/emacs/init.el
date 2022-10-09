@@ -197,6 +197,30 @@
   (completion-styles '(orderless basic))
   (completion-category-overrides '((file (styles basic partial-completion)))))
 
+;; From completion module of crafted-emacs.
+(use-package cape
+  :ensure t
+  :config
+  ;; Add useful defaults completion sources from cape
+  (add-to-list 'completion-at-point-functions #'cape-file)
+  (add-to-list 'completion-at-point-functions #'cape-dabbrev)
+  (add-to-list 'completion-at-point-functions #'cape-keyword)
+  ;; Silence the pcomplete capf, no errors or messages!
+  ;; Important for corfu
+  (advice-add 'pcomplete-completions-at-point :around #'cape-wrap-silent)
+  ;; ;; Ensure that pcomplete does not write to the buffer
+  ;; ;; and behaves as a pure `completion-at-point-function'.
+  ;; (advice-add 'pcomplete-completions-at-point :around #'cape-wrap-purify)
+  (add-hook 'eshell-mode-hook
+            (lambda ()
+	      (setq-local corfu-quit-at-boundary t
+			  corfu-quit-no-match t
+			  corfu-auto nil)
+              (corfu-mode)))
+  :bind (("H-c H-l" . cape-line)
+	 ("H-c H-s" . cape-ispell)
+	 ("H-c H-w" . cape-dict)))
+
 (customize-set-variable 'read-file-name-completion-ignore-case t)
 (customize-set-variable 'read-buffer-completion-ignore-case t)
 
@@ -217,7 +241,7 @@
   (pdf-tools-install)
   ;; Autorevert might not work reliably with (La)TeX.  See https://pdftools.wiki/24b671c6
   (add-hook 'TeX-after-compilation-finished-functions #'TeX-revert-document-buffer))
-(use-package tex
+(use-package latex
   :ensure auctex
   :custom
   (TeX-auto-save t)
@@ -289,3 +313,18 @@
   ;; Switch the current buffer to the next/previous one *based on the current window's history*.
   :bind (("H-l" . previous-buffer)
 	 ("H-r" . next-buffer)))
+
+(use-package project
+  :ensure t
+  :config
+  ;; Modelled after project-vc-dir.
+  (defun my/project-git-dir ()
+    "Run Magit-Status in the current project's root."
+    (interactive)
+    (magit-status (project-root (project-current t))))
+  (add-to-list 'project-switch-commands '(my/project-git-dir "Magit-Status"))
+  :bind (("C-x p v" . my/project-git-dir)
+	 ;; If I want actual vc dir.
+	 ("C-x p V" . project-vc-dir)
+	 ;; Easier to remember: Just prefix M-x with C-x p.
+	 ("C-x p M-x" . project-execute-extended-command)))
