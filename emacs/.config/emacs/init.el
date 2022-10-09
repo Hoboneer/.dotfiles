@@ -130,6 +130,45 @@
 
 ;; Completions
 
+(use-package corfu
+  :ensure t
+  :init
+  ;; Recommended: Enable Corfu globally.
+  ;; This is recommended since Dabbrev can be used globally (M-/).
+  ;; See also `corfu-excluded-modes'.
+  (global-corfu-mode)
+  ;; From README.
+  :custom
+  (corfu-cycle t) ;; Enable cycling for `corfu-next/previous'
+  (corfu-auto t)  ;; Enable auto completion
+  ;; (corfu-separator ?\s)          ;; Orderless field separator
+  ;; (corfu-quit-at-boundary nil)   ;; Never quit at completion boundary
+  ;; (corfu-quit-no-match nil)      ;; Never quit, even if there is no match
+  ;; (corfu-preview-current nil)    ;; Disable current candidate preview
+  ;; (corfu-preselect-first nil)    ;; Disable candidate preselection
+  ;; (corfu-on-exact-match nil)     ;; Configure handling of exact matches
+  ;; (corfu-echo-documentation nil) ;; Disable documentation in the echo area
+  ;; (corfu-scroll-margin 5)        ;; Use scroll margin
+
+  ;; Enable Corfu only for certain modes.
+  ;; :hook ((prog-mode . corfu-mode)
+  ;;        (shell-mode . corfu-mode)
+  ;;        (eshell-mode . corfu-mode))
+  ;; Enable in any minibuffer as long as no other completion UI is active.  From README.
+  :hook (minibuffer-setup . (lambda ()
+			      "Enable Corfu in the minibuffer if Vertico is not active."
+			      (unless (bound-and-true-p vertico--input)
+				;; (setq-local corfu-auto nil) Enable/disable auto completion
+				(corfu-mode 1)))))
+(use-package corfu-doc
+  :ensure t
+  :after corfu
+  :hook (corfu-mode . corfu-doc-mode)
+  :bind (:map corfu-map
+	      ("M-p". corfu-doc-scroll-down) ;; corfu-next
+	      ("M-n" . corfu-doc-scroll-up) ;; corfu-previous
+	      ("M-d" . corfu-doc-toggle)))
+
 ;; vertico, savehist, marginalia from https://systemcrafters.cc/emacs-tips/streamline-completions-with-vertico/
 ;; TODO: use https://cestlaz.github.io/post/using-emacs-80-vertico/
 (use-package vertico
