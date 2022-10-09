@@ -206,6 +206,11 @@
 (use-package expand-region
   :ensure t
   :bind ("C-=" . er/expand-region))
+(use-package whole-line-or-region
+  :ensure t
+  :init
+  (whole-line-or-region-global-mode))
+
 (use-package ace-window
   :ensure t
   :custom
