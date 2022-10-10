@@ -248,6 +248,9 @@
   (TeX-parse-self t)
   ;; Uncomment if I start using \include or \input a lot.  From Info manual.
   ;;(TeX-master nil)
+  ;; Just save whenever I initiate a compile.
+  ;; From https://stevelosh.com/blog/2010/09/coming-home-to-vim/ linked to by https://www.reddit.com/r/emacs/comments/5pynxg/comment/dcvu8xa/?utm_source=share&utm_medium=web2x&context=3.
+  (TeX-save-query nil)
   :config
   ;; From crafted-emacs.
   ;; set a correct indentation in a few additional environments
