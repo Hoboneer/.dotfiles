@@ -93,6 +93,9 @@ I've been bitten a couple times before: no more."
 (use-package dired
   :config
   (advice-add 'dired-do-print :around #'my/confirm-print))
+(use-package dired-x
+  :custom
+  (dired-x-hands-off-my-keys nil))
 
 (use-package imenu
   :custom
