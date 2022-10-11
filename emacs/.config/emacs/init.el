@@ -277,7 +277,10 @@
 
   ;; add support for references
   (add-hook 'LaTeX-mode-hook 'turn-on-reftex)
-  (customize-set-variable 'reftex-plug-into-AUCTeX t))
+  (customize-set-variable 'reftex-plug-into-AUCTeX t)
+
+  ;; Synctex.
+  (TeX-source-correlate-mode))
 
 ;; Version Control stuff
 (use-package diff-hl
