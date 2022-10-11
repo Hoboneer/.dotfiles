@@ -80,21 +80,19 @@
   (modus-themes-load-operandi) ;; OR (modus-themes-load-vivendi)
   :bind ("<f5>" . modus-themes-toggle))
 
+(defun my/confirm-print (fun &rest args)
+  "Confirm whether to actually print, applying FUN to the arg list ARGS if confirmed.
+
+I've been bitten a couple times before: no more."
+  (when (yes-or-no-p "Print? ")
+    (apply fun args)))
 (use-package ibuffer
-  :bind (("C-x C-b" . ibuffer)
-	 :map ibuffer-mode-map
-	 ;; I've accidentally printed before!
-	 ("P" . (lambda ()
-		  "Print marked buffers as with `print-buffer', with confirmation."
-		  (interactive)
-		  (if (yes-or-no-p "Print? ") (ibuffer-do-print))))))
+  :config
+  (advice-add 'ibuffer-do-print :around #'my/confirm-print)
+  :bind (("C-x C-b" . ibuffer)))
 (use-package dired
-  :bind (:map dired-mode-map
-	      ;; I've accidentally printed before!
-	      ("P" . (lambda (&optional arg)
-		       "Print the marked (or next ARG) files, with confirmation."
-		       (interactive)
-		       (if (yes-or-no-p "Print? ") (dired-do-print arg))))))
+  :config
+  (advice-add 'dired-do-print :around #'my/confirm-print))
 
 (use-package imenu
   :custom
