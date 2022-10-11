@@ -19,7 +19,7 @@
 ;; Imenu entries for use-package in init!
 ;; Based on https://issuecloser.com/blog/make-imenu-recognize-usepackage-directives.
 (defun my/setup-imenu-for-use-package ()
-  "Recognize `use-package` in imenu"
+  "Recognize `use-package` in imenu."
   (when (and buffer-file-name		; In case the buffer's not backed by a file.
 	     (string= (file-truename buffer-file-name) (file-truename user-init-file)))
     (add-to-list
