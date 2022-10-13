@@ -79,6 +79,27 @@
   ;; Load the theme of your choice:
   (modus-themes-load-operandi) ;; OR (modus-themes-load-vivendi)
   :bind ("<f5>" . modus-themes-toggle))
+(use-package olivetti
+  :ensure t
+  :preface
+  (defun my/reading-mode ()
+    "Toggle modes that allow for nicer reading.
+
+Currently `olivetti-mode' and `display-line-numbers-mode'."
+    (interactive)
+    (if olivetti-mode
+	(progn
+	  (olivetti-mode -1)
+	  (display-line-numbers-mode 1)
+	  (diff-hl-mode 1)
+	  ;; Ensure the highlighting comes back immediately.
+	  (diff-hl-update)
+	  (setq show-trailing-whitespace t))
+      (olivetti-mode 1)
+      (display-line-numbers-mode -1)
+      (diff-hl-mode -1)
+      (setq show-trailing-whitespace nil)))
+  :bind ("<f6>" . my/reading-mode))
 
 (defun my/confirm-print (fun &rest args)
   "Confirm whether to actually print, applying FUN to the arg list ARGS if confirmed.
