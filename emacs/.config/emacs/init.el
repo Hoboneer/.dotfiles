@@ -125,6 +125,7 @@ I've been bitten a couple times before: no more."
 (use-package imenu-anywhere
   :ensure t
   :bind ("H-M-i" . imenu-anywhere))
+(customize-set-variable 'isearch-lazy-count t)
 
 (use-package simple
   :bind (("H-n H-n" . clone-buffer)
