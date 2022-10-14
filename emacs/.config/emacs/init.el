@@ -87,6 +87,7 @@
 
 Currently `olivetti-mode' and `display-line-numbers-mode'."
     (interactive)
+    (require 'olivetti)
     (if olivetti-mode
 	(progn
 	  (olivetti-mode -1)
