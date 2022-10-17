@@ -45,9 +45,6 @@
 ;; Much more focussed than Vim's `listchars' variable.  I often only
 ;; want to see trailing whitespace anyway.
 (customize-set-variable 'show-trailing-whitespace t)
-;; Human-readable file sizes in Dired.
-(customize-set-variable 'dired-listing-switches "-alh")
-(customize-set-variable 'dired-dwim-target t)
 
 ;; Maybe use this: https://ianyepan.github.io/posts/setting-up-use-package/
 ;; https://menno.io/posts/use-package/
@@ -113,6 +110,10 @@ I've been bitten a couple times before: no more."
   (advice-add 'ibuffer-do-print :around #'my/confirm-print)
   :bind (("C-x C-b" . ibuffer)))
 (use-package dired
+  :custom
+  ;; Human-readable file sizes.
+  (dired-listing-switches "-alh")
+  (dired-dwim-target t)
   :config
   (advice-add 'dired-do-print :around #'my/confirm-print))
 (use-package dired-x
