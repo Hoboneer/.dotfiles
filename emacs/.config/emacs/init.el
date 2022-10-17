@@ -46,6 +46,8 @@
 ;; Much more focussed than Vim's `listchars' variable.  I often only
 ;; want to see trailing whitespace anyway.
 (customize-set-variable 'show-trailing-whitespace t)
+(add-hook 'text-mode-hook #'flyspell-mode)
+(add-hook 'prog-mode-hook #'flyspell-prog-mode)
 
 ;; Maybe use this: https://ianyepan.github.io/posts/setting-up-use-package/
 ;; https://menno.io/posts/use-package/
