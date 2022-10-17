@@ -142,9 +142,14 @@ I've been bitten a couple times before: no more."
 	      ("M-p" . backward-button)))
 
 (use-package info
+  :hook (Info-mode . my/reading-mode)
   :bind (:map Info-mode-map
 	      ("M-n" . Info-next-reference)
 	      ("M-p" . Info-prev-reference)))
+(use-package man
+  :hook (Man-mode . my/reading-mode))
+(use-package woman
+  :hook (woman-mode-hook . my/reading-mode))
 
 ;; Completions
 
