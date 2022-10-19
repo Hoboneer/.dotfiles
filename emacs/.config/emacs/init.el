@@ -305,6 +305,7 @@ I've been bitten a couple times before: no more."
   ;; I hate auto-fill mode in LaTeX.
   ;; (add-hook 'LaTeX-mode-hook #'auto-fill-mode)
   (add-hook 'LaTeX-mode-hook #'LaTeX-math-mode)
+  (add-hook 'LaTeX-mode-hook #'outline-minor-mode)
 
   ;; add support for references
   (add-hook 'LaTeX-mode-hook 'turn-on-reftex)
