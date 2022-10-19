@@ -246,7 +246,8 @@ I've been bitten a couple times before: no more."
 			  corfu-quit-no-match t
 			  corfu-auto nil)
               (corfu-mode)))
-  :bind (("H-c H-l" . cape-line)
+  :bind (("M-/" . cape-dabbrev)
+	 ("H-c H-l" . cape-line)
 	 ("H-c H-s" . cape-ispell)
 	 ("H-c H-w" . cape-dict)))
 
