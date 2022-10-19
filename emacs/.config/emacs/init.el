@@ -133,7 +133,12 @@ I've been bitten a couple times before: no more."
 (customize-set-variable 'isearch-lazy-count t)
 
 (use-package simple
-  :bind (("H-n H-n" . clone-buffer)
+  :bind (;; Cases
+	 ("M-u" . upcase-dwim)
+	 ("M-l" . downcase-dwim)
+	 ("M-c" . capitalize-dwim)
+	 ;; Buffers
+	 ("H-n H-n" . clone-buffer)
 	 ("H-n n" . clone-indirect-buffer)))
 
 (use-package help-mode
