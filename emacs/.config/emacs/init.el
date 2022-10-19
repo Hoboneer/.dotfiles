@@ -249,7 +249,8 @@ I've been bitten a couple times before: no more."
   :bind (("M-/" . cape-dabbrev)
 	 ("H-c H-l" . cape-line)
 	 ("H-c H-s" . cape-ispell)
-	 ("H-c H-w" . cape-dict)))
+	 ("H-c H-w" . cape-dict)
+	 ("H-c H-f" . cape-file)))
 
 (customize-set-variable 'read-file-name-completion-ignore-case t)
 (customize-set-variable 'read-buffer-completion-ignore-case t)
