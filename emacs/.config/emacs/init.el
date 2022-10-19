@@ -344,6 +344,7 @@ I've been bitten a couple times before: no more."
   :ensure t
   :custom
   (aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l))
+  (aw-dispatch-always t)
   ;; The default command bound to M-SPC (just-one-space) is pretty useless.
   :bind ("M-SPC" . ace-window))
 (use-package tab-bar
