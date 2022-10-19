@@ -137,6 +137,7 @@ I've been bitten a couple times before: no more."
 	 ("H-n n" . clone-indirect-buffer)))
 
 (use-package help-mode
+  :hook (help-mode . my/reading-mode)
   :bind (:map help-mode-map
 	      ("M-n" . forward-button)
 	      ("M-p" . backward-button)))
