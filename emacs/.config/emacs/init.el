@@ -250,7 +250,8 @@ I've been bitten a couple times before: no more."
 	 ("H-c H-l" . cape-line)
 	 ("H-c H-s" . cape-ispell)
 	 ("H-c H-w" . cape-dict)
-	 ("H-c H-f" . cape-file)))
+	 ("H-c H-f" . cape-file)
+	 ("H-c H-h" . cape-history)))
 
 (customize-set-variable 'read-file-name-completion-ignore-case t)
 (customize-set-variable 'read-buffer-completion-ignore-case t)
