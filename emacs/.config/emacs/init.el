@@ -48,6 +48,7 @@
 (customize-set-variable 'show-trailing-whitespace t)
 (add-hook 'text-mode-hook #'flyspell-mode)
 (add-hook 'prog-mode-hook #'flyspell-prog-mode)
+(recentf-mode)
 
 ;; Maybe use this: https://ianyepan.github.io/posts/setting-up-use-package/
 ;; https://menno.io/posts/use-package/
