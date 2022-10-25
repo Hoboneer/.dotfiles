@@ -393,7 +393,10 @@ I've been bitten a couple times before: no more."
 
 (use-package ace-window
   :ensure t
-  :preface
+  :custom
+  (aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l))
+  (aw-dispatch-always t)
+  :config
   ;; Modified version of internal function.  Oh well.
   (defun aw--switch-buffer ()
     (cond ((bound-and-true-p ivy-mode)
@@ -406,9 +409,6 @@ I've been bitten a couple times before: no more."
   ;;   (require 'consult)
   ;;   (let (switch-to-buffer #'consult-buffer)
   ;;     (funcall-interactively fun args)))
-  :custom
-  (aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l))
-  (aw-dispatch-always t)
   ;; The default command bound to M-SPC (just-one-space) is pretty useless.
   :bind ("M-SPC" . ace-window))
 (use-package tab-bar
