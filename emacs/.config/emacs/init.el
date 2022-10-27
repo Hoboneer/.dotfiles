@@ -175,7 +175,19 @@ I've been bitten a couple times before: no more."
   ;; (corfu-on-exact-match nil)     ;; Configure handling of exact matches
   ;; (corfu-echo-documentation nil) ;; Disable documentation in the echo area
   ;; (corfu-scroll-margin 5)        ;; Use scroll margin
-
+  :config
+  ;; From corfu manual.
+  (defun corfu-move-to-minibuffer ()
+    "Transfer completion to the minibuffer.
+Uses `consult-completion-in-region'."
+    (interactive)
+    (require 'consult)
+    (let ((completion-extra-properties corfu--extra)
+          completion-cycle-threshold
+	  completion-cycling)
+      (apply #'consult-completion-in-region completion-in-region--data)))
+  :bind (:map corfu-map
+	      ("M-m" . #'corfu-move-to-minibuffer))
   ;; Enable Corfu only for certain modes.
   ;; :hook ((prog-mode . corfu-mode)
   ;;        (shell-mode . corfu-mode)
