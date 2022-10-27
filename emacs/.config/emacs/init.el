@@ -398,18 +398,11 @@ I've been bitten a couple times before: no more."
   (aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l))
   (aw-dispatch-always t)
   :config
-  ;; Modified version of internal function.  Oh well.
-  (defun aw--switch-buffer ()
-    (cond ((bound-and-true-p ivy-mode)
-           (ivy-switch-buffer))
-          ((bound-and-true-p ido-mode)
-           (ido-switch-buffer))
-          (t
-           (call-interactively 'consult-buffer))))
-  ;; (defun my/ensure-correct-buffer-switcher (fun &rest args)
-  ;;   (require 'consult)
-  ;;   (let (switch-to-buffer #'consult-buffer)
-  ;;     (funcall-interactively fun args)))
+  (defun my/ensure-correct-buffer-switcher (fun &rest args)
+    (require 'consult)
+    (let ((switch-to-buffer #'consult-buffer))
+      (funcall-interactively fun args)))
+  (advice-add 'ace-window :around #'my/ensure-correct-buffer-switcher)
   ;; The default command bound to M-SPC (just-one-space) is pretty useless.
   :bind ("M-SPC" . ace-window))
 (use-package tab-bar
