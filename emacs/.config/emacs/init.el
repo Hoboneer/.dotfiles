@@ -50,6 +50,12 @@
 (add-hook 'prog-mode-hook #'flyspell-prog-mode)
 (recentf-mode)
 
+;; From https://blog.sumtypeofway.com/posts/emacs-config.html
+
+(customize-set-variable 'save-interprogram-paste-before-kill t)
+(delete-selection-mode)
+(global-so-long-mode)
+
 ;; Maybe use this: https://ianyepan.github.io/posts/setting-up-use-package/
 ;; https://menno.io/posts/use-package/
 
