@@ -325,6 +325,12 @@ Uses `consult-completion-in-region'."
          ("M-s" . consult-history) ;; orig. next-matching-history-element
          ("M-r" . consult-history)
 	 ))
+(use-package consult-dir
+  :ensure t
+  :bind (("C-x C-d" . consult-dir)
+         :map vertico-map
+         ("C-x C-d" . consult-dir)
+         ("C-x C-j" . consult-dir-jump-file)))
 
 ;; Just show me what I can do with a prefix key!
 (use-package which-key
