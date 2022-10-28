@@ -446,3 +446,7 @@ Uses `consult-completion-in-region'."
 	 ("C-x p V" . project-vc-dir)
 	 ;; Easier to remember: Just prefix M-x with C-x p.
 	 ("C-x p M-x" . project-execute-extended-command)))
+
+(use-package markdown-mode
+  :ensure t
+  :mode ("\\.md$" . gfm-mode))
