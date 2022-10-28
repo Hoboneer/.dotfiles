@@ -336,7 +336,8 @@ Uses `consult-completion-in-region'."
   :config
   (pdf-tools-install)
   ;; Autorevert might not work reliably with (La)TeX.  See https://pdftools.wiki/24b671c6
-  (add-hook 'TeX-after-compilation-finished-functions #'TeX-revert-document-buffer))
+  (add-hook 'TeX-after-compilation-finished-functions #'TeX-revert-document-buffer)
+  (add-hook 'pdf-tools-enabled-hook #'pdf-outline-imenu-enable))
 (use-package latex
   :ensure auctex
   :custom
