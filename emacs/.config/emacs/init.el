@@ -283,6 +283,7 @@ Uses `consult-completion-in-region'."
   :ensure t
   :bind (("M-X" . consult-mode-command)
          ("H-k" . consult-kmacro)
+	 ("C-h M" . consult-man)
          ;; C-x bindings (ctl-x-map)
          ("C-x M-:" . consult-complex-command) ;; orig. repeat-complex-command
          ("C-x b" . consult-buffer) ;; orig. switch-to-buffer
