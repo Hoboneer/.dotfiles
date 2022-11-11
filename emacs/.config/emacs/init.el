@@ -149,6 +149,14 @@ I've been bitten a couple times before: no more."
   :bind (:map help-mode-map
 	      ("M-n" . forward-button)
 	      ("M-p" . backward-button)))
+(use-package helpful
+  :ensure t
+  :bind (("C-h f" . helpful-callable)
+	 ("C-h v" . helpful-variable)
+	 ("C-h k" . helpful-key)
+	 :map helpful-mode-map
+	 ("M-n" . forward-button)
+	 ("M-p" . backward-button)))
 
 (use-package info
   :hook (Info-mode . my/reading-mode)
