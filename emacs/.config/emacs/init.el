@@ -32,7 +32,7 @@
 ;; Don't show the splash screen
 (customize-set-variable 'inhibit-startup-message t)
 ;; Turn off some unneeded UI elements
-;(menu-bar-mode -1)  ; Leave this one on if you're a beginner!
+(menu-bar-mode -1)
 (tool-bar-mode -1)
 ;(scroll-bar-mode -1)
 ;; Display line numbers in every buffer
