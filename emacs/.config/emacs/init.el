@@ -142,8 +142,8 @@ I've been bitten a couple times before: no more."
 	 ("M-c" . capitalize-dwim)
 	 ;; Buffers
 	 ("H-n H-n" . clone-buffer)
-	 ("H-n n" . clone-indirect-buffer)))
-
+	 ("H-n n" . clone-indirect-buffer)
+	 ("C-x k" . kill-current-buffer)))
 (use-package help-mode
   :hook (help-mode . my/reading-mode)
   :bind (:map help-mode-map
