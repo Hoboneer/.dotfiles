@@ -468,3 +468,12 @@ Uses `consult-completion-in-region'."
 (use-package markdown-mode
   :ensure t
   :mode ("\\.md$" . gfm-mode))
+
+(use-package winner
+  :init
+  (winner-mode)
+  :custom
+  (winner-dont-bind-my-keys t)
+  :bind (:map winner-mode-map
+	      ("H-[" . winner-undo)
+	      ("H-]" . winner-redo)))
