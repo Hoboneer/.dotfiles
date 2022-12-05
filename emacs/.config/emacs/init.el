@@ -343,13 +343,6 @@ Uses `consult-completion-in-region'."
          ("C-x C-d" . consult-dir)
          ("C-x C-j" . consult-dir-jump-file)))
 
-;; Just show me what I can do with a prefix key!
-(use-package which-key
-  :ensure t
-  :init
-  (which-key-setup-side-window-right)
-  (which-key-mode 1))
-
 (use-package pdf-tools
   :ensure t
   :custom
@@ -479,6 +472,8 @@ Uses `consult-completion-in-region'."
 
 (use-package embark
   :ensure t
+  :init
+  (setq prefix-help-command #'embark-prefix-help-command)
   :bind (("C-." . embark-act)
 	 ("M-." . embark-dwim)
 	 ("C-h B" . embark-bindings)
