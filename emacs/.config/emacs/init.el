@@ -206,7 +206,9 @@ Uses `consult-completion-in-region'."
 	  completion-cycling)
       (apply #'consult-completion-in-region completion-in-region--data)))
   :bind (:map corfu-map
-	      ("M-m" . #'corfu-move-to-minibuffer))
+	      ("M-m" . #'corfu-move-to-minibuffer)
+	      ("M-q" . #'corfu-quick-complete)
+	      ("C-q" .  #'corfu-quick-insert))
   ;; Enable Corfu only for certain modes.
   ;; :hook ((prog-mode . corfu-mode)
   ;;        (shell-mode . corfu-mode)
