@@ -5,3 +5,7 @@ surfraw/.config/surfraw/bookmarks
 surfraw/.config/surfraw/elvi/*
 graphical/.config/sxhkd/sxhkdrc.exec
 *.swp
+
+# Emacs junk
+*#
+*~
