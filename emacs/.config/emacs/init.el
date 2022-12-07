@@ -488,3 +488,6 @@ Uses `consult-completion-in-region'."
   :hook (embark-collect-mode . consult-preview-at-point-mode))
 
 (require 'org-tempo)
+
+(customize-set-variable 'enable-recursive-minibuffers t)
+(minibuffer-depth-indicate-mode)
