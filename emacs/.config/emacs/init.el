@@ -440,7 +440,11 @@ Uses `consult-completion-in-region'."
 (use-package emacs
   ;; Switch the current buffer to the next/previous one *based on the current window's history*.
   :bind (("H-l" . previous-buffer)
-	 ("H-r" . next-buffer)))
+	 ("H-r" . next-buffer)
+	 ("H-<left>" . shrink-window-horizontally)
+	 ("H-<right>" . enlarge-window-horizontally)
+	 ("H-<up>" . enlarge-window)
+	 ("H-<down>" . shrink-window)))
 
 (use-package project
   :ensure t
