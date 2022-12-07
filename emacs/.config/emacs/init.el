@@ -192,6 +192,8 @@ I've been bitten a couple times before: no more."
   ;; (corfu-on-exact-match nil)     ;; Configure handling of exact matches
   ;; (corfu-echo-documentation nil) ;; Disable documentation in the echo area
   ;; (corfu-scroll-margin 5)        ;; Use scroll margin
+  (corfu-popupinfo-hide nil) ;; Keep popup shown while scrolling between candidates
+  (corfu-popupinfo-delay t)  ;; Update popup instantly
   :config
   ;; From corfu manual.
   (defun corfu-move-to-minibuffer ()
@@ -210,19 +212,12 @@ Uses `consult-completion-in-region'."
   ;;        (shell-mode . corfu-mode)
   ;;        (eshell-mode . corfu-mode))
   ;; Enable in any minibuffer as long as no other completion UI is active.  From README.
-  :hook (minibuffer-setup . (lambda ()
-			      "Enable Corfu in the minibuffer if Vertico is not active."
-			      (unless (bound-and-true-p vertico--input)
-				;; (setq-local corfu-auto nil) Enable/disable auto completion
-				(corfu-mode 1)))))
-(use-package corfu-doc
-  :ensure t
-  :after corfu
-  :hook (corfu-mode . corfu-doc-mode)
-  :bind (:map corfu-map
-	      ("M-p". corfu-doc-scroll-down) ;; corfu-next
-	      ("M-n" . corfu-doc-scroll-up) ;; corfu-previous
-	      ("M-d" . corfu-doc-toggle)))
+  :hook ((minibuffer-setup . (lambda ()
+			       "Enable Corfu in the minibuffer if Vertico is not active."
+			       (unless (bound-and-true-p vertico--input)
+				 ;; (setq-local corfu-auto nil) Enable/disable auto completion
+				 (corfu-mode 1))))
+	 (corfu-mode . corfu-popupinfo-mode)))
 
 ;; vertico, savehist, marginalia from https://systemcrafters.cc/emacs-tips/streamline-completions-with-vertico/
 ;; TODO: use https://cestlaz.github.io/post/using-emacs-80-vertico/
