@@ -473,11 +473,10 @@ Uses `consult-completion-in-region'."
   :ensure t
   :init
   (setq prefix-help-command #'embark-prefix-help-command)
-  :bind (("C-." . embark-act)
-	 ("M-." . embark-dwim)
-	 ("C-h B" . embark-bindings)
-	 :map flyspell-mode-map
-	 ("C-." . embark-act)))
+  :config
+  :bind* (("C-." . embark-act)
+	  ("M-." . embark-dwim)
+	  ("C-h B" . embark-bindings)))
 (use-package embark-consult
   :ensure t
   :after (embark consult)
