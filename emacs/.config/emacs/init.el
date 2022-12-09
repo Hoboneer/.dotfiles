@@ -516,6 +516,10 @@ Uses `consult-completion-in-region'."
   :bind (("M-g u" . link-hint-open-link)
 	 ("M-g U" . link-hint-open-multiple-links)))
 
+
+(use-package redacted
+  :ensure t
+  :hook (redacted-mode . (lambda () (read-only-mode (if redacted-mode 1 -1)))))
 (use-package wgrep
   :ensure t
   :bind (:map grep-mode-map
