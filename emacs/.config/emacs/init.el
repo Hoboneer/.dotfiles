@@ -516,6 +516,8 @@ Uses `consult-completion-in-region'."
   :bind (("M-g u" . link-hint-open-link)
 	 ("M-g U" . link-hint-open-multiple-links)))
 
+(use-package wgrep
+  :ensure t)
 ;; Use with firefox addon: https://addons.mozilla.org/en-US/firefox/addon/edit-with-emacs1/
 (use-package edit-server
   :ensure t
