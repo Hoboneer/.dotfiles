@@ -504,6 +504,9 @@ Uses `consult-completion-in-region'."
   :ensure t
   :bind (("C-c r" . vr/replace)
 	 ("C-c q" . vr/query-replace)))
+(use-package org
+  :bind (:map org-mode-map
+	      ("<C-M-return>" . org-insert-subheading)))
 
 (use-package link-hint
   :ensure t
