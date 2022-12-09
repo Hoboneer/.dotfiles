@@ -575,3 +575,6 @@ In either case, does not delete the prompt."
     ;; Output message and put back prompt
     (comint-output-filter proc replacement)))
 (bind-key "C-c C-o" #'comint-copy-or-kill-output 'comint-mode-map)
+
+;; Enable some commands.  I don't want to do this for all of them yet.
+(put 'narrow-to-region 'disabled nil)
