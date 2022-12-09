@@ -52,6 +52,9 @@
 (customize-set-variable 'recentf-max-saved-items 200)
 (customize-set-variable 'recentf-max-menu-items 15)
 
+;; Make backups of files even when under version control.
+(customize-set-variable 'vc-make-backup-files t)
+
 ;; From https://blog.sumtypeofway.com/posts/emacs-config.html
 
 (customize-set-variable 'save-interprogram-paste-before-kill t)
