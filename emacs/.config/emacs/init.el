@@ -517,7 +517,11 @@ Uses `consult-completion-in-region'."
 	 ("M-g U" . link-hint-open-multiple-links)))
 
 (use-package wgrep
-  :ensure t)
+  :ensure t
+  :bind (:map grep-mode-map
+	      ("C-x C-q" . wgrep-change-to-wgrep-mode)))
+(bind-key "C-x C-q" #'occur-edit-mode 'occur-mode-map)
+(bind-key "C-x C-q" #'occur-cease-edit 'occur-edit-mode-map)
 ;; Use with firefox addon: https://addons.mozilla.org/en-US/firefox/addon/edit-with-emacs1/
 (use-package edit-server
   :ensure t
