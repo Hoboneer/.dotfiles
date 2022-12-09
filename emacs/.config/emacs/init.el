@@ -505,6 +505,9 @@ Uses `consult-completion-in-region'."
   :bind (("C-c r" . vr/replace)
 	 ("C-c q" . vr/query-replace)))
 (use-package org
+  :custom
+  (org-src-preserve-indentation t)
+  (org-src-tab-acts-natively t)
   :bind (:map org-mode-map
 	      ("<C-M-return>" . org-insert-subheading)))
 
