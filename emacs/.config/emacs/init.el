@@ -544,3 +544,34 @@ Uses `consult-completion-in-region'."
           (minibuffer . t)
           (menu-bar-lines . t)
           (window-system . x))))
+
+;; Based on comint-delete-output
+(defun comint-copy-or-kill-output (arg)
+  "Copy or kill all output from interpreter since last input.
+
+With no prefix argument, copy the region.
+With prefix argument, kill the region.
+
+In either case, does not delete the prompt."
+  (interactive "P")
+  (let ((proc (get-buffer-process (current-buffer)))
+	(replacement nil)
+	(inhibit-read-only t)
+	(has-prefix-p (not (null arg))))
+    (save-excursion
+      (let ((pmark (progn (goto-char (process-mark proc))
+			  (forward-line 0) ; go to 1st column
+			  (point-marker))))
+	;; Differentiate between prefix and no prefix.
+	(if (not has-prefix-p)
+	    (progn (kill-new (buffer-substring comint-last-input-end pmark))
+		   (message "Copied all interpreter output since last input to kill ring"))
+	  (kill-region comint-last-input-end pmark)
+	  (goto-char (process-mark proc))
+	  (setq replacement (concat "*** output killed ***\n"
+				    (buffer-substring pmark (point))))
+	  ;; Delete old prompt?
+	  (delete-region pmark (point)))))
+    ;; Output message and put back prompt
+    (comint-output-filter proc replacement)))
+(bind-key "C-c C-o" #'comint-copy-or-kill-output 'comint-mode-map)
