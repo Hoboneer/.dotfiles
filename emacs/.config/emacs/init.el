@@ -493,3 +493,7 @@ Uses `consult-completion-in-region'."
 
 (customize-set-variable 'enable-recursive-minibuffers t)
 (minibuffer-depth-indicate-mode)
+
+(use-package rainbow-delimiters
+  :ensure t
+  :hook (prog-mode . rainbow-delimiters-mode))
