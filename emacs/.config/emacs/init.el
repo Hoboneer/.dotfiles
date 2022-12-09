@@ -497,3 +497,8 @@ Uses `consult-completion-in-region'."
 (use-package rainbow-delimiters
   :ensure t
   :hook (prog-mode . rainbow-delimiters-mode))
+
+(use-package visual-regexp
+  :ensure t
+  :bind (("C-c r" . vr/replace)
+	 ("C-c q" . vr/query-replace)))
