@@ -49,6 +49,8 @@
 (add-hook 'text-mode-hook #'flyspell-mode)
 (add-hook 'prog-mode-hook #'flyspell-prog-mode)
 (recentf-mode)
+(customize-set-variable 'recentf-max-saved-items 200)
+(customize-set-variable 'recentf-max-menu-items 15)
 
 ;; From https://blog.sumtypeofway.com/posts/emacs-config.html
 
