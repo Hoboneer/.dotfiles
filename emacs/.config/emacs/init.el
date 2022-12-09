@@ -515,3 +515,22 @@ Uses `consult-completion-in-region'."
   :ensure t
   :bind (("M-g u" . link-hint-open-link)
 	 ("M-g U" . link-hint-open-multiple-links)))
+
+;; Use with firefox addon: https://addons.mozilla.org/en-US/firefox/addon/edit-with-emacs1/
+(use-package edit-server
+  :ensure t
+  :commands edit-server-start
+  :init
+  (if after-init-time
+      (edit-server-start)
+    (add-hook 'after-init-hook #'edit-server-start))
+  :config
+  (setq edit-server-new-frame-alist
+        '((name . "Edit with Emacs FRAME")
+          (top . 200)
+          (left . 200)
+          (width . 80)
+          (height . 25)
+          (minibuffer . t)
+          (menu-bar-lines . t)
+          (window-system . x))))
