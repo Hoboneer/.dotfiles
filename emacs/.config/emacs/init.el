@@ -502,3 +502,8 @@ Uses `consult-completion-in-region'."
   :ensure t
   :bind (("C-c r" . vr/replace)
 	 ("C-c q" . vr/query-replace)))
+
+(use-package link-hint
+  :ensure t
+  :bind (("M-g u" . link-hint-open-link)
+	 ("M-g U" . link-hint-open-multiple-links)))
