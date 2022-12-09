@@ -430,9 +430,11 @@ Uses `consult-completion-in-region'."
     (require 'consult)
     (let ((switch-to-buffer #'consult-buffer))
       (funcall-interactively fun args)))
+  ;; FIXME: This doesn't work anymore!
   (advice-add 'ace-window :around #'my/ensure-correct-buffer-switcher)
   ;; The default command bound to M-SPC (just-one-space) is pretty useless.
-  :bind ("M-SPC" . ace-window))
+  :bind (("M-SPC" . ace-window)
+	 ("M-g w" . ace-window)))
 (use-package tab-bar
   ;; Analogy with Isearch.
   :bind ("C-x t C-s" . tab-bar-select-tab-by-name))
