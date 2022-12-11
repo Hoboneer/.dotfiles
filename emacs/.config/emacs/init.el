@@ -580,5 +580,10 @@ In either case, does not delete the prompt."
     (comint-output-filter proc replacement)))
 (bind-key "C-c C-o" #'comint-copy-or-kill-output 'comint-mode-map)
 
+(use-package volatile-highlights
+  :ensure t
+  :config
+  (volatile-highlights-mode))
+
 ;; Enable some commands.  I don't want to do this for all of them yet.
 (put 'narrow-to-region 'disabled nil)
