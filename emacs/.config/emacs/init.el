@@ -580,6 +580,13 @@ In either case, does not delete the prompt."
     (comint-output-filter proc replacement)))
 (bind-key "C-c C-o" #'comint-copy-or-kill-output 'comint-mode-map)
 
+(use-package separedit
+  :ensure t
+  :custom
+  (separedit-preserve-string-indentation t)
+  (separedit-remove-trailing-spaces-in-comment t)
+  :bind (("C-c '" . separedit)))
+
 (use-package volatile-highlights
   :ensure t
   :config
