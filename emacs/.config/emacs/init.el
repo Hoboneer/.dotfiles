@@ -449,7 +449,8 @@ Uses `consult-completion-in-region'."
 	 ("H-<left>" . shrink-window-horizontally)
 	 ("H-<right>" . enlarge-window-horizontally)
 	 ("H-<up>" . enlarge-window)
-	 ("H-<down>" . shrink-window)))
+	 ("H-<down>" . shrink-window)
+	 ("C-c v" . visual-line-mode)))
 
 (use-package project
   :ensure t
