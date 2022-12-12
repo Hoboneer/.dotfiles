@@ -513,8 +513,9 @@ Uses `consult-completion-in-region'."
   :custom
   (org-src-preserve-indentation t)
   (org-src-tab-acts-natively t)
-  :bind (:map org-mode-map
-	      ("<C-M-return>" . org-insert-subheading)))
+  :bind (("C-c l" . org-store-link)
+	 :map org-mode-map
+	 ("<C-M-return>" . org-insert-subheading)))
 
 (use-package link-hint
   :ensure t
