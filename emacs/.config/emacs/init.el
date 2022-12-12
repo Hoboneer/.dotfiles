@@ -430,12 +430,7 @@ Uses `consult-completion-in-region'."
   (aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l))
   (aw-dispatch-always t)
   :config
-  (defun my/ensure-correct-buffer-switcher (fun &rest args)
-    (require 'consult)
-    (let ((switch-to-buffer #'consult-buffer))
-      (funcall-interactively fun args)))
-  ;; FIXME: This doesn't work anymore!
-  (advice-add 'ace-window :around #'my/ensure-correct-buffer-switcher)
+  (fset 'aw--switch-buffer #'consult-buffer)
   ;; The default command bound to M-SPC (just-one-space) is pretty useless.
   :bind (("M-SPC" . ace-window)
 	 ("M-g w" . ace-window)))
