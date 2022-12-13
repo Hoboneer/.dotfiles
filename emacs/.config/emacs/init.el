@@ -431,6 +431,20 @@ Uses `consult-completion-in-region'."
   (aw-dispatch-always t)
   :config
   (fset 'aw--switch-buffer #'consult-buffer)
+  (setq aw-dispatch-alist
+	'((?x aw-delete-window "Delete Window")
+	  (?m aw-swap-window "Swap Windows")
+	  (?M aw-move-window "Move Window")
+	  (?c aw-copy-window "Copy Window")
+	  (?j aw-switch-buffer-in-window "Select Buffer")
+	  (?n aw-flip-window)
+	  (?u aw-switch-buffer-other-window "Switch Buffer Other Window")
+	  (?e aw-execute-command-other-window "Execute Command Other Window")
+	  (?F aw-split-window-fair "Split Fair Window")
+	  (?_ aw-split-window-vert "Split Window Along Vertical Axis")
+	  (?| aw-split-window-horz "Split Window Along Horizontal Axis")
+	  (?o delete-other-windows "Delete Other Windows")
+	  (?? aw-show-dispatch-help)))
   ;; The default command bound to M-SPC (just-one-space) is pretty useless.
   :bind (("M-SPC" . ace-window)
 	 ("M-g w" . ace-window)))
