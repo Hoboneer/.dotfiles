@@ -574,6 +574,22 @@ Uses `consult-completion-in-region'."
 	 ("M-g a" . avy-isearch)
 	 ("H-SPC" . avy-isearch)))
 
+(use-package wrap-region
+  :ensure t
+  :init
+  (wrap-region-global-mode)
+  (add-to-list 'wrap-region-except-modes 'special-mode)
+  (add-to-list 'wrap-region-except-modes 'ibuffer-mode)
+  :config
+  ;; wrap-region-add-wrappers is meant to be equivalent to doing each of them individually, but doesn't work for some reason.
+  (wrap-region-add-wrapper "*" "*" "*" '(markdown-mode org-mode))
+  (wrap-region-add-wrapper "_" "_" "_" '(markdown-mode org-mode))
+  (wrap-region-add-wrapper "/" "/" "/" '(org-mode))
+  (wrap-region-add-wrapper "=" "=" "M-=" '(org-mode))
+  (wrap-region-add-wrapper "+" "+" "+" '(org-mode))
+  (wrap-region-add-wrapper "~" "~" "~" '(org-mode))
+  (wrap-region-add-wrapper "`" "`" "`" '(markdown-mode)))
+
 (use-package redacted
   :ensure t
   :hook (redacted-mode . (lambda () (read-only-mode (if redacted-mode 1 -1)))))
