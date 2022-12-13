@@ -472,8 +472,12 @@ Uses `consult-completion-in-region'."
   :bind (("M-SPC" . ace-window)
 	 ("M-g w" . ace-window)))
 (use-package tab-bar
+  :custom
+  (tab-bar-tab-hints t)	;; Show tab numbers
+  (tab-bar-select-tab-modifiers '(hyper))
   ;; Analogy with Isearch.
-  :bind ("C-x t C-s" . tab-bar-select-tab-by-name))
+  :bind (("C-x t C-s" . tab-bar-select-tab-by-name)
+	 ("M-g t" . tab-bar-select-tab-by-name)))
 (use-package emacs
   ;; Switch the current buffer to the next/previous one *based on the current window's history*.
   :bind (("H-l" . previous-buffer)
