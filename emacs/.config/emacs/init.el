@@ -286,6 +286,9 @@ Uses `consult-completion-in-region'."
 
 (use-package consult
   :ensure t
+  :init
+  (setq xref-show-xrefs-function #'consult-xref
+        xref-show-definitions-function #'consult-xref)
   :bind* (("M-X" . consult-mode-command)
           ("H-k" . consult-kmacro)
 	  ("C-h M" . consult-man)
