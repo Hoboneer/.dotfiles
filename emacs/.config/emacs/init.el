@@ -489,7 +489,8 @@ Uses `consult-completion-in-region'."
 	 ("H-<right>" . enlarge-window-horizontally)
 	 ("H-<up>" . enlarge-window)
 	 ("H-<down>" . shrink-window)
-	 ("C-c v" . visual-line-mode)))
+	 ("C-c v" . visual-line-mode)
+	 ("M-\\" . cycle-spacing)))
 
 (use-package project
   :ensure t
