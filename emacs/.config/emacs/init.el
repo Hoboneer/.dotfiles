@@ -531,11 +531,12 @@ Uses `consult-completion-in-region'."
   (setq prefix-help-command #'embark-prefix-help-command)
   :config
   ;; From https://github.com/oantolin/embark/wiki/Additional-Actions#use-embark-like-a-leader-key
-  (defun embark-target-this-buffer-file ()
-    (cons 'this-buffer-file (or (buffer-file-name) (buffer-name))))
-  (add-to-list 'embark-target-finders #'embark-target-this-buffer-file 'append)
-  (add-to-list 'embark-keymap-alist '(this-buffer-file . this-buffer-file-map))
-  (embark-define-keymap this-buffer-file-map
+  (defun embark-target-this-buffer ()
+    (cons 'this-buffer (buffer-name)))
+  (add-to-list 'embark-target-finders #'embark-target-this-buffer 'append)
+  (add-to-list 'embark-keymap-alist '(this-buffer . this-buffer-map))
+  ;; TODO: Wrap commands which operate on *files* to receive (buffer-file-name).
+  (embark-define-keymap this-buffer-map
     "Commands to act on current file or buffer."
     ("l" load-file)
     ("b" byte-compile-file)
@@ -553,12 +554,12 @@ Uses `consult-completion-in-region'."
     ("z" bury-buffer)
     ("|" embark-shell-command-on-buffer)
     ("g" revert-buffer))
-  (defun embark-act-on-buffer-file (&optional arg)
+  (defun embark-act-on-buffer (&optional arg)
     (interactive "P")
-    (let ((embark-target-finders '(embark-target-this-buffer-file)))
+    (let ((embark-target-finders '(embark-target-this-buffer)))
       (embark-act arg)))
   :bind* (("C-." . embark-act)
-	  ("C-M-." . embark-act-on-buffer-file)
+	  ("C-M-." . embark-act-on-buffer)
 	  ("M-." . embark-dwim)
 	  ("H-b" . embark-become)
 	  ("C-h B" . embark-bindings)))
