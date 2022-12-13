@@ -577,7 +577,9 @@ Uses `consult-completion-in-region'."
   :custom
   (org-src-preserve-indentation t)
   (org-src-tab-acts-natively t)
-  :bind (("C-c l" . org-store-link)
+  :bind (("C-c a" . org-agenda)
+	 ("C-c A" . consult-org-agenda)
+	 ("C-c l" . org-store-link)
 	 :map org-mode-map
 	 ("<C-M-return>" . org-insert-subheading)))
 
