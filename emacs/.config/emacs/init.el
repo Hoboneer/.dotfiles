@@ -553,7 +553,26 @@ Uses `consult-completion-in-region'."
   :ensure t
   :bind (("M-g u" . link-hint-open-link)
 	 ("M-g U" . link-hint-open-multiple-links)))
-
+;; TODO: Wrap avy to run (avy-pop-mark) if I pass a universal argument, i.e., {C-u H-SPC}.
+(use-package avy
+  :ensure t
+  :custom
+  (avy-all-windows 'all-frames)
+  :config
+  (defun avy-action-embark (pt)
+    (unwind-protect
+	(save-excursion
+          (goto-char pt)
+          (embark-act))
+      (select-window
+       (cdr (ring-ref avy-ring 0))))
+    t)
+  (setf (alist-get ?. avy-dispatch-alist) #'avy-action-embark)
+  :bind (("M-g a" . avy-goto-char-timer)
+	 ("H-SPC" . avy-goto-char-timer)
+	 :map isearch-mode-map
+	 ("M-g a" . avy-isearch)
+	 ("H-SPC" . avy-isearch)))
 
 (use-package redacted
   :ensure t
