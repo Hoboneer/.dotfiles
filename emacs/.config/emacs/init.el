@@ -431,6 +431,24 @@ Uses `consult-completion-in-region'."
   (aw-dispatch-always t)
   :config
   (fset 'aw--switch-buffer #'consult-buffer)
+  (defun my/aw-text-scale-reset (window)
+    "Reset height of the default face in WINDOW."
+    (aw-switch-to-window window)
+    (unwind-protect
+	(text-scale-increase 0)
+      (aw-flip-window)))
+  (defun my/aw-text-scale-increase (window)
+    "Increase height of the default face in WINDOW."
+    (aw-switch-to-window window)
+    (unwind-protect
+	(text-scale-increase text-scale-mode-step)
+      (aw-flip-window)))
+  (defun my/aw-text-scale-decrease (window)
+    "Decrease height of the default face in WINDOW."
+    (aw-switch-to-window window)
+    (unwind-protect
+	(text-scale-decrease text-scale-mode-step)
+      (aw-flip-window)))
   (setq aw-dispatch-alist
 	'((?x aw-delete-window "Delete Window")
 	  (?m aw-swap-window "Swap Windows")
@@ -444,6 +462,11 @@ Uses `consult-completion-in-region'."
 	  (?_ aw-split-window-vert "Split Window Along Vertical Axis")
 	  (?| aw-split-window-horz "Split Window Along Horizontal Axis")
 	  (?o delete-other-windows "Delete Other Windows")
+	  ;; TODO: Allow repeatable increasing/decreasing font size keys.
+	  ;; Right now, I need to reinvoke ace-window to scale it again.
+	  (?+ my/aw-text-scale-increase "Increase Text Scale Other Window")
+	  (?- my/aw-text-scale-decrease "Decrease Text Scale Other Window")
+	  (?= my/aw-text-scale-reset "Reset Text Scale Other Window")
 	  (?? aw-show-dispatch-help)))
   ;; The default command bound to M-SPC (just-one-space) is pretty useless.
   :bind (("M-SPC" . ace-window)
