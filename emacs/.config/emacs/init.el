@@ -470,6 +470,7 @@ Uses `consult-completion-in-region'."
 	  (?+ my/aw-text-scale-increase "Increase Text Scale Other Window")
 	  (?- my/aw-text-scale-decrease "Decrease Text Scale Other Window")
 	  (?= my/aw-text-scale-reset "Reset Text Scale Other Window")
+	  (?T aw-transpose-frame "Transpose Frame")
 	  (?? aw-show-dispatch-help)))
   ;; The default command bound to M-SPC (just-one-space) is pretty useless.
   :bind (("M-SPC" . ace-window)
@@ -491,6 +492,10 @@ Uses `consult-completion-in-region'."
 	 ("H-<down>" . shrink-window)
 	 ("C-c v" . visual-line-mode)
 	 ("M-\\" . cycle-spacing)))
+(use-package transpose-frame
+  :ensure t
+  :bind (("H-<" . rotate-frame-anticlockwise)
+	 ("H->" . rotate-frame-clockwise)))
 
 (use-package project
   :ensure t
