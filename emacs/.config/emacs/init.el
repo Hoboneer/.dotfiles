@@ -551,6 +551,7 @@ Uses `consult-completion-in-region'."
   :bind* (("C-." . embark-act)
 	  ("C-M-." . embark-act-on-buffer-file)
 	  ("M-." . embark-dwim)
+	  ("H-b" . embark-become)
 	  ("C-h B" . embark-bindings)))
 (use-package embark-consult
   :ensure t
