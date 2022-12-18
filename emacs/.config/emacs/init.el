@@ -538,6 +538,18 @@ Since `defvar' doesn't seem to allow easy redefinition, ensure NAME is first unb
   :init
   (setq prefix-help-command #'embark-prefix-help-command)
   :config
+  (my/embark-force-define-keymap embark-become-help-map
+    "Keymap for Embark help actions."
+    :parent embark-meta-map
+    ("V" apropos-variable)
+    ("U" apropos-user-option)
+    ("C" apropos-command)
+    ("v" describe-variable)
+    ("f" helpful-callable)
+    ("s" helpful-symbol)
+    ("F" describe-face)
+    ("p" describe-package)
+    ("i" describe-input-method))
   ;; From https://github.com/oantolin/embark/wiki/Additional-Actions#use-embark-like-a-leader-key
   (defun embark-target-this-buffer ()
     (cons 'this-buffer (buffer-name)))
