@@ -527,6 +527,14 @@ Uses `consult-completion-in-region'."
 
 (use-package embark
   :ensure t
+  :preface
+  (defmacro my/embark-force-define-keymap (name doc &rest bindings)
+    "Force keymap variable NAME to be defined by BINDINGS as with `embark-define-keymap'.
+Since `defvar' doesn't seem to allow easy redefinition, ensure NAME is first unbound."
+    (declare (indent 1))
+    `(progn
+       (makunbound ',name)
+       (embark-define-keymap ,name ,doc ,@bindings)))
   :init
   (setq prefix-help-command #'embark-prefix-help-command)
   :config
@@ -536,7 +544,7 @@ Uses `consult-completion-in-region'."
   (add-to-list 'embark-target-finders #'embark-target-this-buffer 'append)
   (add-to-list 'embark-keymap-alist '(this-buffer . this-buffer-map))
   ;; TODO: Wrap commands which operate on *files* to receive (buffer-file-name).
-  (embark-define-keymap this-buffer-map
+  (my/embark-force-define-keymap this-buffer-map
     "Commands to act on current file or buffer."
     ("l" load-file)
     ("b" byte-compile-file)
