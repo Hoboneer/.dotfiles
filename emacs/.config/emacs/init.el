@@ -645,6 +645,7 @@ Since `defvar' doesn't seem to allow easy redefinition, ensure NAME is first unb
   (wrap-region-global-mode)
   (add-to-list 'wrap-region-except-modes 'special-mode)
   (add-to-list 'wrap-region-except-modes 'ibuffer-mode)
+  (add-to-list 'wrap-region-except-modes 'org-agenda-mode)
   :config
   ;; wrap-region-add-wrappers is meant to be equivalent to doing each of them individually, but doesn't work for some reason.
   (wrap-region-add-wrapper "*" "*" "*" '(markdown-mode org-mode))
