@@ -12,7 +12,7 @@ mod4 + space
 ## @description		Program launcher (output run through $SHELL).
 mod4 + shift + space
 	dmenu_path | dmenu | $\{SHELL:-"/bin/sh"\} &
-## @description		Open {audio control,browser,mail,file manager,network services (avahi-discover),screen painter,telegram,discord}.
+## @description		Open {emacs,audio control,browser,mail,file manager,network services (avahi-discover),screen painter,telegram,discord}.
 mod4 + a; {e,a,b,m,f,n,p,t,d}
 	{emacs,pavucontrol,x-www-browser,thunderbird,pcmanfm,avahi-discover,gromit-mpx,telegram-desktop,flatpak run com.discordapp.Discord}
 ## @description		Dmenu surfraw (firefox), {skipping,not skipping} options.
