@@ -167,7 +167,17 @@ I've been bitten a couple times before: no more."
 	 ("M-n" . forward-button)
 	 ("M-p" . backward-button)))
 
+(defun my/push-mark-advice (&rest args)
+  "Push current location onto mark ring as an advice.
+
+Intended to be a :before advice for functions that should set the
+mark but don't.  This is needed as a separate function because
+the arguments of `push-mark' aren't guaranteed to be the same as
+the advised function."
+  (push-mark))
 (use-package info
+  :config
+  (advice-add 'Info-follow-nearest-node :before #'my/push-mark-advice)
   :hook (Info-mode . my/reading-mode)
   :bind (:map Info-mode-map
 	      ("M-n" . Info-next-reference)
