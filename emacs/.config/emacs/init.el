@@ -495,6 +495,24 @@ Uses `consult-completion-in-region'."
   ;; Analogy with Isearch.
   :bind (("C-x t C-s" . tab-bar-select-tab-by-name)
 	 ("M-g t" . tab-bar-select-tab-by-name)))
+(defcustom my/buffer-default-directory "~/"
+  "Default directory for a buffer's `default-directory' to be set to if the directory referred to by the variable no longer exists.
+
+See `my/reset-buffer-pwds'."
+  :type '(directory))
+
+(defun my/reset-buffer-pwds ()
+  "For every buffer whose `default-directory' variable is set to a non-existent directory, set the variable to `my/buffer-default-directory'."
+  (interactive)
+  (dolist (buf (buffer-list))
+    (with-current-buffer buf
+      (when (and (buffer-name) ; skip buffers which have been killed since loop started
+		 (not (string-match-p "^ " (buffer-name))) ; skip hidden buffers
+		 (not (file-directory-p default-directory))
+		 (yes-or-no-p (format "Reset `default-directory' of buffer \"%s\" to \"%s\"? " buf my/buffer-default-directory)))
+	(message "Resetting `default-directory' of \"%s\" to \"%s\"" buf my/buffer-default-directory)
+	(setq default-directory my/buffer-default-directory)))))
+
 (use-package emacs
   ;; Switch the current buffer to the next/previous one *based on the current window's history*.
   :bind (("H-l" . previous-buffer)
