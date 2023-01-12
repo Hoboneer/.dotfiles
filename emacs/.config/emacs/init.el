@@ -370,6 +370,9 @@ Uses `consult-completion-in-region'."
   ;; Autorevert might not work reliably with (La)TeX.  See https://pdftools.wiki/24b671c6
   (add-hook 'TeX-after-compilation-finished-functions #'TeX-revert-document-buffer)
   (add-hook 'pdf-tools-enabled-hook #'pdf-outline-imenu-enable))
+(use-package org-pdftools
+  :ensure t
+  :hook (org-mode . org-pdftools-setup-link))
 (use-package latex
   :ensure auctex
   :custom
