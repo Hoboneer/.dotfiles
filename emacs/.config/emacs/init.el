@@ -504,7 +504,11 @@ Uses `consult-completion-in-region'."
 	 ("H-<up>" . enlarge-window)
 	 ("H-<down>" . shrink-window)
 	 ("C-c v" . visual-line-mode)
-	 ("M-\\" . cycle-spacing)))
+	 ("M-\\" . cycle-spacing)
+	 ("C-c x" . emacs-lock-mode))
+  :config
+  (with-current-buffer "*scratch*"
+    (emacs-lock-mode 'kill)))
 (use-package transpose-frame
   :ensure t
   :bind (("H-<" . rotate-frame-anticlockwise)
