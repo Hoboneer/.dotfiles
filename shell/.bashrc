@@ -130,10 +130,6 @@ alias xclip='xclip -selection clipboard'
 
 alias zathura='zathura --fork'
 
-# Manuals for pipx stuff
-venvs="$HOME/.local/pipx/venvs"
-export MANPATH="$venvs/sxhkd-parser/share/man:$venvs/yt-dlp/share/man:"
-
 cdf ()
 {
 	local dir

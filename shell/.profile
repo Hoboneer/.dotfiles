@@ -42,4 +42,7 @@ export VISUAL=$EDITOR
 # This should be w3m.
 export BROWSER='www-browser'
 
+# Manuals for pipx stuff
+venvs="$HOME/.local/pipx/venvs"
+export MANPATH="$venvs/sxhkd-parser/share/man:$venvs/yt-dlp/share/man:"
 fi
