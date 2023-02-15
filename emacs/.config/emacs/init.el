@@ -553,7 +553,9 @@ See `my/reset-buffer-pwds'."
 
 (use-package markdown-mode
   :ensure t
-  :mode ("\\.md$" . gfm-mode))
+  :mode ("\\.md$" . gfm-mode)
+  :custom
+  (markdown-asymmetric-header t))
 
 (use-package winner
   :init
