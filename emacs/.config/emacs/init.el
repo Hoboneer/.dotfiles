@@ -526,7 +526,8 @@ See `my/reset-buffer-pwds'."
 	 ;; "w" for "wrap".
 	 ("C-c w" . visual-line-mode)
 	 ("M-\\" . cycle-spacing)
-	 ("C-c x" . emacs-lock-mode))
+	 ("C-c x" . emacs-lock-mode)
+	 ("C-c s" . shell))
   :config
   (with-current-buffer "*scratch*"
     (emacs-lock-mode 'kill)))
