@@ -143,7 +143,7 @@ I've been bitten a couple times before: no more."
 
 (use-package scratch
   :ensure t
-  :bind (("C-c s" . scratch)))
+  :bind (("C-c S" . scratch)))
 (use-package simple
   :bind (;; Cases
 	 ("M-u" . upcase-dwim)
