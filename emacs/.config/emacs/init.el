@@ -772,6 +772,7 @@ In either case, does not delete the prompt."
 
 ;; Enable some commands.  I don't want to do this for all of them yet.
 (put 'narrow-to-region 'disabled nil)
+(put 'narrow-to-page 'disabled nil)
 
 (use-package transient
   :custom
