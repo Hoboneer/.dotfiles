@@ -943,3 +943,9 @@ toggled."
 (use-package flyspell-correct-avy-menu
   :ensure t
   :after flyspell-correct)
+
+(use-package pulsar
+  :ensure t
+  :init
+  (pulsar-global-mode)
+  :hook ((next-error . #'pulsar-pulse-line)))
