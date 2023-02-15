@@ -351,6 +351,8 @@ Uses `consult-completion-in-region'."
           :map minibuffer-local-map
           ("M-s" . consult-history) ;; orig. next-matching-history-element
           ("M-r" . consult-history)
+	  :map comint-mode-map
+	  ("C-c C-l" . consult-history)
 	  ))
 (use-package consult-dir
   :ensure t
