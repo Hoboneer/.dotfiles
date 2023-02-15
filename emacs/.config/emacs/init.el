@@ -773,6 +773,10 @@ In either case, does not delete the prompt."
 ;; Enable some commands.  I don't want to do this for all of them yet.
 (put 'narrow-to-region 'disabled nil)
 
+(use-package transient
+  :custom
+  (transient-show-common-commands t))
+
 (use-package ess
   :ensure t
   :preface
