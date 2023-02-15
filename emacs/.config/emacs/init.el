@@ -768,3 +768,156 @@ In either case, does not delete the prompt."
 
 ;; Enable some commands.  I don't want to do this for all of them yet.
 (put 'narrow-to-region 'disabled nil)
+
+(use-package ess
+  :ensure t
+  :preface
+  (defun my/ess-request-a-process (message &optional noswitch ask-if-1)
+    "Ask for a process, and make it the current ESS process.
+If there is exactly one process, only ask if ASK-IF-1 is non-nil.
+Also switches to the process buffer unless NOSWITCH is non-nil.  Interactively,
+NOSWITCH can be set by giving a prefix argument.
+Returns the name of the selected process."
+    (interactive
+     (list "Switch to which ESS process? " current-prefix-arg))
+                                        ; prefix sets 'noswitch
+    (require 'ess)
+    (ess-write-to-dribble-buffer "ess-request-a-process: {beginning}\n")
+    (update-ess-process-name-list)
+
+    (setq ess-dialect (or ess-dialect
+                          (ess-completing-read
+                           "Set `ess-dialect'"
+                           (delete-dups (list "R" "S+" (if (boundp 'S+-dialect-name) S+-dialect-name "S+")
+                                              "stata" (if (boundp 'STA-dialect-name) STA-dialect-name "stata")
+                                              "julia" "SAS" "XLS"  "ViSta")))))
+
+    (let* ((ask-if-1 t)	;; NEW: Always give the opportunity to change process.
+	   (pname-list (delq nil ;; keep only those mathing dialect
+                             (append
+                              (mapcar (lambda (lproc)
+					(and (equal ess-dialect
+                                                    (buffer-local-value
+                                                     'ess-dialect
+                                                     (process-buffer (get-process (car lproc)))))
+                                             (not (equal ess-local-process-name (car lproc)))
+                                             (car lproc)))
+                                      ess-process-name-list)
+                              ;; append local only if running
+                              (when (assoc ess-local-process-name ess-process-name-list)
+				(list ess-local-process-name)))))
+           (num-processes (length pname-list))
+           (inferior-ess-same-window nil) ;; this should produce the inferior process in other window
+           (auto-started?))
+      (if (or (= 0 num-processes)
+              (and (= 1 num-processes)
+                   (not (equal ess-dialect ;; don't auto connect if from different dialect
+                               (buffer-local-value
+				'ess-dialect
+				(process-buffer (get-process
+						 (car pname-list))))))))
+          ;; try to start "the appropriate" process
+          (progn
+            (ess-write-to-dribble-buffer
+             (concat " ... request-a-process:\n  "
+                     (format
+                      "major mode %s; current buff: %s; ess-language: %s, ess-dialect: %s\n"
+                      major-mode (current-buffer) ess-language ess-dialect)))
+            (ess-start-process-specific ess-language ess-dialect)
+            (ess-write-to-dribble-buffer
+             (format "  ... request-a-process: buf=%s\n" (current-buffer)))
+            (setq num-processes 1
+                  pname-list (car ess-process-name-list)
+                  auto-started? t)))
+      ;; now num-processes >= 1 :
+      (let* ((proc-buffers (mapcar (lambda (lproc)
+                                     (buffer-name (process-buffer (get-process lproc))))
+                                   pname-list))
+             (proc
+              (if (or auto-started?
+                      (and (not ask-if-1) (= 1 num-processes)))
+                  (progn
+                    (message "using process '%s'" (car proc-buffers))
+                    (car pname-list))
+		;; else
+		(unless (and ess-current-process-name
+                             (get-process ess-current-process-name))
+                  (setq ess-current-process-name nil))
+		(when message
+                  (setq message (replace-regexp-in-string ": +\\'" "" message))) ;; <- why is this here??
+		;; ask for buffer name not the *real* process name:
+		(let ((buf (ess-completing-read message (append proc-buffers (list "*new*")) nil t nil nil)))
+                  (if (equal buf "*new*")
+                      (progn
+			(ess-start-process-specific ess-language ess-dialect) ;; switches to proc-buff
+			(caar ess-process-name-list))
+                    (process-name (get-buffer-process buf))
+                    ))
+		)))
+	;; NEW: Ensure we can head back to the current buffer.
+	(message "Set current R process of `%s' to `%s'" (buffer-name) proc)
+	(setq-local ess-current-process-name proc)
+	(cond (noswitch (pop-to-buffer (current-buffer))) ;; VS: this is weired, but is necessary
+	      ((not auto-started?) (pop-to-buffer (buffer-name (process-buffer (get-process proc))) t)))
+	;; (if noswitch
+	;;     (pop-to-buffer (current-buffer)) ;; VS: this is weired, but is necessary
+	;;   (pop-to-buffer (buffer-name (process-buffer (get-process proc))) t))
+	proc)))
+
+
+  (defun my/ess-switch-to-inferior-or-script-buffer (toggle-eob)
+    "If in script, switch to the iESS. If in iESS switch to most recent script buffer.
+This is a single-key command. Assuming that it is bound to C-c
+C-z, you can navigate back and forth between iESS and script
+buffer with C-c C-z C-z C-z ... If variable
+`ess-switch-to-end-of-proc-buffer' is t (the default) this
+function switches to the end of process buffer. If TOGGLE-EOB is
+given, the value of `ess-switch-to-end-of-proc-buffer' is
+toggled."
+    (interactive "P")
+    (require 'ess)
+    (let ((map (make-sparse-keymap))
+          (EOB (if toggle-eob
+                   (not ess-switch-to-end-of-proc-buffer)
+		 ess-switch-to-end-of-proc-buffer)))
+      (define-key map (vector last-command-event)
+	(lambda (ev eob) (interactive)
+          (if (not (eq major-mode 'inferior-ess-mode))
+              (ess-switch-to-ESS eob)
+            (let ((dialect ess-dialect)
+                  (loc-proc-name ess-local-process-name)
+                  (blist (cdr (buffer-list))))
+              (while (and blist
+                          (with-current-buffer (car blist)
+                            (not (or (and
+                                      (memq major-mode '(ess-mode ess-julia-mode))
+                                      (equal dialect ess-dialect)
+                                      (null ess-local-process-name))
+                                     (and
+                                      (memq major-mode '(ess-mode ess-julia-mode))
+                                      (equal loc-proc-name ess-local-process-name))
+				     ;; NEW: Ensure literate document can be associated with the process.
+				     (and
+				      (memq 'poly-markdown+r-mode minor-mode-list)
+				      (equal loc-proc-name ess-local-process-name))
+                                     ))))
+		(pop blist))
+              (if blist
+		  (ess-show-buffer (car blist) t)
+		(message "Found no buffers for ess-dialect %s associated with process %s"
+			 dialect loc-proc-name))))))
+      (ess--execute-electric-command map nil nil nil EOB)))
+  :custom
+  (ess-use-ido nil)
+  :bind (("C-c R" . my/ess-request-a-process)))
+(use-package polymode
+  :ensure t)
+(use-package poly-R
+  :ensure t
+  :after polymode
+  :bind (:map poly-markdown+R-mode-map
+	 ("C-c C-z" . my/ess-switch-to-inferior-or-script-buffer)
+	 :map ess-mode-map
+	 ("C-c C-z" . my/ess-switch-to-inferior-or-script-buffer)
+	 :map inferior-ess-mode-map
+	 ("C-c C-z" . my/ess-switch-to-inferior-or-script-buffer)))
