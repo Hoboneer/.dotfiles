@@ -949,3 +949,17 @@ toggled."
   :init
   (pulsar-global-mode)
   :hook ((next-error . #'pulsar-pulse-line)))
+
+(use-package bash-completion
+  :ensure t
+  ;; The package is a bit hacky (because it deals with bash) so it's a
+  ;; bit buggy, but releases are infrequent.
+  :pin melpa
+  :preface
+  (defun my/complete-bash-at-point-in-shell ()
+    (interactive)
+    (let ((completion-at-point-functions '(bash-completion-dynamic-complete))
+	  (completion-styles '(basic partial-completion)))
+      (completion-at-point)))
+  :bind (:map shell-mode-map
+	      ("<M-tab>" . my/complete-bash-at-point-in-shell)))
