@@ -47,6 +47,9 @@ mod4 + slash
 # }}}
 
 # AUX {{{
+## @description		Run Emacs to insert some text.
+mod4 + Menu
+	emacsclient --eval '(emacs-everywhere)'
 ## @description		Increase volume.
 XF86AudioRaiseVolume
 	pactl set-sink-volume @DEFAULT_SINK@ +10%

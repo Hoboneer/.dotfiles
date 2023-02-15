@@ -722,7 +722,9 @@ Since `defvar' doesn't seem to allow easy redefinition, ensure NAME is first unb
           (minibuffer . t)
           (menu-bar-lines . t)
           (window-system . x))))
-
+(if after-init-time
+    (server-start)
+  (add-hook 'after-init-hook #'server-start))
 ;; Based on comint-delete-output
 (defun comint-copy-or-kill-output (arg)
   "Copy or kill all output from interpreter since last input.
@@ -921,3 +923,8 @@ toggled."
 	 ("C-c C-z" . my/ess-switch-to-inferior-or-script-buffer)
 	 :map inferior-ess-mode-map
 	 ("C-c C-z" . my/ess-switch-to-inferior-or-script-buffer)))
+
+(use-package emacs-everywhere
+  :ensure t
+  :custom
+  (emacs-everywhere-major-mode-function #'gfm-mode))
