@@ -523,7 +523,8 @@ See `my/reset-buffer-pwds'."
 	 ("H-<right>" . enlarge-window-horizontally)
 	 ("H-<up>" . enlarge-window)
 	 ("H-<down>" . shrink-window)
-	 ("C-c v" . visual-line-mode)
+	 ;; "w" for "wrap".
+	 ("C-c w" . visual-line-mode)
 	 ("M-\\" . cycle-spacing)
 	 ("C-c x" . emacs-lock-mode))
   :config
