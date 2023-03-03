@@ -992,3 +992,9 @@ toggled."
       (completion-at-point)))
   :bind (:map shell-mode-map
 	      ("<M-tab>" . my/complete-bash-at-point-in-shell)))
+
+(use-package sxhkdrc-mode  ;; By Protesilaos
+  :ensure t
+  :config
+  ;; We want to indent by tabs.
+  (setf (alist-get 'indent-command sxhkdrc-mode-syntax) 8))
