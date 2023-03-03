@@ -34,7 +34,7 @@
 ;; Turn off some unneeded UI elements
 (menu-bar-mode -1)
 (tool-bar-mode -1)
-;(scroll-bar-mode -1)
+(scroll-bar-mode -1)
 ;; Display line numbers in every buffer
 (global-display-line-numbers-mode 1)
 (dolist (mode '(;; pdf-tools doesn't work well with line numbers.  See https://pdftools.wiki/f178ba41
