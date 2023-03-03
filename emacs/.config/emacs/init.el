@@ -956,6 +956,9 @@ toggled."
 	 :map inferior-ess-mode-map
 	 ("C-c C-z" . my/ess-switch-to-inferior-or-script-buffer)))
 
+(use-package macrostep
+  :ensure t)
+
 (use-package emacs-everywhere
   :ensure t
   :custom
