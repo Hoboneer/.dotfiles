@@ -758,6 +758,31 @@ In either case, does not delete the prompt."
     (comint-output-filter proc replacement)))
 (bind-key "C-c C-o" #'comint-copy-or-kill-output 'comint-mode-map)
 
+;; This can be done more generally using proced but it would be
+;; convenient to work directly on the *current subjob* of comint.
+(defun my/comint-send-signal (sigcode)
+  "Send the signal SIGCODE to the subjob currently controlling the terminal.
+SIGCODE may be a string or a symbol."
+  (interactive (list
+		(completing-read "Signal (name or number): "
+				 ;; The signals available on my system.
+				 '(ABRT ALRM BUS CHLD CONT FPE HUP ILL INT KILL PIPE POLL PROF PWR QUIT SEGV STKFLT STOP SYS TERM TRAP TSTP TTIN TTOU URG USR1 USR2 VTALRM WINCH XCPU XFSZ))))
+  (require 'comint)
+  (unless (derived-mode-p 'comint-mode)
+    (user-error "Must be in a mode derived from comint-mode"))
+  (let ((sigcode (if (stringp sigcode)
+		     (make-symbol sigcode)
+		   (sigcode)))
+	(proc (get-buffer-process (current-buffer))))
+    (unless proc
+      (user-error "Current buffer has no process"))
+    (let ((maybe-current-subjob (process-running-child-p proc)))
+      (if (not (booleanp maybe-current-subjob))
+	  (signal-process maybe-current-subjob sigcode)
+	;; A boolean value shows how certain Emacs is about this.
+	(message "No subjob controlling the terminal")))))
+(bind-key "C-c @" #'my/comint-send-signal 'comint-mode-map)
+
 (use-package separedit
   :ensure t
   :custom
