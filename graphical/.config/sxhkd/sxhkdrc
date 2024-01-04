@@ -336,3 +336,28 @@ mod4 + shift + m: shift + m
 	setmonitorposition "$mon"
 ## }}}
 # }}}
+
+# PASS-KEY-INPUTS-TO-MARKED-WINDOWS {{{
+## ZATHURA {{{
+## @description	Send a {next page,previous page} command to marked zathura windows (WARNING: don't press too quickly as the windows may desync; use the keybind for going to specific page numbers to resync).
+## @mode	zathura
+mod4 + F1; z: {n,p}
+	simulpress-keys-on-multiple-marked-windows Zathura {J,K}
+## @description	Send a {first page,last page} command to marked zathura windows.
+## @mode	zathura
+mod4 + F1; z: {asciicircum,dollar}
+	simulpress-keys-on-multiple-marked-windows Zathura {g g,G}
+## @description	Go to a specific page on every marked zathura window.
+## @credit	https://stackoverflow.com/a/8566863.
+## @mode	zathura
+mod4 + F1; z: numbersign
+	pagenum="$(dmenu -p 'What page number?' </dev/null)"; \
+	case "$pagenum" in \
+		*[!0-9]*) notify-send -t 5000 -u critical "Page numbers must be positive integers" ;; \
+		'') notify-send -t 5000 -u critical "Page numbers must not be empty" ;; \
+		*) simulpress-keys-on-multiple-marked-windows Zathura $(echo "$pagenum" | \
+			awk '\{for (i=0; ++i <= length($0); ) printf "%s\n", substr($0, i, 1)\}') G \
+		;; \
+	esac
+## }}}
+# }}}
