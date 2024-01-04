@@ -65,6 +65,9 @@ mod4 + XF86AudioLowerVolume
 ## @description		Mute volume.
 XF86AudioMute
 	pactl set-sink-mute @DEFAULT_SINK@ toggle
+## @description		Reset volume to 100%.
+mod4 + XF86AudioMute
+	pactl set-sink-volume @DEFAULT_SINK@ 100%
 ## @description		Mute mic.
 XF86AudioMicMute
 	pactl set-source-mute @DEFAULT_SOURCE@ toggle
