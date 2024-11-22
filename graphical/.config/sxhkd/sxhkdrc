@@ -17,7 +17,7 @@ mod4 + a; {e,a,b,m,f,n,p,t,d}
 	{emacs,pavucontrol,x-www-browser,thunderbird,pcmanfm,avahi-discover,gromit-mpx,telegram-desktop,flatpak run com.discordapp.Discord}
 ## @description		Dmenu surfraw (firefox), {skipping,not skipping} options.
 mod4 + {_,shift + }d
-	if wmctrl -lx | awk -v found=0 '$3 ~ /Firefox/ \{found=1; exit\} END \{exit found\}'; then \
+	if wmctrl -lx | awk -v found=0 '$3 ~ /[Ff]irefox/ \{found=1; exit\} END \{exit found\}'; then \
 		setsid firefox & \
 	fi; \
 	env DO_FIELD_SPLIT=yes DO_SKIP_OPTIONS={yes,no} SURFRAW_browser=firefox dmenu_surfraw 2>&1 | xargs -n1 -d'\n' notify-send -u critical -t 5000
